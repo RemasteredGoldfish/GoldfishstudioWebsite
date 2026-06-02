@@ -1,17 +1,17 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { translations } from '../i18n.ts';
-const t = translations.en;
+import Layout from '../../layouts/Layout.astro';
+import { translations } from '../../i18n.ts';
+const t = translations.nl;
 
 const projects = [
-  { title: 'De Kas — Farm to Table', tag: 'Commercial', year: '2026', embed: null },
-  { title: 'LUWAM — Night Drive', tag: 'Music Video', year: '2026', embed: null },
-  { title: 'Nordrecht — Made with Care', tag: 'Brand Film', year: '2025', embed: null },
-  { title: 'Bloom Coffee — Morning Ritual', tag: 'Social Media', year: '2025', embed: null },
+  { title: 'De Kas — Van Boer tot Bord', tag: 'Commercial', year: '2026', embed: null },
+  { title: 'LUWAM — Nachtrit', tag: 'Muziekvideo', year: '2026', embed: null },
+  { title: 'Nordrecht — Met Zorg Gemaakt', tag: 'Merkenfilm', year: '2025', embed: null },
+  { title: 'Bloom Coffee — Ochtendritueel', tag: 'Social Media', year: '2025', embed: null },
 ];
 ---
 
-<Layout t={t} lang="en" pageTitle="Goldfishstudio" year="2026">
+<Layout t={t} lang="nl" pageTitle="Goldfishstudio" year="2026">
 
   <section class="hero">
     <div class="container">
@@ -20,8 +20,8 @@ const projects = [
         <h1 class="hero-title" set:html={t.hero.title} />
         <p class="hero-sub" set:html={t.hero.sub} />
         <div class="hero-actions">
-          <a href="/work" class="btn btn-primary" set:html={t.hero.cta1} />
-          <a href="/contact" class="btn btn-ghost" set:html={t.hero.cta2} />
+          <a href="/nl/work" class="btn btn-primary" set:html={t.hero.cta1} />
+          <a href="/nl/contact" class="btn btn-ghost" set:html={t.hero.cta2} />
         </div>
       </div>
     </div>
@@ -63,7 +63,7 @@ const projects = [
           <p set:html={t.about.p3} />
         </div>
         <div class="editorial-image">
-          <div class="video-thumb-placeholder" style="font-size:.8rem">YOUR<br/>PHOTO<br/>HERE</div>
+          <div class="video-thumb-placeholder" style="font-size:.8rem">JOUW<br/>FOTO<br/>HIER</div>
         </div>
       </div>
     </div>
@@ -111,7 +111,7 @@ const projects = [
     <div class="container">
       <h2 class="heading" set:html={t.cta.heading} />
       <p class="lede" style="margin:0 auto 2.5rem;" set:html={t.cta.sub} />
-      <a href="/contact" class="btn btn-primary" set:html={t.cta.btn} />
+      <a href="/nl/contact" class="btn btn-primary" set:html={t.cta.btn} />
     </div>
   </div>
 
@@ -126,7 +126,7 @@ const projects = [
           <p><strong set:html={t.how.h3} /> <span set:html={t.how.h3desc} /></p>
         </div>
         <div class="editorial-image">
-          <div class="video-thumb-placeholder" style="font-size:.8rem">BEHIND<br/>THE<br/>SCENES<br/>PHOTO</div>
+          <div class="video-thumb-placeholder" style="font-size:.8rem">ACHTER<br/>DE<br/>SCHERMEN<br/>FOTO</div>
         </div>
       </div>
     </div>

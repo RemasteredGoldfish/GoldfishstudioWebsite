@@ -1,35 +1,35 @@
 ---
-const { pageTitle = 'Goldfishstudio', year = '2026' } = Astro.props;
+import { translations } from '../i18n.ts';
+
+const { pageTitle, year = '2026', lang = 'en' } = Astro.props;
+const t = translations[lang];
+const otherLang = lang === 'en' ? 'nl' : 'en';
+const otherPath = lang === 'en' ? '/nl' : '';
 const navLinks = [
-  { href: '/work', label: 'Work' },
-  { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Contact' },
+  { href: lang === 'en' ? '/work' : '/nl/work', label: t.nav.work },
+  { href: lang === 'en' ? '/about' : '/nl/about', label: t.nav.about },
+  { href: lang === 'en' ? '/contact' : '/nl/contact', label: t.nav.contact },
 ];
 const currentPath = Astro.url.pathname;
 ---
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Goldfishstudio — Cinematic videography &amp; film production in the Netherlands." />
+  <title>{pageTitle} — Goldfishstudio</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <title>{pageTitle} — Goldfishstudio</title>
+  <meta name="description" content={lang === 'en' ? 'Goldfishstudio — Cinematic videography & film production in the Netherlands.' : 'Goldfishstudio — Cineastische videografie & filmproductie in Nederland.'} />
   <style is:global>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg: #0c0c0c;
-      --bg-warm: #1a1510;
-      --fg: #f5f0eb;
-      --fg-muted: #a09888;
-      --fg-dim: #6a6358;
-      --accent: #c4a46e;
-      --accent-light: #d4b87a;
-      --border: #2a2520;
-      --border-light: #3a3530;
+      --bg: #0c0c0c; --bg-warm: #1a1510; --fg: #f5f0eb;
+      --fg-muted: #a09888; --fg-dim: #6a6358;
+      --accent: #c4a46e; --accent-light: #d4b87a;
+      --border: #2a2520; --border-light: #3a3530;
       --font-serif: 'Cormorant Garamond', Georgia, serif;
       --font-sans: 'Inter', system-ui, sans-serif;
     }
@@ -38,19 +38,20 @@ const currentPath = Astro.url.pathname;
     a { color: inherit; text-decoration: none; }
     img, video { max-width: 100%; display: block; }
 
-    /* Nav */
     .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 3rem; transition: background .4s, backdrop-filter .4s; }
     .nav.scrolled { background: rgba(12,12,12,.92); backdrop-filter: blur(16px); }
     .nav-logo { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 400; letter-spacing: .08em; color: var(--fg); }
     .nav-logo span { color: var(--accent); }
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+    .nav-right { display: flex; align-items: center; gap: 2rem; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a { font-size: .75rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--fg-muted); transition: color .3s; }
     .nav-links a:hover { color: var(--fg); }
     .nav-links a.active { color: var(--accent); }
+    .lang-btn { font-size: .7rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; padding: .4rem .8rem; border: 1px solid var(--border); color: var(--fg-muted); background: transparent; cursor: pointer; transition: all .3s; }
+    .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
     .nav-cta { font-size: .75rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; padding: .7rem 1.5rem; border: 1px solid var(--border); color: var(--fg); transition: border-color .3s, color .3s; }
     .nav-cta:hover { border-color: var(--accent); color: var(--accent); }
 
-    /* Layout */
     .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
     section { padding: 8rem 0; }
     .eyebrow { font-size: .7rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; }
@@ -58,7 +59,6 @@ const currentPath = Astro.url.pathname;
     .heading em { font-style: italic; color: var(--accent); }
     .lede { font-size: 1.05rem; color: var(--fg-muted); max-width: 560px; line-height: 1.9; }
 
-    /* Hero */
     .hero { min-height: 100vh; display: flex; align-items: center; position: relative; padding-top: 6rem; background: radial-gradient(ellipse at 30% 60%, var(--bg-warm) 0%, var(--bg) 65%); }
     .hero-inner { max-width: 750px; }
     .hero-eyebrow { font-size: .7rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 2rem; }
@@ -72,7 +72,6 @@ const currentPath = Astro.url.pathname;
     .btn-ghost { background: transparent; color: var(--fg); border: 1px solid var(--border); }
     .btn-ghost:hover { border-color: var(--border-light); }
 
-    /* Video grid */
     .video-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
     .video-card { cursor: pointer; }
     .video-card:hover .video-title { color: var(--accent); }
@@ -86,25 +85,21 @@ const currentPath = Astro.url.pathname;
     .video-year { font-size: .7rem; color: var(--fg-dim); }
     .video-title { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 400; line-height: 1.3; transition: color .3s; }
 
-    /* Editorial */
     .editorial { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
     .editorial-text p { color: var(--fg-muted); margin-bottom: 1.2rem; font-size: 1rem; line-height: 1.9; }
-    .editorial-text p:first-of-type { color: var(--fg); }
+    .editorial-text strong { color: var(--fg); font-weight: 500; }
     .editorial-image { aspect-ratio: 4/5; background: var(--bg-warm); border-radius: 2px; overflow: hidden; display: flex; align-items: center; justify-content: center; color: var(--fg-dim); font-size: .85rem; }
     .editorial-image img { width: 100%; height: 100%; object-fit: cover; }
 
-    /* Testimonial */
     .testimonial { text-align: center; max-width: 700px; margin: 0 auto; padding: 4rem 0; }
     .testimonial-quote { font-family: var(--font-serif); font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 300; line-height: 1.5; color: var(--fg); margin-bottom: 1.5rem; }
     .testimonial-quote em { font-style: italic; color: var(--accent); }
     .testimonial-author { font-size: .8rem; color: var(--fg-dim); letter-spacing: .08em; }
 
-    /* CTA */
     .cta-band { padding: 6rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); text-align: center; }
     .cta-band .heading { margin-bottom: 1rem; }
     .cta-band .lede { margin: 0 auto 2.5rem; }
 
-    /* Contact */
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
     .contact-form { display: flex; flex-direction: column; gap: 1.5rem; }
     .field label { display: block; font-size: .7rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--fg-muted); margin-bottom: .5rem; }
@@ -116,19 +111,18 @@ const currentPath = Astro.url.pathname;
     .contact-value { font-size: 1rem; color: var(--fg); }
     .contact-value a:hover { color: var(--accent); }
 
-    /* Footer */
     footer { padding: 3rem 0; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
     .footer-copy { font-size: .75rem; color: var(--fg-dim); letter-spacing: .05em; }
     .footer-links { display: flex; gap: 2rem; list-style: none; }
     .footer-links a { font-size: .75rem; color: var(--fg-dim); letter-spacing: .08em; }
     .footer-links a:hover { color: var(--accent); }
 
-    /* Responsive */
     @media (max-width: 768px) {
       .nav { padding: 1rem 1.5rem; }
       .nav-links { gap: 1.2rem; }
       .nav-links a { font-size: .65rem; }
       .nav-cta { display: none; }
+      .lang-btn { font-size: .6rem; padding: .3rem .6rem; }
       section { padding: 5rem 0; }
       .editorial, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .video-grid { grid-template-columns: 1fr; gap: 2.5rem; }
@@ -137,18 +131,18 @@ const currentPath = Astro.url.pathname;
 </head>
 <body>
   <nav class="nav" id="top-nav">
-    <a href="/" class="nav-logo">goldfish<span>studio</span></a>
-    <ul class="nav-links">
-      {navLinks.map((link) => (
-        <li>
-          <a
-            href={link.href}
-            class:list={[{ active: currentPath.startsWith(link.href) && link.href !== '/' }, { active: link.href === '/' && currentPath === '/' }]}
-          >{link.label}</a>
-        </li>
-      ))}
-      <li><a href="/contact" class="nav-cta">Hire me</a></li>
-    </ul>
+    <a href={lang === 'en' ? '/' : '/nl/'} class="nav-logo">goldfish<span>studio</span></a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        {navLinks.map((link) => (
+          <li>
+            <a href={link.href} class:list={[{ active: currentPath === link.href }]}>{link.label}</a>
+          </li>
+        ))}
+      </ul>
+      <a href={lang === 'en' ? '/nl/contact' : '/contact'} class="lang-btn">{t.langBtn}</a>
+      <a href={lang === 'en' ? '/contact' : '/nl/contact'} class="nav-cta">{t.nav.hire}</a>
+    </div>
   </nav>
 
   <main>
@@ -156,11 +150,11 @@ const currentPath = Astro.url.pathname;
   </main>
 
   <footer>
-    <div class="footer-copy">&copy; {year} Goldfishstudio. All rights reserved.</div>
+    <div class="footer-copy">&copy; {year} Goldfishstudio. {t.footer.copy}</div>
     <ul class="footer-links">
       <li><a href="mailto:info@goldfishstudio.nl">info@goldfishstudio.nl</a></li>
-      <li><a href="/work">Portfolio</a></li>
-      <li><a href="/contact">Get in touch</a></li>
+      <li><a href={lang === 'en' ? '/work' : '/nl/work'}>{t.footer.portfolio}</a></li>
+      <li><a href={lang === 'en' ? '/contact' : '/nl/contact'}>{t.footer.touch}</a></li>
     </ul>
   </footer>
 
@@ -168,11 +162,7 @@ const currentPath = Astro.url.pathname;
     var nav = document.getElementById('top-nav');
     if (nav) {
       window.addEventListener('scroll', function() {
-        if (window.scrollY > 80) {
-          nav.classList.add('scrolled');
-        } else {
-          nav.classList.remove('scrolled');
-        }
+        nav.classList.toggle('scrolled', window.scrollY > 80);
       }, { passive: true });
     }
   </script>

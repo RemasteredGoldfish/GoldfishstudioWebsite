@@ -1,0 +1,41 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { translations } from '../../i18n.ts';
+const t = translations.nl;
+
+const projects = [
+  { title: 'De Kas — Van Boer tot Bord', tag: 'Commercial', year: '2026', embed: null },
+  { title: 'LUWAM — Nachtrit', tag: 'Muziekvideo', year: '2026', embed: null },
+  { title: 'Nordrecht — Met Zorg Gemaakt', tag: 'Merkenfilm', year: '2025', embed: null },
+  { title: 'Bloom Coffee — Ochtendritueel', tag: 'Social Media', year: '2025', embed: null },
+];
+---
+
+<Layout t={t} lang="nl" pageTitle="Werk — Goldfishstudio" year="2026">
+
+  <section class="container" style="padding-top: 8rem;">
+    <div class="eyebrow" set:html={t.work.eyebrow} />
+    <h1 class="heading" style="font-size: clamp(2rem, 5vw, 3.5rem);" set:html={t.work.heading} />
+    <p class="lede" style="margin-bottom: 3rem;" set:html={t.work.desc} />
+
+    <div class="video-grid">
+      {projects.map((p) => (
+        <article class="video-card">
+          <div class="video-thumb">
+            {p.embed
+              ? <iframe src={p.embed} title={p.title} loading="lazy" allowfullscreen style="width:100%;height:100%;border:none;" />
+              : <div class="video-thumb-placeholder">VIDEO&nbsp;PLACEHOLDER</div>
+            }
+          </div>
+          <div class="video-meta">
+            <span class="video-tag" set:html={p.tag} />
+            <span class="video-meta-dot"></span>
+            <span class="video-year" set:html={p.year} />
+          </div>
+          <div class="video-title" set:html={p.title} />
+        </article>
+      ))}
+    </div>
+  </section>
+
+</Layout>

@@ -1,0 +1,60 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { translations } from '../../i18n.ts';
+
+const nl = translations.nl;
+const en = translations.en;
+---
+
+<Layout t={nl} lang="nl" pageTitle="Contact — Goldfishstudio" year="2026">
+
+  <section class="container" style="padding-top: 8rem; padding-bottom: 4rem;">
+    <div class="contact-grid">
+      <div>
+        <div class="eyebrow">Contact</div>
+        <h1 class="heading" style="font-size: clamp(2rem, 5vw, 3.5rem);">Laten we<br/>samenwerken.</h1>
+        <p class="lede">Heb je een project in gedachten? Stuur me een bericht en ik reageer binnen 24 uur.</p>
+
+        <div style="margin-top: 2.5rem;">
+          <div class="contact-item">
+            <span class="contact-label">E-mail</span>
+            <span class="contact-value"><a href="mailto:info@goldfishstudio.nl">info@goldfishstudio.nl</a></span>
+          </div>
+          <div class="contact-item">
+            <span class="contact-label">Locatie</span>
+            <span class="contact-value">Nederland</span>
+          </div>
+          <div class="contact-item">
+            <span class="contact-label">BTW</span>
+            <span class="contact-value">NL005113528B68</span>
+          </div>
+          <div class="contact-item">
+            <span class="contact-label">IBAN</span>
+            <span class="contact-value">NL26 INGB 0107 9749 08</span>
+          </div>
+        </div>
+      </div>
+
+      <form class="contact-form" action="mailto:info@goldfishstudio.nl" method="post" enctype="text/plain">
+        <div class="field">
+          <label for="name">Je naam</label>
+          <input type="text" id="name" name="name" placeholder="Jan de Vries" required />
+        </div>
+        <div class="field">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" placeholder="jan@voorbeeld.nl" required />
+        </div>
+        <div class="field">
+          <label for="type">Project type</label>
+          <input type="text" id="type" name="type" placeholder="Commercial / Muziekvideo / Evenement / Anders" />
+        </div>
+        <div class="field">
+          <label for="message">Vertel me over je project</label>
+          <textarea id="message" name="message" placeholder="Wat moet er gefilmd worden? Zijn er referenties, deadlines of specifieke wensen?" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="align-self: flex-end;">Verstuur bericht</button>
+      </form>
+    </div>
+  </section>
+
+</Layout>
