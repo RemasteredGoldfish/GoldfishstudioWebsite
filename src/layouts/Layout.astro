@@ -1,0 +1,256 @@
+---
+const { pageTitle = 'Goldfishstudio', year = '2026' } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Goldfishstudio — Videography & film production in the Netherlands." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <title>{pageTitle} — Goldfishstudio</title>
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      :root {
+        --bg: #0a0a0a;
+        --bg-elevated: #111;
+        --bg-card: #161616;
+        --fg: #f0f0f0;
+        --fg-muted: #888;
+        --fg-dim: #555;
+        --accent: #e0b060;
+        --accent-dim: #c09040;
+        --border: #222;
+        --radius: 8px;
+        --font-sans: 'Inter', system-ui, sans-serif;
+        --font-mono: 'JetBrains Mono', monospace;
+      }
+      html { font-size: 16px; scroll-behavior: smooth; }
+      body {
+        font-family: var(--font-sans);
+        background: var(--bg);
+        color: var(--fg);
+        line-height: 1.7;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+      a { color: var(--fg); text-decoration: none; transition: color .2s; }
+      a:hover { color: var(--accent); }
+      img, video { max-width: 100%; display: block; }
+
+      /* Navigation */
+      .nav {
+        position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 1.2rem 2rem;
+        background: rgba(10,10,10,.85);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-logo {
+        font-family: var(--font-mono);
+        font-size: 1rem; font-weight: 600;
+        letter-spacing: .05em;
+        color: var(--fg);
+      }
+      .nav-logo span { color: var(--accent); }
+      .nav-links { display: flex; gap: 2rem; list-style: none; }
+      .nav-links a {
+        font-size: .85rem; font-weight: 500;
+        color: var(--fg-muted);
+        letter-spacing: .03em;
+      }
+      .nav-links a:hover,
+      .nav-links a.active { color: var(--accent); }
+
+      /* Layout */
+      .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+      section { padding: 6rem 0; }
+      .section-label {
+        font-family: var(--font-mono);
+        font-size: .75rem; font-weight: 500;
+        letter-spacing: .12em; text-transform: uppercase;
+        color: var(--accent); margin-bottom: 1rem;
+      }
+      .section-title {
+        font-size: clamp(1.8rem, 4vw, 3rem);
+        font-weight: 600; line-height: 1.2;
+        margin-bottom: 1.5rem;
+      }
+      .section-desc {
+        font-size: 1.05rem; color: var(--fg-muted);
+        max-width: 600px; line-height: 1.8;
+      }
+
+      /* Hero */
+      .hero {
+        min-height: 100vh;
+        display: flex; align-items: center; justify-content: center;
+        position: relative; padding-top: 5rem;
+        background: radial-gradient(ellipse at 50% 30%, #1a1510 0%, var(--bg) 70%);
+      }
+      .hero-inner { text-align: center; max-width: 800px; padding: 0 2rem; }
+      .hero-eyebrow {
+        font-family: var(--font-mono);
+        font-size: .75rem; letter-spacing: .15em;
+        color: var(--accent); margin-bottom: 1.5rem;
+      }
+      .hero-title {
+        font-size: clamp(2.5rem, 6vw, 4.5rem);
+        font-weight: 700; line-height: 1.1;
+        margin-bottom: 1.5rem;
+        letter-spacing: -.02em;
+      }
+      .hero-sub {
+        font-size: 1.15rem; color: var(--fg-muted);
+        max-width: 550px; margin: 0 auto 2.5rem; line-height: 1.8;
+      }
+      .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+      .btn {
+        display: inline-flex; align-items: center; gap: .5rem;
+        padding: .8rem 1.8rem;
+        border-radius: 6px; font-size: .9rem; font-weight: 500;
+        transition: all .2s; cursor: pointer; border: none;
+      }
+      .btn-primary { background: var(--accent); color: #000; }
+      .btn-primary:hover { background: #f0c070; color: #000; }
+      .btn-ghost { background: transparent; color: var(--fg); border: 1px solid var(--border); }
+      .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+      /* Video grid */
+      .video-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 1.5rem;
+      }
+      .video-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        overflow: hidden;
+        transition: border-color .3s, transform .3s;
+        cursor: pointer;
+      }
+      .video-card:hover { border-color: #333; transform: translateY(-2px); }
+      .video-thumb {
+        position: relative; aspect-ratio: 16/9;
+        background: #1a1a1a; overflow: hidden;
+      }
+      .video-thumb iframe {
+        width: 100%; height: 100%; border: none;
+      }
+      .video-info { padding: 1.2rem 1.4rem; }
+      .video-tag {
+        font-family: var(--font-mono); font-size: .7rem;
+        letter-spacing: .1em; color: var(--accent);
+        text-transform: uppercase; margin-bottom: .5rem;
+      }
+      .video-title { font-size: 1rem; font-weight: 600; margin-bottom: .3rem; }
+      .video-meta { font-size: .8rem; color: var(--fg-dim); }
+
+      /* About */
+      .about-grid {
+        display: grid; grid-template-columns: 1fr 1fr;
+        gap: 4rem; align-items: start;
+      }
+      .about-text p { color: var(--fg-muted); margin-bottom: 1rem; font-size: 1rem; }
+      .about-stats {
+        display: grid; grid-template-columns: 1fr 1fr;
+        gap: 1.5rem; margin-top: 2rem;
+      }
+      .stat { padding: 1.2rem; background: var(--bg-card); border-radius: var(--radius); }
+      .stat-num { font-size: 1.8rem; font-weight: 700; color: var(--accent); }
+      .stat-label { font-size: .8rem; color: var(--fg-muted); margin-top: .3rem; }
+
+      /* Contact */
+      .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+      .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+      .field label {
+        display: block; font-size: .8rem; font-weight: 500;
+        color: var(--fg-muted); margin-bottom: .4rem;
+      }
+      .field input, .field textarea {
+        width: 100%; padding: .8rem 1rem;
+        background: var(--bg-card); border: 1px solid var(--border);
+        border-radius: 6px; color: var(--fg); font-family: var(--font-sans);
+        font-size: .95rem; transition: border-color .2s;
+      }
+      .field input:focus, .field textarea:focus {
+        outline: none; border-color: var(--accent);
+      }
+      .field textarea { min-height: 140px; resize: vertical; }
+      .contact-info p { color: var(--fg-muted); margin-bottom: 1rem; }
+      .contact-row {
+        display: flex; align-items: center; gap: .8rem;
+        margin-bottom: .8rem; color: var(--fg-muted); font-size: .95rem;
+      }
+      .contact-row strong { color: var(--fg); min-width: 80px; font-weight: 500; }
+
+      /* Footer */
+      footer {
+        padding: 3rem 0;
+        border-top: 1px solid var(--border);
+        display: flex; justify-content: space-between; align-items: center;
+        flex-wrap: wrap; gap: 1rem;
+      }
+      .footer-copy { font-family: var(--font-mono); font-size: .75rem; color: var(--fg-dim); }
+      .footer-links { display: flex; gap: 1.5rem; list-style: none; }
+      .footer-links a { font-size: .85rem; color: var(--fg-dim); }
+      .footer-links a:hover { color: var(--accent); }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .nav-links { gap: 1.2rem; }
+        .nav-links a { font-size: .8rem; }
+        section { padding: 4rem 0; }
+        .video-grid { grid-template-columns: 1fr; }
+        .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+        .about-stats { grid-template-columns: 1fr; }
+      }
+
+      /* Animations */
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .fade-up { animation: fadeUp .8s ease-out both; }
+      .delay-1 { animation-delay: .15s; }
+      .delay-2 { animation-delay: .3s; }
+      .delay-3 { animation-delay: .45s; }
+
+      @media (prefers-reduced-motion: reduce) {
+        .fade-up { animation: none; opacity: 1; }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="nav">
+      <a href="/" class="nav-logo">GOLDFISH<span>.</span>STUDIO</a>
+      <ul class="nav-links">
+        <li><a href="/work" id="nav-work">Work</a></li>
+        <li><a href="/about" id="nav-about">About</a></li>
+        <li><a href="/contact" id="nav-contact">Contact</a></li>
+      </ul>
+    </nav>
+    <script>
+      const path = window.location.pathname;
+      if(path.startsWith('/work')) document.getElementById('nav-work')?.classList.add('active');
+      if(path.startsWith('/about')) document.getElementById('nav-about')?.classList.add('active');
+      if(path.startsWith('/contact')) document.getElementById('nav-contact')?.classList.add('active');
+    </script>
+    <main>
+      <slot />
+    </main>
+    <footer class="container">
+      <div class="footer-copy">&copy; {year} Goldfishstudio — All rights reserved</div>
+      <ul class="footer-links">
+        <li><a href="mailto:info@goldfishstudio.nl">info@goldfishstudio.nl</a></li>
+        <li><a href="/#work">Portfolio</a></li>
+        <li><a href="/contact">Hire me</a></li>
+      </ul>
+    </footer>
+  </body>
+</html>

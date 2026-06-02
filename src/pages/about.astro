@@ -1,0 +1,83 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout pageTitle="About" year="2026">
+
+  <section class="container" style="padding-top: 8rem;">
+    <div class="about-grid">
+      <div>
+        <div class="section-label">About</div>
+        <h1 class="section-title" style="font-size: clamp(2rem, 5vw, 3.5rem);">J. Murray.</h1>
+        <div class="about-text" style="margin-top: 1.5rem;">
+          <p>
+            I'm a freelance videographer and filmmaker based in the Netherlands.
+            I help brands, artists, and businesses tell their stories through
+            cinematic video — from concept to final delivery.
+          </p>
+          <p>
+            I work solo or with a small crew depending on the project. I handle
+            everything: directing, filming, editing, color grading, and sound
+            design. My focus is on creating authentic, visually striking
+            content that connects with the audience.
+          </p>
+          <p>
+            When I'm not behind the camera, I'm probably behind a screen
+            color grading, learning new techniques, or planning the next shoot.
+            I believe in keeping things simple, communicating clearly, and
+            delivering quality work on time.
+          </p>
+          <p style="color: var(--fg-dim); font-size: .9rem; margin-top: 2rem;">
+            Based in the Netherlands &nbsp;|&nbsp; Available for projects across Europe
+          </p>
+        </div>
+
+        <div class="about-stats">
+          <div class="stat">
+            <div class="stat-num">20+</div>
+            <div class="stat-label">Projects completed</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">2</div>
+            <div class="stat-label">Years experience</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">4K</div>
+            <div class="stat-label">All projects delivered in 4K</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">100%</div>
+            <div class="stat-label">Client satisfaction</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;justify-content:center;">
+        <div style="width:100%;aspect-ratio:3/4;background:var(--bg-card);border-radius:var(--radius);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--fg-dim);font-family:var(--font-mono);font-size:.8rem;text-align:center;padding:2rem;">
+          PHOTO<br/>PLACEHOLDER<br/><br/>Drop your portrait<br/>here — square or<br/>3:4 aspect ratio<br/>works best
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Approach -->
+  <section class="container" style="border-top: 1px solid var(--border);">
+    <div class="section-label">My Approach</div>
+    <h2 class="section-title">How I work.</h2>
+    <div class="about-stats" style="grid-template-columns: repeat(3, 1fr); margin-top: 2rem;">
+      <div class="stat">
+        <div class="stat-num" style="font-size: 1.2rem;">01 — Brief</div>
+        <div class="stat-label" style="font-size: .85rem; margin-top: .5rem;">We discuss your vision, goals, and requirements. I ask questions to understand the story you want to tell.</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" style="font-size: 1.2rem;">02 — Shoot</div>
+        <div class="stat-label" style="font-size: .85rem; margin-top: .5rem;">Filming day — I handle everything on set. You focus on your business while I capture the content.</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" style="font-size: 1.2rem;">03 — Deliver</div>
+        <div class="stat-label" style="font-size: .85rem; margin-top: .5rem;">Editing, revisions, and final delivery via Frame.io. You review, comment, and download when approved.</div>
+      </div>
+    </div>
+  </section>
+
+</Layout>

@@ -1,0 +1,105 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const featuredProjects = [
+  {
+    title: 'Restaurant Promo — De Kas',
+    tag: 'Commercial',
+    year: '2026',
+    embed: null,
+    placeholder: true,
+  },
+  {
+    title: 'Artist Music Video — LUWAM',
+    tag: 'Music Video',
+    year: '2026',
+    embed: null,
+    placeholder: true,
+  },
+  {
+    title: 'Brand Story — Nordrecht',
+    tag: 'Brand Film',
+    year: '2025',
+    embed: null,
+    placeholder: true,
+  },
+];
+---
+
+<Layout pageTitle="Videography & Film Production" year="2026">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-eyebrow fade-up">GOLDFISHSTUDIO — VIDEOGRAPHY &amp; FILM PRODUCTION</div>
+      <h1 class="hero-title fade-up delay-1">
+        Visual stories<br />that move.
+      </h1>
+      <p class="hero-sub fade-up delay-2">
+        I'm a freelance videographer based in the Netherlands, crafting cinematic
+        videos for brands, artists, and businesses. From concept to final cut.
+      </p>
+      <div class="hero-cta fade-up delay-3">
+        <a href="/work" class="btn btn-primary">View my work</a>
+        <a href="/contact" class="btn btn-ghost">Get in touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Selected Work -->
+  <section class="container" id="work">
+    <div class="section-label">Selected Work</div>
+    <h2 class="section-title">Recent projects.</h2>
+    <p class="section-desc" style="margin-bottom: 3rem;">
+      A selection of recent work across commercials, music videos, and brand films.
+    </p>
+
+    <div class="video-grid">
+      {featuredProjects.map((project) => (
+        <article class="video-card">
+          <div class="video-thumb">
+            {project.embed
+              ? <iframe src={project.embed} title={project.title} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope" allowfullscreen />
+              : <div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--fg-dim);font-family:var(--font-mono);font-size:.75rem;">VIDEO&nbsp;PLACEHOLDER</div>
+            }
+          </div>
+          <div class="video-info">
+            <div class="video-tag">{project.tag} — {project.year}</div>
+            <div class="video-title">{project.title}</div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="container" style="border-top: 1px solid var(--border);">
+    <div class="section-label">What I Do</div>
+    <h2 class="section-title">Services.</h2>
+    <div class="video-grid" style="margin-top: 2rem;">
+      <div class="about-stats" style="grid-column: 1 / -1; gap: 0;">
+        <div class="stat" style="border-radius: var(--radius) 0 0 var(--radius);">
+          <div class="stat-num">01</div>
+          <div class="stat-label" style="font-weight:600; color:var(--fg); margin-bottom:.3rem;">Commercial Video</div>
+          <div class="stat-label" style="font-size:.8rem;">Promo videos, social media content, product showcases — designed to convert.</div>
+        </div>
+        <div class="stat" style="border-radius: 0 var(--radius) var(--radius) 0;">
+          <div class="stat-num">02</div>
+          <div class="stat-label" style="font-weight:600; color:var(--fg); margin-bottom:.3rem;">Music Videos</div>
+          <div class="stat-label" style="font-size:.8rem;">Visual storytelling for artists — from indie to professional productions.</div>
+        </div>
+        <div class="stat" style="border-radius: var(--radius) 0 0 var(--radius);">
+          <div class="stat-num">03</div>
+          <div class="stat-label" style="font-weight:600; color:var(--fg); margin-bottom:.3rem;">Brand Films</div>
+          <div class="stat-label" style="font-size:.8rem;">Documentary-style brand stories that build trust and emotional connection.</div>
+        </div>
+        <div class="stat" style="border-radius: 0 var(--radius) var(--radius) 0;">
+          <div class="stat-num">04</div>
+          <div class="stat-label" style="font-weight:600; color:var(--fg); margin-bottom:.3rem;">Event Coverage</div>
+          <div class="stat-label" style="font-size:.8rem;">Capturing the energy of live events, conferences, and performances.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Layout>

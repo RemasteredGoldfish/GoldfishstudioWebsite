@@ -1,0 +1,42 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const projects = [
+  { title: 'Restaurant Promo — De Kas', tag: 'Commercial', year: '2026', client: 'De Kas', desc: 'Cinematic promo video showcasing the farm-to-table experience.', embed: null, placeholder: true },
+  { title: 'Music Video — LUWAM', tag: 'Music Video', year: '2026', client: 'LUWAM', desc: 'Narrative-driven music video shot across Amsterdam.', embed: null, placeholder: true },
+  { title: 'Brand Film — Nordrecht', tag: 'Brand Film', year: '2025', client: 'Nordrecht', desc: 'Short documentary about sustainable fashion and ethical production.', embed: null, placeholder: true },
+  { title: 'Social Media Campaign — Bloom Coffee', tag: 'Social Media', year: '2025', client: 'Bloom Coffee', desc: '6 short-form videos for Instagram Reels and TikTok.', embed: null, placeholder: true },
+  { title: 'Product Launch — Waka Waka', tag: 'Commercial', year: '2025', client: 'Waka Waka', desc: 'Product showcase video for Kickstarter campaign.', embed: null, placeholder: true },
+  { title: 'Event Highlight — AfroTech', tag: 'Event', year: '2024', client: 'AfroTech Conference', desc: '2-minute highlight reel from the 3-day conference in Rotterdam.', embed: null, placeholder: true },
+];
+---
+
+<Layout pageTitle="Work" year="2026">
+
+  <section class="container" style="padding-top: 8rem;">
+    <div class="section-label">Portfolio</div>
+    <h1 class="section-title" style="font-size: clamp(2rem, 5vw, 3.5rem);">Selected work.</h1>
+    <p class="section-desc" style="margin-bottom: 3rem;">
+      Projects spanning commercials, music videos, brand films, and social media content.
+    </p>
+
+    <div class="video-grid">
+      {projects.map((p) => (
+        <article class="video-card">
+          <div class="video-thumb">
+            {p.embed
+              ? <iframe src={p.embed} title={p.title} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope" allowfullscreen />
+              : <div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--fg-dim);font-family:var(--font-mono);font-size:.75rem;">VIDEO&nbsp;PLACEHOLDER</div>
+            }
+          </div>
+          <div class="video-info">
+            <div class="video-tag">{p.tag} — {p.year}</div>
+            <div class="video-title">{p.title}</div>
+            <div class="video-meta" style="margin-top:.5rem;">{p.desc}</div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+</Layout>
