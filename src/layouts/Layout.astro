@@ -1,6 +1,7 @@
 ---
 import { translations } from '../i18n.ts';
 
+
 const { pageTitle, year = '2026', lang = 'en' } = Astro.props;
 const t = translations[lang];
 const otherLang = lang === 'en' ? 'nl' : 'en';
@@ -166,5 +167,6 @@ const currentPath = Astro.url.pathname;
       }, { passive: true });
     }
   </script>
+  <script src="/_vercel/insights/script.js" defer></script>
 </body>
 </html>
