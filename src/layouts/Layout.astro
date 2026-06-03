@@ -62,7 +62,7 @@ const currentPath = Astro.url.pathname;
 
     .hero { min-height: 100vh; display: flex; align-items: center; position: relative; padding-top: 6rem; overflow: hidden; }
     .hero-bg { position: absolute; inset: 0; z-index: 0; }
-    .hero-bg mux-player { width: 100%; height: 100%; --media-object-fit: cover; }
+    .hero-bg iframe { width: 100%; height: 100%; border: none; }
     .hero-overlay { position: absolute; inset: 0; z-index: 1; background: rgba(12,12,12,.85); pointer-events: none; }
     .hero-content { position: relative; z-index: 2; }
     .hero-inner { max-width: 750px; }
@@ -80,7 +80,8 @@ const currentPath = Astro.url.pathname;
     .video-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
     .video-card { cursor: pointer; }
     .video-card:hover .video-title { color: var(--accent); }
-    .video-thumb { aspect-ratio: 16/10; overflow: hidden; background: var(--bg-warm); margin-bottom: 1.2rem; display: flex; align-items: center; justify-content: center; }
+    .video-thumb { aspect-ratio: 16/10; overflow: hidden; background: var(--bg-warm); margin-bottom: 1.2rem; position: relative; }
+    .video-thumb iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
     .video-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
     .video-card:hover .video-thumb img { transform: scale(1.03); }
     .video-thumb-placeholder { color: var(--fg-dim); font-size: .75rem; letter-spacing: .1em; text-align: center; }

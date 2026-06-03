@@ -7,15 +7,15 @@ const featured = {
   title: 'Restaurant Promo — De Kas',
   tag: 'Commercial',
   year: '2026',
-  muxId: 'WzgR4p6KbtQDdD19drFUrxxcsQgB3VYeyceDe00npKq8',
+  video: '1169209749',
 };
 
 const projects = [
-  { title: 'Music Video — LUWAM', tag: 'Music Video', year: '2026', muxId: null },
-  { title: 'Brand Film — Nordrecht', tag: 'Brand Film', year: '2025', muxId: null },
-  { title: 'Social Media — Bloom Coffee', tag: 'Social Media', year: '2025', muxId: null },
-  { title: 'Product Launch — Waka Waka', tag: 'Commercial', year: '2025', muxId: null },
-  { title: 'Event Highlight — AfroTech', tag: 'Event', year: '2024', muxId: null },
+  { title: 'Music Video — LUWAM', tag: 'Music Video', year: '2026', video: null },
+  { title: 'Brand Film — Nordrecht', tag: 'Brand Film', year: '2025', video: null },
+  { title: 'Social Media — Bloom Coffee', tag: 'Social Media', year: '2025', video: null },
+  { title: 'Product Launch — Waka Waka', tag: 'Commercial', year: '2025', video: null },
+  { title: 'Event Highlight — AfroTech', tag: 'Event', year: '2024', video: null },
 ];
 ---
 
@@ -29,14 +29,14 @@ const projects = [
     <div style="margin-top: 3rem;">
       <article class="video-card">
         <div class="video-thumb" style="aspect-ratio:16/9;">
-          {featured.muxId
+          {featured.video
             ? <iframe
-                src={`https://player.mux.com/${featured.muxId}`}
+                src={`https://player.vimeo.com/video/${featured.video}`}
                 title={featured.title}
-                allow="autoplay; encrypted-media"
+                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
                 allowfullscreen
+                referrerpolicy="strict-origin-when-cross-origin"
                 loading="lazy"
-                style="width:100%;height:100%;border:none;"
               />
             : <div class="video-thumb-placeholder">VIDEO&nbsp;PLACEHOLDER</div>
           }
@@ -57,8 +57,15 @@ const projects = [
         {projects.map((p) => (
           <article class="video-card">
             <div class="video-thumb">
-              {p.muxId
-                ? <iframe src="https://player.mux.com/p.muxId" title="p.title" allow="autoplay; encrypted-media" allowfullscreen loading="lazy" style="width:100%;height:100%;border:none;" />
+              {p.video
+                ? <iframe
+                    src={`https://player.vimeo.com/video/${p.video}`}
+                    title={p.title}
+                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                    allowfullscreen
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    loading="lazy"
+                  />
                 : <div class="video-thumb-placeholder">VIDEO&nbsp;PLACEHOLDER</div>
               }
             </div>
