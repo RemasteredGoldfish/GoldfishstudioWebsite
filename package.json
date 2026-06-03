@@ -12,6 +12,9 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@mux/mux-node": "^14.1.1",
+    "@mux/mux-player": "^3.13.0",
+    "@mux/mux-uploader-react": "^1.5.0",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "astro": "^6.4.2"

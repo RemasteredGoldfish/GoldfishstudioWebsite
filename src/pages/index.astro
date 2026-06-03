@@ -4,10 +4,10 @@ import { translations } from '../i18n.ts';
 const t = translations.en;
 
 const projects = [
-  { title: 'De Kas — Farm to Table', tag: 'Commercial', year: '2026', embed: null },
-  { title: 'LUWAM — Night Drive', tag: 'Music Video', year: '2026', embed: null },
-  { title: 'Nordrecht — Made with Care', tag: 'Brand Film', year: '2025', embed: null },
-  { title: 'Bloom Coffee — Morning Ritual', tag: 'Social Media', year: '2025', embed: null },
+  { title: 'De Kas — Farm to Table', tag: 'Commercial', year: '2026', muxId: null },
+  { title: 'LUWAM — Night Drive', tag: 'Music Video', year: '2026', muxId: null },
+  { title: 'Nordrecht — Made with Care', tag: 'Brand Film', year: '2025', muxId: null },
+  { title: 'Bloom Coffee — Morning Ritual', tag: 'Social Media', year: '2025', muxId: null },
 ];
 ---
 
@@ -37,7 +37,9 @@ const projects = [
             <div class="video-thumb">
               {p.embed
                 ? <iframe src={p.embed} title={p.title} loading="lazy" allowfullscreen style="width:100%;height:100%;border:none;" />
-                : <div class="video-thumb-placeholder">VIDEO&nbsp;PLACEHOLDER</div>
+                : p.muxId
+                  ? <mux-player playback-id={p.muxId} title={p.title} preload="metadata" accent-color="#c4a46e" />
+                  : <div class="video-thumb-placeholder">VIDEO&nbsp;PLACEHOLDER</div>
               }
             </div>
             <div class="video-meta">

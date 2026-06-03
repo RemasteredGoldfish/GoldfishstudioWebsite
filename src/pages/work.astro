@@ -1,39 +1,39 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { translations } from '../i18n.ts';
+const t = translations.en;
 
 const projects = [
-  { title: 'Restaurant Promo — De Kas', tag: 'Commercial', year: '2026', client: 'De Kas', desc: 'Cinematic promo video showcasing the farm-to-table experience.', embed: null, placeholder: true },
-  { title: 'Music Video — LUWAM', tag: 'Music Video', year: '2026', client: 'LUWAM', desc: 'Narrative-driven music video shot across Amsterdam.', embed: null, placeholder: true },
-  { title: 'Brand Film — Nordrecht', tag: 'Brand Film', year: '2025', client: 'Nordrecht', desc: 'Short documentary about sustainable fashion and ethical production.', embed: null, placeholder: true },
-  { title: 'Social Media Campaign — Bloom Coffee', tag: 'Social Media', year: '2025', client: 'Bloom Coffee', desc: '6 short-form videos for Instagram Reels and TikTok.', embed: null, placeholder: true },
-  { title: 'Product Launch — Waka Waka', tag: 'Commercial', year: '2025', client: 'Waka Waka', desc: 'Product showcase video for Kickstarter campaign.', embed: null, placeholder: true },
-  { title: 'Event Highlight — AfroTech', tag: 'Event', year: '2024', client: 'AfroTech Conference', desc: '2-minute highlight reel from the 3-day conference in Rotterdam.', embed: null, placeholder: true },
+  { title: 'Restaurant Promo — De Kas', tag: 'Commercial', year: '2026', muxId: null },
+  { title: 'Music Video — LUWAM', tag: 'Music Video', year: '2026', muxId: null },
+  { title: 'Brand Film — Nordrecht', tag: 'Brand Film', year: '2025', muxId: null },
+  { title: 'Social Media — Bloom Coffee', tag: 'Social Media', year: '2025', muxId: null },
+  { title: 'Product Launch — Waka Waka', tag: 'Commercial', year: '2025', muxId: null },
+  { title: 'Event Highlight — AfroTech', tag: 'Event', year: '2024', muxId: null },
 ];
 ---
 
-<Layout pageTitle="Work" year="2026">
+<Layout t={t} lang="en" pageTitle="Work" year="2026">
 
   <section class="container" style="padding-top: 8rem;">
-    <div class="section-label">Portfolio</div>
-    <h1 class="section-title" style="font-size: clamp(2rem, 5vw, 3.5rem);">Selected work.</h1>
-    <p class="section-desc" style="margin-bottom: 3rem;">
-      Projects spanning commercials, music videos, brand films, and social media content.
-    </p>
+    <div class="eyebrow" set:html={t.work.eyebrow} />
+    <h1 class="heading" style="font-size: clamp(2rem, 5vw, 3.5rem);" set:html={t.work.heading} />
 
-    <div class="video-grid">
+    <div class="video-grid" style="margin-top: 3rem;">
       {projects.map((p) => (
         <article class="video-card">
           <div class="video-thumb">
-            {p.embed
-              ? <iframe src={p.embed} title={p.title} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope" allowfullscreen />
-              : <div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--fg-dim);font-family:var(--font-mono);font-size:.75rem;">VIDEO&nbsp;PLACEHOLDER</div>
+            {p.muxId
+              ? <mux-player playback-id={p.muxId} title={p.title} preload="metadata" accent-color="#c4a46e" />
+              : <div class="video-thumb-placeholder">VIDEO&nbsp;PLACEHOLDER</div>
             }
           </div>
-          <div class="video-info">
-            <div class="video-tag">{p.tag} — {p.year}</div>
-            <div class="video-title">{p.title}</div>
-            <div class="video-meta" style="margin-top:.5rem;">{p.desc}</div>
+          <div class="video-meta">
+            <span class="video-tag">{p.tag}</span>
+            <span class="video-meta-dot"></span>
+            <span class="video-year">{p.year}</span>
           </div>
+          <div class="video-title">{p.title}</div>
         </article>
       ))}
     </div>
