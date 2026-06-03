@@ -11,8 +11,9 @@ const featured = {
 };
 
 const projects = [
-  { title: 'Muziekvideo — LUWAM', tag: 'Muziekvideo', year: '2026', video: null },
-  { title: 'Merkenfilm — Nordrecht', tag: 'Merkenfilm', year: '2025', video: null },
+  { title: 'Project 01', tag: 'Commercial', year: '2026', video: '1169208960' },
+  { title: 'Project 02', tag: 'Muziekvideo', year: '2026', video: '1169208935' },
+  { title: 'Project 03', tag: 'Merkenfilm', year: '2025', video: '1169209569' },
   { title: 'Social Media — Bloom Coffee', tag: 'Social Media', year: '2025', video: null },
   { title: 'Productlancering — Waka Waka', tag: 'Commercial', year: '2025', video: null },
   { title: 'Evenement — AfroTech', tag: 'Evenement', year: '2024', video: null },
@@ -30,14 +31,7 @@ const projects = [
       <article class="video-card">
         <div class="video-thumb" style="aspect-ratio:16/9;">
           {featured.video
-            ? <iframe
-                src={`https://player.vimeo.com/video/${featured.video}`}
-                title={featured.title}
-                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-                allowfullscreen
-                referrerpolicy="strict-origin-when-cross-origin"
-                loading="lazy"
-              />
+            ? <iframe src={`https://player.vimeo.com/video/${featured.video}`} title={featured.title} allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" loading="lazy" />
             : <div class="video-thumb-placeholder">VIDEO&nbsp;PLACEHOLDER</div>
           }
         </div>
@@ -58,14 +52,7 @@ const projects = [
           <article class="video-card">
             <div class="video-thumb">
               {p.video
-                ? <iframe
-                    src={`https://player.vimeo.com/video/${p.video}`}
-                    title={p.title}
-                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-                    allowfullscreen
-                    referrerpolicy="strict-origin-when-cross-origin"
-                    loading="lazy"
-                  />
+                ? <iframe src={`https://player.vimeo.com/video/${p.video}`} title={p.title} allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" loading="lazy" />
                 : <div class="video-thumb-placeholder">VIDEO&nbsp;PLACEHOLDER</div>
               }
             </div>
