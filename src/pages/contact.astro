@@ -1,8 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { translations } from '../i18n.ts';
+const t = translations.en;
 ---
 
-<Layout pageTitle="Contact" year="2026">
+<Layout t={t} lang="en" pageTitle="Contact" year="2026">
 
   <section class="container" style="padding-top: 8rem; padding-bottom: 4rem;">
     <div class="contact-grid">
