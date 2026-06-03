@@ -15,14 +15,13 @@ const projects = [
 
   <section class="hero">
     <div class="hero-bg">
-      <mux-player
-        playback-id="hVmQz5KRnonL02tIOz5KjwW72e82pV6iTiurdqwOnSqU"
+      <iframe
+        src="https://player.mux.com/hVmQz5KRnonL02tIOz5KjwW72e82pV6iTiurdqwOnSqU?muted=true&autoplay=true&loop=true"
         title="Goldfishstudio background"
+        allow="autoplay"
         muted
-        autoplay
-        loop
-        preload="metadata"
-        playsinline
+        loading="lazy"
+        style="width:100%;height:100%;border:none;"
       />
     </div>
     <div class="hero-overlay" />
@@ -48,7 +47,7 @@ const projects = [
           <article class="video-card">
             <div class="video-thumb">
               {p.muxId
-                ? <mux-player playback-id={p.muxId} title={p.title} preload="metadata" accent-color="#c4a46e" />
+                ? <iframe src="https://player.mux.com/p.muxId" title="p.title" allow="autoplay; encrypted-media" allowfullscreen loading="lazy" style="width:100%;height:100%;border:none;" />
                 : <div class="video-thumb-placeholder">VIDEO&nbsp;PLACEHOLDER</div>
               }
             </div>

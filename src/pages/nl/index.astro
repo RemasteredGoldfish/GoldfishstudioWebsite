@@ -36,7 +36,7 @@ const projects = [
           <article class="video-card">
             <div class="video-thumb">
               {p.muxId
-                ? <mux-player playback-id={p.muxId} title={p.title} preload="metadata" accent-color="#c4a46e" />
+                ? <iframe src="https://player.mux.com/p.muxId" title="p.title" allow="autoplay; encrypted-media" allowfullscreen loading="lazy" style="width:100%;height:100%;border:none;" />
                 : <div class="video-thumb-placeholder">VIDEO&nbsp;PLACEHOLDER</div>
               }
             </div>
