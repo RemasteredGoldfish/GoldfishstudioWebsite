@@ -3,8 +3,14 @@ import Layout from '../layouts/Layout.astro';
 import { translations } from '../i18n.ts';
 const t = translations.en;
 
+const featured = {
+  title: 'Restaurant Promo — De Kas',
+  tag: 'Commercial',
+  year: '2026',
+  muxId: 'WzgR4p6KbtQDdD19drFUrxxcsQgB3VYeyceDe00npKq8',
+};
+
 const projects = [
-  { title: 'Restaurant Promo — De Kas', tag: 'Commercial', year: '2026', muxId: 'WzgR4p6KbtQDdD19drFUrxxcsQgB3VYeyceDe00npKq8' },
   { title: 'Music Video — LUWAM', tag: 'Music Video', year: '2026', muxId: null },
   { title: 'Brand Film — Nordrecht', tag: 'Brand Film', year: '2025', muxId: null },
   { title: 'Social Media — Bloom Coffee', tag: 'Social Media', year: '2025', muxId: null },
@@ -19,23 +25,45 @@ const projects = [
     <div class="eyebrow" set:html={t.work.eyebrow} />
     <h1 class="heading" style="font-size: clamp(2rem, 5vw, 3.5rem);" set:html={t.work.heading} />
 
-    <div class="video-grid" style="margin-top: 3rem;">
-      {projects.map((p) => (
-        <article class="video-card">
-          <div class="video-thumb">
-            {p.muxId
-              ? <mux-player playback-id={p.muxId} title={p.title} preload="metadata" accent-color="#c4a46e" />
-              : <div class="video-thumb-placeholder">VIDEO&nbsp;PLACEHOLDER</div>
-            }
-          </div>
-          <div class="video-meta">
-            <span class="video-tag">{p.tag}</span>
-            <span class="video-meta-dot"></span>
-            <span class="video-year">{p.year}</span>
-          </div>
-          <div class="video-title">{p.title}</div>
-        </article>
-      ))}
+    <!-- Featured video -->
+    <div style="margin-top: 3rem;">
+      <article class="video-card">
+        <div class="video-thumb" style="aspect-ratio:16/9;">
+          {featured.muxId
+            ? <mux-player playback-id={featured.muxId} title={featured.title} preload="metadata" accent-color="#c4a46e" />
+            : <div class="video-thumb-placeholder">VIDEO&nbsp;PLACEHOLDER</div>
+          }
+        </div>
+        <div class="video-meta">
+          <span class="video-tag">{featured.tag}</span>
+          <span class="video-meta-dot"></span>
+          <span class="video-year">{featured.year}</span>
+        </div>
+        <div class="video-title">{featured.title}</div>
+      </article>
+    </div>
+
+    <!-- More work -->
+    <div style="margin-top: 4rem;">
+      <div class="eyebrow" style="font-size:.65rem; margin-bottom:1.5rem;">MORE WORK</div>
+      <div class="video-grid" style="grid-template-columns:repeat(2,1fr);">
+        {projects.map((p) => (
+          <article class="video-card">
+            <div class="video-thumb">
+              {p.muxId
+                ? <mux-player playback-id={p.muxId} title={p.title} preload="metadata" accent-color="#c4a46e" />
+                : <div class="video-thumb-placeholder">VIDEO&nbsp;PLACEHOLDER</div>
+              }
+            </div>
+            <div class="video-meta">
+              <span class="video-tag">{p.tag}</span>
+              <span class="video-meta-dot"></span>
+              <span class="video-year">{p.year}</span>
+            </div>
+            <div class="video-title">{p.title}</div>
+          </article>
+        ))}
+      </div>
     </div>
   </section>
 
