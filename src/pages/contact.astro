@@ -36,7 +36,8 @@ const t = translations.en;
         </div>
       </div>
 
-      <form class="contact-form" action="mailto:info@goldfishstudio.nl" method="post" enctype="text/plain">
+      <form class="contact-form" id="contact-form">
+        <div id="form-status" style="display:none;padding:1rem;margin-bottom:1rem;border-radius:4px;font-size:.9rem;"></div>
         <div class="field">
           <label for="name">Your name</label>
           <input type="text" id="name" name="name" placeholder="John Doe" required />
@@ -53,9 +54,46 @@ const t = translations.en;
           <label for="message">Tell me about your project</label>
           <textarea id="message" name="message" placeholder="What do you need filmed? Any references, deadlines, or specific requirements?" required></textarea>
         </div>
-        <button type="submit" class="btn btn-primary" style="align-self: flex-end;">Send message</button>
+        <button type="submit" class="btn btn-primary" style="align-self: flex-end;" id="submit-btn">Send message</button>
       </form>
     </div>
   </section>
+
+  <script>
+    document.getElementById('contact-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      var btn = document.getElementById('submit-btn');
+      var status = document.getElementById('form-status');
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+      status.style.display = 'none';
+      try {
+        var res = await fetch('/api/contact', {
+          method: 'POST',
+          body: new FormData(this)
+        });
+        var data = await res.json();
+        if (data.success) {
+          status.textContent = 'Message sent! I\'ll get back to you within 24 hours.';
+          status.style.background = '#1a2a1a';
+          status.style.color = '#7ec87e';
+          status.style.display = 'block';
+          this.reset();
+        } else {
+          status.textContent = 'Something went wrong. Please try again or email info@goldfishstudio.nl directly.';
+          status.style.background = '#2a1a1a';
+          status.style.color = '#e07070';
+          status.style.display = 'block';
+        }
+      } catch (err) {
+        status.textContent = 'Network error. Please try again or email info@goldfishstudio.nl directly.';
+        status.style.background = '#2a1a1a';
+        status.style.color = '#e07070';
+        status.style.display = 'block';
+      }
+      btn.textContent = 'Send message';
+      btn.disabled = false;
+    });
+  </script>
 
 </Layout>
