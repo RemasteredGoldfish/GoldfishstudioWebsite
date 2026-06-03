@@ -24,9 +24,10 @@ const currentPath = Astro.url.pathname;
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <meta name="description" content={lang === 'en' ? 'Goldfishstudio — Cinematic videography & film production in the Netherlands.' : 'Goldfishstudio — Cineastische videografie & filmproductie in Nederland.'} />
-  <script type="module" src="https://cdn.jsdelivr.net/npm/@mux/mux-player" defer></script>
+  <script src="https://cdn.mux.com/player/mux-player.mjs" type="module" defer></script>
+  <link rel="stylesheet" href="https://cdn.mux.com/player/mux-player.css" />
   <style is:global>
-    mux-player { display: block; width: 100%; aspect-ratio: 16/10; --media-object-fit: cover; --controls: none; }
+    mux-player { display: block; width: 100%; --media-object-fit: cover; }
     mux-player::part(video) { object-fit: cover; }
   </style>
   <style is:global>
