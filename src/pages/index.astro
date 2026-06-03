@@ -14,7 +14,19 @@ const projects = [
 <Layout t={t} lang="en" pageTitle="Goldfishstudio" year="2026">
 
   <section class="hero">
-    <div class="container">
+    <div class="hero-bg">
+      <mux-player
+        playback-id="hVmQz5KRnonL02tIOz5KjwW72e82pV6iTiurdqwOnSqU"
+        title="Goldfishstudio background"
+        muted
+        autoplay
+        loop
+        preload="metadata"
+        playsinline
+      />
+    </div>
+    <div class="hero-overlay" />
+    <div class="container hero-content">
       <div class="hero-inner">
         <div class="hero-eyebrow" set:html={t.hero.eyebrow} />
         <h1 class="hero-title" set:html={t.hero.title} />
