@@ -14,7 +14,16 @@ const projects = [
 <Layout t={t} lang="nl" pageTitle="Goldfishstudio" year="2026">
 
   <section class="hero">
-    <div class="container">
+    <div class="hero-bg">
+      <iframe
+        src="https://player.vimeo.com/video/1169208987?h=a7a6a855d2&autoplay=1&loop=1&muted=1&background=1"
+        title="Goldfishstudio background"
+        allow="autoplay; fullscreen"
+        loading="lazy"
+      />
+    </div>
+    <div class="hero-overlay" />
+    <div class="container hero-content">
       <div class="hero-inner">
         <div class="hero-eyebrow" set:html={t.hero.eyebrow} />
         <h1 class="hero-title" set:html={t.hero.title} />
