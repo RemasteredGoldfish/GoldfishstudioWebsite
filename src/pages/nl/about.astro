@@ -7,7 +7,7 @@ const t = translations.nl;
 <Layout t={t} lang="nl" pageTitle="Over mij — Goldfishstudio" year="2026">
 
   <section class="container" style="padding-top: 8rem;">
-    <div class="about-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start;">
+    <div class="editorial">
       <div>
         <div class="eyebrow" set:html={t.about.eyebrow} />
         <h1 class="heading" style="font-size: clamp(2rem, 5vw, 3.5rem);" set:html={t.about.heading} />
@@ -15,8 +15,8 @@ const t = translations.nl;
         <p set:html={t.about.p2} />
         <p set:html={t.about.p3} />
       </div>
-      <div class="editorial-image">
-        <div class="video-thumb-placeholder" style="font-size:.8rem">JOUW FOTO HIER</div>
+      <div class="editorial-image" aria-hidden="true">
+        <div class="video-thumb-placeholder">Portretfoto</div>
       </div>
     </div>
   </section>
@@ -24,22 +24,22 @@ const t = translations.nl;
   <!-- Stats -->
   <section style="border-top: 1px solid var(--border);">
     <div class="container">
-      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem;">
-        <div style="padding:1.2rem; background:var(--bg-warm); border-radius:8px;">
-          <div style="font-size:1.8rem; font-weight:700; color:var(--accent);">20+</div>
-          <div style="font-size:.8rem; color:var(--fg-muted); margin-top:.3rem;">Projecten voltooid</div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-num">20+</div>
+          <div class="stat-label">Projecten voltooid</div>
         </div>
-        <div style="padding:1.2rem; background:var(--bg-warm); border-radius:8px;">
-          <div style="font-size:1.8rem; font-weight:700; color:var(--accent);">2</div>
-          <div style="font-size:.8rem; color:var(--fg-muted); margin-top:.3rem;">Jaar ervaring</div>
+        <div class="stat-card">
+          <div class="stat-num">2</div>
+          <div class="stat-label">Jaar ervaring</div>
         </div>
-        <div style="padding:1.2rem; background:var(--bg-warm); border-radius:8px;">
-          <div style="font-size:1.8rem; font-weight:700; color:var(--accent);">4K</div>
-          <div style="font-size:.8rem; color:var(--fg-muted); margin-top:.3rem;">Alle projecten in 4K</div>
+        <div class="stat-card">
+          <div class="stat-num">4K</div>
+          <div class="stat-label">Alle projecten in 4K</div>
         </div>
-        <div style="padding:1.2rem; background:var(--bg-warm); border-radius:8px;">
-          <div style="font-size:1.8rem; font-weight:700; color:var(--accent);">100%</div>
-          <div style="font-size:.8rem; color:var(--fg-muted); margin-top:.3rem;">Klanttevredenheid</div>
+        <div class="stat-card">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Klanttevredenheid</div>
         </div>
       </div>
     </div>

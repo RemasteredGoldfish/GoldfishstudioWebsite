@@ -8,6 +8,7 @@ export const POST: APIRoute = async ({ request }) => {
     const name = data.get('name')?.toString() || '';
     const email = data.get('email')?.toString() || '';
     const type = data.get('type')?.toString() || '';
+    const budget = data.get('budget')?.toString() || '';
     const message = data.get('message')?.toString() || '';
 
     const apiKey = import.meta.env.RESEND_API_KEY || process.env.RESEND_API_KEY;
@@ -28,6 +29,7 @@ export const POST: APIRoute = async ({ request }) => {
 Name: ${name}
 Email: ${email}
 Project type: ${type}
+Budget: ${budget || 'Not specified'}
 
 Message:
 ${message}
@@ -40,6 +42,7 @@ Sent from Goldfishstudio website`,
           <tr><td style="padding:4px 12px 4px 0;font-weight:600;color:#888">Name</td><td style="padding:4px 0">${name}</td></tr>
           <tr><td style="padding:4px 12px 4px 0;font-weight:600;color:#888">Email</td><td style="padding:4px 0">${email}</td></tr>
           <tr><td style="padding:4px 12px 4px 0;font-weight:600;color:#888">Type</td><td style="padding:4px 0">${type || '-'}</td></tr>
+          <tr><td style="padding:4px 12px 4px 0;font-weight:600;color:#888">Budget</td><td style="padding:4px 0">${budget || '-'}</td></tr>
         </table>
         <h3 style="font-family:Georgia,serif;color:#f5f0eb;margin-top:24px">Message</h3>
         <p style="font-family:sans-serif;color:#a09888;line-height:1.8">${message.replace(/\n/g, '<br>')}</p>

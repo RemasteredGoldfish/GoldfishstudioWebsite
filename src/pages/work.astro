@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { translations } from '../i18n.ts';
 const t = translations.en;
+const lang = 'en';
 
 const featured = {
   title: 'Restaurant Promo — De Kas',
@@ -11,9 +12,9 @@ const featured = {
 };
 
 const projects = [
-  { title: 'Project 01', tag: 'Commercial', year: '2026', video: '1169208960' },
-  { title: 'Project 02', tag: 'Music Video', year: '2026', video: '1169208935' },
-  { title: 'Project 03', tag: 'Brand Film', year: '2025', video: '1169209569' },
+  { title: 'Martabak Anniversary', tag: 'Commercial', year: '2026', video: '1169208960' },
+  { title: 'The Barber Shop', tag: 'Brand Film', year: '2026', video: '1169208935' },
+  { title: 'Street Basketball', tag: 'Event', year: '2025', video: '1169209569' },
   { title: 'Social Media — Bloom Coffee', tag: 'Social Media', year: '2025', video: null },
   { title: 'Product Launch — Waka Waka', tag: 'Commercial', year: '2025', video: null },
   { title: 'Event Highlight — AfroTech', tag: 'Event', year: '2024', video: null },
@@ -29,12 +30,12 @@ const projects = [
     <!-- Featured video -->
     <div style="margin-top: 3rem;">
       <article class="video-card">
-        <div class="video-thumb" style="aspect-ratio:16/9;">
+        <a href={lang === 'en' ? '/contact' : '/nl/contact'} class="video-thumb" style="aspect-ratio:16/9;" aria-label={`${featured.title} — ${featured.tag}, ${featured.year}`}>
           {featured.video
-            ? <iframe src={`https://player.vimeo.com/video/${featured.video}`} title={featured.title} allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" loading="lazy" />
-            : <div class="video-thumb-placeholder">VIDEO&nbsp;PLACEHOLDER</div>
+            ? <iframe src={`https://player.vimeo.com/video/${featured.video}?autoplay=1&muted=1&loop=1`} title={featured.title} allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" loading="lazy" />
+            : <div class="video-thumb-placeholder">Coming soon</div>
           }
-        </div>
+        </a>
         <div class="video-meta">
           <span class="video-tag">{featured.tag}</span>
           <span class="video-meta-dot"></span>
@@ -47,13 +48,16 @@ const projects = [
     <!-- More work -->
     <div style="margin-top: 4rem;">
       <div class="eyebrow" style="font-size:.65rem; margin-bottom:1.5rem;">MORE WORK</div>
-      <div class="video-grid" style="grid-template-columns:repeat(2,1fr);">
+      <div class="video-grid">
         {projects.map((p) => (
           <article class="video-card">
             <div class="video-thumb">
               {p.video
-                ? <iframe src={`https://player.vimeo.com/video/${p.video}`} title={p.title} allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" loading="lazy" />
-                : <div class="video-thumb-placeholder">VIDEO&nbsp;PLACEHOLDER</div>
+                ? <>
+                    <div class="video-thumb-loading"></div>
+                    <iframe src={`https://player.vimeo.com/video/${p.video}#t=0.5s`} title={p.title} allow="fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" loading="lazy" onload="this.style.opacity='1';this.previousElementSibling.style.display='none'" style="opacity:0;transition:opacity .3s" />
+                  </>
+                : <div class="video-thumb-placeholder">Coming soon</div>
               }
             </div>
             <div class="video-meta">

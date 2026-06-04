@@ -12,25 +12,36 @@ const navLinks = [
   { href: lang === 'en' ? '/about' : '/nl/about', label: t.nav.about },
   { href: lang === 'en' ? '/contact' : '/nl/contact', label: t.nav.contact },
 ];
-const currentPath = Astro.url.pathname;
+const currentPath = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const isActive = (href) => {
+  const clean = href.replace(/\/+$/, '') || '/';
+  return currentPath === clean;
+};
 ---
 <!doctype html>
 <html lang={lang}>
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0c0c0c" />
   <title>{pageTitle} — Goldfishstudio</title>
   <ClientRouter />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://player.vimeo.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" /></noscript>
   <meta property="og:title" content={pageTitle + ' — Goldfishstudio'} />
   <meta property="og:description" content={lang === 'en' ? 'Goldfishstudio — Cinematic videography & film production in the Netherlands.' : 'Goldfishstudio — Cineastische videografie & filmproductie in Nederland.'} />
   <meta property="og:type" content="website" />
   <meta property="og:url" content={Astro.url} />
   <meta property="og:image" content="https://goldfishstudio.nl/favicon.svg" />
+  <meta property="og:locale" content={lang === 'en' ? 'en_NL' : 'nl_NL'} />
   <meta name="twitter:card" content="summary_large_image" />
+  <link rel="alternate" hreflang="en" href="https://goldfishstudio.nl{lang === 'en' ? currentPath : '/'} " />
+  <link rel="alternate" hreflang="nl" href="https://goldfishstudio.nl{lang === 'nl' ? currentPath : '/nl'}" />
+  <link rel="alternate" hreflang="x-default" href="https://goldfishstudio.nl/" />
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
@@ -57,20 +68,71 @@ const currentPath = Astro.url.pathname;
     body { font-family: var(--font-sans); background: var(--bg); color: var(--fg); line-height: 1.7; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
     a { color: inherit; text-decoration: none; }
     img, video { max-width: 100%; display: block; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    a:focus-visible, button:focus-visible { border-radius: 2px; }
+
+    /* Skip link */
+    .skip-link {
+      position: absolute; top: -100px; left: 1rem; z-index: 1000;
+      background: var(--accent); color: #0c0c0c; padding: .6rem 1rem;
+      font-size: .8rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase;
+      transition: top .2s;
+    }
+    .skip-link:focus { top: 1rem; }
 
     .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 3rem; transition: background .4s, backdrop-filter .4s; }
-    .nav.scrolled { background: rgba(12,12,12,.92); backdrop-filter: blur(16px); }
+    .nav.scrolled { background: rgba(12,12,12,.92); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
     .nav-logo { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 400; letter-spacing: .08em; color: var(--fg); }
     .nav-logo span { color: var(--accent); }
     .nav-right { display: flex; align-items: center; gap: 2rem; }
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-    .nav-links a { font-size: .75rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--fg-muted); transition: color .3s; }
+    .nav-links a { font-size: .75rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--fg-muted); transition: color .3s; padding: .25rem 0; }
     .nav-links a:hover { color: var(--fg); }
     .nav-links a.active { color: var(--accent); }
-    .lang-btn { font-size: .7rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; padding: .4rem .8rem; border: 1px solid var(--border); color: var(--fg-muted); background: transparent; cursor: pointer; transition: all .3s; }
+    .lang-btn { font-size: .7rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; padding: .4rem .8rem; border: 1px solid var(--border); color: var(--fg-muted); background: transparent; cursor: pointer; transition: all .3s; font-family: inherit; }
     .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
     .nav-cta { font-size: .75rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; padding: .7rem 1.5rem; border: 1px solid var(--border); color: var(--fg); transition: border-color .3s, color .3s; }
     .nav-cta:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Hamburger (mobile) */
+    .nav-toggle {
+      display: none;
+      background: transparent; border: 1px solid var(--border); color: var(--fg);
+      width: 42px; height: 42px; cursor: pointer; align-items: center; justify-content: center;
+      padding: 0; transition: border-color .3s;
+    }
+    .nav-toggle:hover { border-color: var(--accent); }
+    .nav-toggle svg { width: 20px; height: 20px; }
+    .nav-toggle .icon-close { display: none; }
+    .nav-toggle[aria-expanded="true"] .icon-open { display: none; }
+    .nav-toggle[aria-expanded="true"] .icon-close { display: block; }
+
+    /* Mobile menu */
+    .mobile-menu {
+      display: none;
+      position: fixed; top: 0; right: 0; bottom: 0;
+      width: min(86vw, 360px);
+      background: rgba(12,12,12,.98); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      z-index: 99;
+      padding: 6rem 2rem 2rem;
+      flex-direction: column; gap: 2rem;
+      transform: translateX(100%); transition: transform .35s ease;
+      border-left: 1px solid var(--border);
+      overflow-y: auto;
+    }
+    .mobile-menu.open { transform: translateX(0); }
+    .mobile-menu ul { list-style: none; display: flex; flex-direction: column; gap: 1.5rem; }
+    .mobile-menu a { font-family: var(--font-serif); font-size: 1.8rem; font-weight: 400; color: var(--fg); transition: color .3s; }
+    .mobile-menu a:hover, .mobile-menu a.active { color: var(--accent); }
+    .mobile-menu .mobile-meta { margin-top: auto; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 1rem; }
+    .mobile-menu .mobile-meta a { font-family: var(--font-sans); font-size: .85rem; letter-spacing: .08em; text-transform: uppercase; color: var(--fg-muted); }
+    .mobile-backdrop {
+      display: none;
+      position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 98;
+      opacity: 0; transition: opacity .35s;
+    }
+    .mobile-backdrop.open { opacity: 1; }
+    body.menu-open { overflow: hidden; }
 
     .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
     section { padding: 8rem 0; }
@@ -79,7 +141,7 @@ const currentPath = Astro.url.pathname;
     .heading em { font-style: italic; color: var(--accent); }
     .lede { font-size: 1.05rem; color: var(--fg-muted); max-width: 560px; line-height: 1.9; }
 
-    .hero { min-height: 100vh; display: flex; align-items: center; position: relative; padding-top: 6rem; overflow: hidden; }
+    .hero { min-height: 100vh; min-height: 100svh; display: flex; align-items: center; position: relative; padding-top: 6rem; overflow: hidden; }
     .hero-bg { position: absolute; inset: 0; z-index: 0; }
     .hero-bg iframe { width: 100%; height: 100%; border: none; }
     .hero-overlay { position: absolute; inset: 0; z-index: 1; background: rgba(12,12,12,.85); pointer-events: none; }
@@ -90,10 +152,10 @@ const currentPath = Astro.url.pathname;
     .hero-title em { font-style: italic; color: var(--accent); }
     .hero-sub { font-size: 1.05rem; color: var(--fg-muted); max-width: 520px; line-height: 1.9; margin-bottom: 2.5rem; }
     .hero-actions { display: flex; gap: 1.2rem; flex-wrap: wrap; }
-    .btn { display: inline-flex; align-items: center; gap: .6rem; padding: .9rem 2rem; font-family: var(--font-sans); font-size: .75rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; transition: all .3s; cursor: pointer; border-radius: 0; }
-    .btn-primary { background: var(--accent); color: #0c0c0c; border: 1px solid var(--accent); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: .6rem; padding: .9rem 2rem; font-family: var(--font-sans); font-size: .75rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; transition: all .3s; cursor: pointer; border-radius: 0; border: 1px solid transparent; min-height: 44px; }
+    .btn-primary { background: var(--accent); color: #0c0c0c; border-color: var(--accent); }
     .btn-primary:hover { background: var(--accent-light); border-color: var(--accent-light); }
-    .btn-ghost { background: transparent; color: var(--fg); border: 1px solid var(--border); }
+    .btn-ghost { background: transparent; color: var(--fg); border-color: var(--border); }
     .btn-ghost:hover { border-color: var(--border-light); }
 
     .video-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
@@ -104,6 +166,9 @@ const currentPath = Astro.url.pathname;
     .video-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
     .video-card:hover .video-thumb img { transform: scale(1.03); }
     .video-thumb-placeholder { color: var(--fg-dim); font-size: .75rem; letter-spacing: .1em; text-align: center; }
+    .video-thumb-loading { position: absolute; inset: 0; background: var(--bg-warm); display: flex; align-items: center; justify-content: center; }
+    .video-thumb-loading::after { content: ''; width: 24px; height: 24px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin .8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
     .video-meta { display: flex; align-items: center; gap: .5rem; margin-bottom: .4rem; }
     .video-meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--fg-dim); }
     .video-tag { font-size: .7rem; color: var(--fg-dim); letter-spacing: .08em; text-transform: uppercase; }
@@ -115,6 +180,11 @@ const currentPath = Astro.url.pathname;
     .editorial-text strong { color: var(--fg); font-weight: 500; }
     .editorial-image { aspect-ratio: 4/5; background: var(--bg-warm); border-radius: 2px; overflow: hidden; display: flex; align-items: center; justify-content: center; color: var(--fg-dim); font-size: .85rem; }
     .editorial-image img { width: 100%; height: 100%; object-fit: cover; }
+
+    .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 3rem 4rem; max-width: 800px; }
+    .service-item .eyebrow { font-size: .65rem; margin-bottom: .6rem; }
+    .service-item h3 { font-family: var(--font-serif); font-size: 1.4rem; font-weight: 400; margin-bottom: .6rem; }
+    .service-item p { font-size: .92rem; color: var(--fg-muted); line-height: 1.9; }
 
     .testimonial { text-align: center; max-width: 700px; margin: 0 auto; padding: 4rem 0; }
     .testimonial-quote { font-family: var(--font-serif); font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 300; line-height: 1.5; color: var(--fg); margin-bottom: 1.5rem; }
@@ -128,68 +198,200 @@ const currentPath = Astro.url.pathname;
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
     .contact-form { display: flex; flex-direction: column; gap: 1.5rem; }
     .field label { display: block; font-size: .7rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--fg-muted); margin-bottom: .5rem; }
-    .field input, .field textarea { width: 100%; padding: .9rem 0; background: transparent; border: none; border-bottom: 1px solid var(--border); color: var(--fg); font-family: var(--font-sans); font-size: .95rem; transition: border-color .3s; }
-    .field input:focus, .field textarea:focus { outline: none; border-color: var(--accent); }
+    .field input, .field textarea { width: 100%; padding: .9rem 0; background: transparent; border: none; border-bottom: 1px solid var(--border); color: var(--fg); font-family: var(--font-sans); font-size: 1rem; transition: border-color .3s; min-height: 44px; }
     .field textarea { min-height: 120px; resize: vertical; }
+    .field input:focus, .field textarea:focus { outline: none; border-color: var(--accent); }
     .contact-details { display: flex; flex-direction: column; gap: 1.5rem; }
     .contact-label { font-size: .7rem; color: var(--fg-dim); letter-spacing: .1em; text-transform: uppercase; }
     .contact-value { font-size: 1rem; color: var(--fg); }
     .contact-value a:hover { color: var(--accent); }
 
+    /* Pricing */
+    .pricing-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+    .pricing-card { padding: 1.5rem; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; transition: border-color .3s; }
+    .pricing-card:hover { border-color: var(--accent); }
+    .pricing-card h3 { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 400; margin-bottom: .5rem; }
+    .pricing-price { font-size: .85rem; color: var(--accent); letter-spacing: .05em; }
+
+    /* FAQ */
+    .faq-grid { display: flex; flex-direction: column; gap: 0; max-width: 700px; }
+    .faq-item { border-bottom: 1px solid var(--border); padding: 1.5rem 0; }
+    .faq-item summary { font-family: var(--font-serif); font-size: 1.15rem; font-weight: 400; cursor: pointer; color: var(--fg); list-style: none; display: flex; justify-content: space-between; align-items: center; }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after { content: '+'; font-family: var(--font-sans); font-size: 1.2rem; color: var(--accent); transition: transform .3s; flex-shrink: 0; margin-left: 1rem; }
+    .faq-item[open] summary::after { content: '−'; }
+    .faq-item p { margin-top: 1rem; font-size: .92rem; color: var(--fg-muted); line-height: 1.9; }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+    .stat-card { padding: 1.5rem; background: var(--bg-warm); border-radius: 8px; border: 1px solid transparent; transition: border-color .3s; }
+    .stat-card:hover { border-color: var(--border); }
+    .stat-num { font-family: var(--font-serif); font-size: 2.2rem; font-weight: 400; color: var(--accent); line-height: 1; margin-bottom: .5rem; }
+    .stat-label { font-size: .8rem; color: var(--fg-muted); }
+
     footer { padding: 3rem 0; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
     .footer-copy { font-size: .75rem; color: var(--fg-dim); letter-spacing: .05em; }
+    .footer-btw { font-size: .65rem; color: var(--fg-dim); letter-spacing: .05em; margin-top: .3rem; opacity: .6; }
     .footer-links { display: flex; gap: 2rem; list-style: none; }
     .footer-links a { font-size: .75rem; color: var(--fg-dim); letter-spacing: .08em; }
     .footer-links a:hover { color: var(--accent); }
 
-    @media (max-width: 768px) {
+    /* Reveal-on-scroll */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .8s ease, transform .8s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+      html { scroll-behavior: auto; }
+    }
+
+    @media (max-width: 900px) {
       .nav { padding: 1rem 1.5rem; }
-      .nav-links { gap: 1.2rem; }
-      .nav-links a { font-size: .65rem; }
-      .nav-cta { display: none; }
-      .lang-btn { font-size: .6rem; padding: .3rem .6rem; }
+      .nav-links, .nav-cta { display: none; }
+      .nav-toggle { display: inline-flex; }
+      .mobile-menu, .mobile-backdrop { display: block; }
       section { padding: 5rem 0; }
+      .container { padding: 0 1.5rem; }
       .editorial, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      .video-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .video-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .services-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero { min-height: 85vh; min-height: 85svh; padding-top: 5rem; }
+      .hero-title { font-size: clamp(2.2rem, 7vw, 3rem); }
+      .hero-sub { max-width: 100%; }
+      .footer-links { flex-wrap: wrap; gap: 1rem; }
+    }
+    @media (max-width: 480px) {
+      .nav { padding: .85rem 1rem; }
+      .nav-logo { font-size: 1.25rem; }
+      .container { padding: 0 1rem; }
+      section { padding: 3.5rem 0; }
+      .hero-title { font-size: 2rem; }
+      .hero-eyebrow { font-size: .6rem; margin-bottom: 1.2rem; }
+      .hero-sub { font-size: .95rem; }
+      .heading { font-size: 1.6rem; }
+      .lede { font-size: .95rem; }
+      .btn { padding: .85rem 1.4rem; font-size: .7rem; }
+      .video-title { font-size: 1.15rem; }
+      .video-thumb { aspect-ratio: 16/9; }
+      .stat-num { font-size: 1.8rem; }
     }
   </style>
 </head>
 <body>
-  <nav class="nav" id="top-nav">
+  <a href="#main-content" class="skip-link">Skip to content</a>
+  <nav class="nav" id="top-nav" aria-label="Primary">
     <a href={lang === 'en' ? '/' : '/nl/'} class="nav-logo">goldfish<span>studio</span></a>
     <div class="nav-right">
       <ul class="nav-links">
         {navLinks.map((link) => (
           <li>
-            <a href={link.href} class:list={[{ active: currentPath === link.href }]}>{link.label}</a>
+            <a href={link.href} class:list={[{ active: isActive(link.href) }]} aria-current={isActive(link.href) ? 'page' : undefined}>{link.label}</a>
           </li>
         ))}
       </ul>
-      <a href={lang === 'en' ? '/nl/contact' : '/contact'} class="lang-btn">{t.langBtn}</a>
+      <a href={lang === 'en' ? '/nl/' : '/'} class="lang-btn" aria-label={lang === 'en' ? 'Switch to Dutch' : 'Switch to English'}>{t.langBtn}</a>
       <a href={lang === 'en' ? '/contact' : '/nl/contact'} class="nav-cta">{t.nav.hire}</a>
+      <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label={lang === 'en' ? 'Open menu' : 'Open menu'}>
+        <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>
+      </button>
     </div>
   </nav>
 
-  <main>
+  <div class="mobile-backdrop" id="mobile-backdrop" aria-hidden="true"></div>
+  <aside class="mobile-menu" id="mobile-menu" aria-label="Mobile menu" aria-hidden="true">
+    <ul>
+      {navLinks.map((link) => (
+        <li><a href={link.href} class:list={[{ active: isActive(link.href) }]} aria-current={isActive(link.href) ? 'page' : undefined}>{link.label}</a></li>
+      ))}
+    </ul>
+    <div class="mobile-meta">
+      <a href={lang === 'en' ? '/nl/' : '/'}>{t.langBtn === 'NL' ? 'Nederlands' : 'English'}</a>
+      <a href={lang === 'en' ? '/contact' : '/nl/contact'}>{t.nav.hire}</a>
+      <a href="mailto:info@goldfishstudio.nl">info@goldfishstudio.nl</a>
+    </div>
+  </aside>
+
+  <main id="main-content">
     <slot />
   </main>
 
   <footer>
-    <div class="footer-copy">&copy; {year} Goldfishstudio. {t.footer.copy}</div>
+    <div>
+      <div class="footer-copy">&copy; {year} Goldfishstudio. {t.footer.copy}</div>
+      <div class="footer-btw">BTW: NL005113528B68</div>
+    </div>
     <ul class="footer-links">
       <li><a href="mailto:info@goldfishstudio.nl">info@goldfishstudio.nl</a></li>
+      <li><a href="https://instagram.com/remastered_goldfish" target="_blank" rel="noopener noreferrer">Instagram</a></li>
       <li><a href={lang === 'en' ? '/work' : '/nl/work'}>{t.footer.portfolio}</a></li>
       <li><a href={lang === 'en' ? '/contact' : '/nl/contact'}>{t.footer.touch}</a></li>
     </ul>
   </footer>
 
   <script>
-    var nav = document.getElementById('top-nav');
-    if (nav) {
-      window.addEventListener('scroll', function() {
-        nav.classList.toggle('scrolled', window.scrollY > 80);
-      }, { passive: true });
+    // Nav scroll state — runs on every page (incl. after view transitions)
+    function initNav() {
+      var nav = document.getElementById('top-nav');
+      if (nav) {
+        var apply = function() { nav.classList.toggle('scrolled', window.scrollY > 80); };
+        apply();
+        window.addEventListener('scroll', apply, { passive: true });
+      }
     }
+    // Mobile menu toggle
+    function initMenu() {
+      var toggle = document.getElementById('nav-toggle');
+      var menu = document.getElementById('mobile-menu');
+      var backdrop = document.getElementById('mobile-backdrop');
+      if (!toggle || !menu || !backdrop) return;
+      var close = function() {
+        toggle.setAttribute('aria-expanded', 'false');
+        menu.classList.remove('open');
+        menu.setAttribute('aria-hidden', 'true');
+        backdrop.classList.remove('open');
+        document.body.classList.remove('menu-open');
+      };
+      var open = function() {
+        toggle.setAttribute('aria-expanded', 'true');
+        menu.classList.add('open');
+        menu.setAttribute('aria-hidden', 'false');
+        backdrop.classList.add('open');
+        document.body.classList.add('menu-open');
+      };
+      toggle.addEventListener('click', function() {
+        if (toggle.getAttribute('aria-expanded') === 'true') close();
+        else open();
+      });
+      backdrop.addEventListener('click', close);
+      // Close on link click
+      menu.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', close);
+      });
+      // Close on Escape
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') close();
+      });
+    }
+    // Reveal-on-scroll
+    function initReveal() {
+      if (!('IntersectionObserver' in window)) {
+        document.querySelectorAll('.reveal').forEach(function(el) { el.classList.add('visible'); });
+        return;
+      }
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+      document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
+    }
+    function initAll() { initNav(); initMenu(); initReveal(); }
+    initAll();
+    document.addEventListener('astro:after-swap', initAll);
   </script>
   <script src="/_vercel/insights/script.js" defer></script>
   <script src="/_vercel/speed-insights/script.js" defer></script>

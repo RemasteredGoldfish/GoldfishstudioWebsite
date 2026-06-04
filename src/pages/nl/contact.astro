@@ -2,21 +2,29 @@
 import Layout from '../../layouts/Layout.astro';
 import { translations } from '../../i18n.ts';
 const t = translations.nl;
+const lang = 'nl';
 ---
 
-<Layout t={t} lang="nl" pageTitle="Contact — Goldfishstudio" year="2026">
+<Layout t={t} lang="nl" pageTitle="Contact" year="2026">
 
   <section class="container" style="padding-top: 8rem; padding-bottom: 4rem;">
     <div class="contact-grid">
       <div>
         <div class="eyebrow">Contact</div>
         <h1 class="heading" style="font-size: clamp(2rem, 5vw, 3.5rem);">Laten we<br/>samenwerken.</h1>
-        <p class="lede">Heb je een project in gedachten? Stuur me een bericht en ik reageer binnen 24 uur.</p>
+        <p class="lede">
+          Een project in gedachten? Stuur me een bericht en ik reageer binnen 24 uur.
+          Als het dringend is, zeg "URGENT" in het onderwerp.
+        </p>
 
         <div style="margin-top: 2.5rem;">
           <div style="margin-bottom:1.5rem;">
             <div class="contact-label">E-mail</div>
             <div class="contact-value"><a href="mailto:info@goldfishstudio.nl">info@goldfishstudio.nl</a></div>
+          </div>
+          <div style="margin-bottom:1.5rem;">
+            <div class="contact-label">Instagram</div>
+            <div class="contact-value"><a href="https://instagram.com/remastered_goldfish" target="_blank" rel="noopener noreferrer">@remastered_goldfish</a></div>
           </div>
           <div style="margin-bottom:1.5rem;">
             <div class="contact-label">Locatie</div>
@@ -26,10 +34,7 @@ const t = translations.nl;
             <div class="contact-label">BTW</div>
             <div class="contact-value">NL005113528B68</div>
           </div>
-          <div style="margin-bottom:1.5rem;">
-            <div class="contact-label">IBAN</div>
-            <div class="contact-value">NL26 INGB 0107 9749 08</div>
-          </div>
+
         </div>
       </div>
 
@@ -44,15 +49,81 @@ const t = translations.nl;
           <input type="email" id="email" name="email" placeholder="jan@voorbeeld.nl" required />
         </div>
         <div class="field">
-          <label for="type">Project type</label>
+          <label for="type">Projecttype</label>
           <input type="text" id="type" name="type" placeholder="Commercial / Muziekvideo / Evenement / Anders" />
         </div>
         <div class="field">
+          <label for="budget">Budget</label>
+          <select id="budget" name="budget" style="width:100%;padding:.9rem 0;background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--fg);font-family:var(--font-sans);font-size:1rem;">
+            <option value="" style="background:var(--bg);">Selecteer een range...</option>
+            <option value="under-500" style="background:var(--bg);">Onder €500</option>
+            <option value="500-1000" style="background:var(--bg);">€500 – €1.000</option>
+            <option value="1000-2500" style="background:var(--bg);">€1.000 – €2.500</option>
+            <option value="2500-5000" style="background:var(--bg);">€2.500 – €5.000</option>
+            <option value="5000+" style="background:var(--bg);">€5.000+</option>
+          </select>
+        </div>
+        <div class="field">
           <label for="message">Vertel me over je project</label>
-          <textarea id="message" name="message" placeholder="Wat moet er gefilmd worden? Zijn er referenties, deadlines of specifieke wensen?" required></textarea>
+          <textarea id="message" name="message" placeholder="Wat moet er gefilmd worden? Referenties, deadlines, of specifieke wensen?" required></textarea>
         </div>
         <button type="submit" class="btn btn-primary" style="align-self: flex-end;" id="submit-btn">Verstuur bericht</button>
       </form>
+    </div>
+  </section>
+
+  <!-- Prijzen -->
+  <section style="border-top: 1px solid var(--border); background: var(--bg-warm);">
+    <div class="container">
+      <div class="eyebrow" set:html={t.pricing.eyebrow} />
+      <h2 class="heading" set:html={t.pricing.heading} />
+      <p class="lede" style="margin-bottom:3rem; font-size:.85rem;" set:html={t.pricing.note} />
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <h3 set:html={t.pricing.p1} />
+          <div class="pricing-price" set:html={t.pricing.p1price} />
+        </div>
+        <div class="pricing-card">
+          <h3 set:html={t.pricing.p2} />
+          <div class="pricing-price" set:html={t.pricing.p2price} />
+        </div>
+        <div class="pricing-card">
+          <h3 set:html={t.pricing.p3} />
+          <div class="pricing-price" set:html={t.pricing.p3price} />
+        </div>
+        <div class="pricing-card">
+          <h3 set:html={t.pricing.p4} />
+          <div class="pricing-price" set:html={t.pricing.p4price} />
+        </div>
+      </div>
+      <div style="text-align:center; margin-top:3rem;">
+        <a href="mailto:info@goldfishstudio.nl" class="btn btn-ghost" set:html={t.pricing.cta} />
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section style="border-top: 1px solid var(--border);">
+    <div class="container">
+      <h2 class="heading" set:html={t.faq.heading} />
+      <div class="faq-grid">
+        <details class="faq-item">
+          <summary set:html={t.faq.q1} />
+          <p set:html={t.faq.a1} />
+        </details>
+        <details class="faq-item">
+          <summary set:html={t.faq.q2} />
+          <p set:html={t.faq.a2} />
+        </details>
+        <details class="faq-item">
+          <summary set:html={t.faq.q3} />
+          <p set:html={t.faq.a3} />
+        </details>
+        <details class="faq-item">
+          <summary set:html={t.faq.q4} />
+          <p set:html={t.faq.a4} />
+        </details>
+      </div>
     </div>
   </section>
 
@@ -77,13 +148,13 @@ const t = translations.nl;
           status.style.display = 'block';
           this.reset();
         } else {
-          status.textContent = 'Er ging iets mis. Probeer opnieuw of mail naar info@goldfishstudio.nl.';
+          status.textContent = 'Er ging iets mis. Probeer opneuw of mail direct naar info@goldfishstudio.nl.';
           status.style.background = '#2a1a1a';
           status.style.color = '#e07070';
           status.style.display = 'block';
         }
       } catch (err) {
-        status.textContent = 'Netwerkfout. Probeer opnieuw of mail naar info@goldfishstudio.nl.';
+        status.textContent = 'Netwerkfout. Probeer opneuw of mail direct naar info@goldfishstudio.nl.';
         status.style.background = '#2a1a1a';
         status.style.color = '#e07070';
         status.style.display = 'block';
