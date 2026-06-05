@@ -4,12 +4,33 @@ import { translations } from '../i18n.ts';
 const t = translations.en;
 const lang = 'en';
 
-const projects = [
+// Auto-detect vertical videos via Vimeo oEmbed API (runs at build time)
+async function getVimeoOrientation(videoId) {
+  if (!videoId) return { vertical: false };
+  try {
+    const res = await fetch(`https://vimeo.com/api/oembed.json?url=https://vimeo.com/${videoId}`, {
+      headers: { 'User-Agent': 'goldfishstudio-site' },
+    });
+    const data = await res.json();
+    return { vertical: data.height > data.width, title: data.title };
+  } catch { return { vertical: false }; }
+}
+
+const rawProjects = [
   { title: 'Martabak Anniversary', tag: 'Commercial', year: '2026', video: '1169208960', poster: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=80' },
   { title: 'The Barber Shop', tag: 'Brand Film', year: '2026', video: '1169208935', poster: 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=80' },
-  { title: 'Bloom Coffee — Morning Ritual', tag: 'Social Media', year: '2025', video: '1169209749', poster: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80', vertical: true },
+  { title: 'Bloom Coffee — Morning Ritual', tag: 'Social Media', year: '2025', video: '1169209749', poster: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80' },
   { title: 'Street Basketball', tag: 'Event', year: '2025', video: '1169209569', poster: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=800&q=80' },
 ];
+
+const projectsWithOrientation = await Promise.all(
+  rawProjects.map(async (p) => {
+    const info = await getVimeoOrientation(p.video);
+    // Only auto-apply vertical if not already set
+    return { ...p, vertical: p.vertical ?? info.vertical };
+  })
+);
+const projects = projectsWithOrientation;
 ---
 
 <Layout t={t} lang="en" pageTitle="Goldfishstudio" year="2026">
