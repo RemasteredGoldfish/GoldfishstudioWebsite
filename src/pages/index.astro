@@ -5,10 +5,10 @@ const t = translations.en;
 const lang = 'en';
 
 const projects = [
-  { title: 'Martabak Anniversary', tag: 'Commercial', year: '2026', video: '1169208960' },
-  { title: 'The Barber Shop', tag: 'Brand Film', year: '2026', video: '1169208935' },
-  { title: 'Street Basketball', tag: 'Event', year: '2025', video: '1169209569' },
-  { title: 'Bloom Coffee — Morning Ritual', tag: 'Social Media', year: '2025', video: null },
+  { title: 'Martabak Anniversary', tag: 'Commercial', year: '2026', video: '1169208960', poster: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=80' },
+  { title: 'The Barber Shop', tag: 'Brand Film', year: '2026', video: '1169208935', poster: 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=80' },
+  { title: 'Street Basketball', tag: 'Event', year: '2025', video: '1169209569', poster: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=800&q=80' },
+  { title: 'Bloom Coffee — Morning Ritual', tag: 'Social Media', year: '2025', video: null, poster: null },
 ];
 ---
 
@@ -45,13 +45,18 @@ const projects = [
         {projects.map((p) => (
           <article class="video-card">
             <a href={lang === 'en' ? '/work' : '/nl/work'} class="video-thumb" aria-label={`${p.title} — ${p.tag}, ${p.year}`}>
-              {p.video
-                ? <>
-                    <div class="video-thumb-loading"></div>
-                    <iframe src={`https://player.vimeo.com/video/${p.video}#t=0.5s`} title={p.title} allow="fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" loading="lazy" onload="this.style.opacity='1';this.previousElementSibling.style.display='none'" style="opacity:0;transition:opacity .3s" />
-                  </>
-                : <div class="video-thumb-placeholder">Coming soon</div>
-              }
+              {p.video ? (
+                <div class="video-card-media" data-video={p.video}>
+                  <img src={p.poster} alt={p.title} class="video-poster" loading="lazy" />
+                  <button class="play-btn" aria-label={`Play ${p.title}`}>
+                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                  </button>
+                  <div class="video-thumb-loading" style="display:none;"></div>
+                  <iframe class="video-iframe" title={p.title} allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" loading="lazy" style="display:none;" onload="this.style.display='block';this.parentElement.querySelector('.video-thumb-loading').style.display='none';this.parentElement.querySelector('.video-poster').style.display='none';this.parentElement.querySelector('.play-btn').style.display='none';"></iframe>
+                </div>
+              ) : (
+                <div class="video-thumb-placeholder">Coming soon</div>
+              )}
             </a>
             <div class="video-meta">
               <span class="video-tag" set:html={p.tag} />
@@ -76,7 +81,8 @@ const projects = [
           <p set:html={t.about.p3} />
         </div>
         <div class="editorial-image" aria-hidden="true">
-          <div class="video-thumb-placeholder">Portrait photo</div>
+          <!-- TODO: Replace src with your actual portrait photo (e.g., /images/portrait.jpg) -->
+          <img src="https://images.unsplash.com/photo-1554048612-387768052bf7?auto=format&fit=crop&w=800&q=80" alt="Portrait" class="cinematic-img" loading="lazy" />
         </div>
       </div>
     </div>
@@ -139,10 +145,32 @@ const projects = [
           <p><strong set:html={t.how.h3} /> <span set:html={t.how.h3desc} /></p>
         </div>
         <div class="editorial-image" aria-hidden="true">
-          <div class="video-thumb-placeholder">Behind the scenes</div>
+          <!-- TODO: Replace src with your actual behind the scenes photo (e.g., /images/bts.jpg) -->
+          <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=800&q=80" alt="Behind the scenes" class="cinematic-img" loading="lazy" />
         </div>
       </div>
     </div>
   </section>
+
+  <script>
+    document.querySelectorAll('.video-card-media').forEach(card => {
+      card.addEventListener('click', (e) => {
+        // Prevent triggering if clicking the link wrapper (optional, but good for safety)
+        const videoId = card.dataset.video;
+        if (!videoId) return;
+        const iframe = card.querySelector('iframe');
+        const poster = card.querySelector('.video-poster');
+        const btn = card.querySelector('.play-btn');
+        const loader = card.querySelector('.video-thumb-loading');
+        
+        poster.style.display = 'none';
+        btn.style.display = 'none';
+        loader.style.display = 'flex';
+        
+        iframe.src = `https://player.vimeo.com/video/${videoId}?autoplay=1`;
+        iframe.style.display = 'block';
+      });
+    });
+  </script>
 
 </Layout>
