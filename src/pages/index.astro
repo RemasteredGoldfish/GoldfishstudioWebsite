@@ -7,8 +7,8 @@ const lang = 'en';
 const projects = [
   { title: 'Martabak Anniversary', tag: 'Commercial', year: '2026', video: '1169208960', poster: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=80' },
   { title: 'The Barber Shop', tag: 'Brand Film', year: '2026', video: '1169208935', poster: 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=80' },
+  { title: 'Bloom Coffee — Morning Ritual', tag: 'Social Media', year: '2025', video: '1169209749', poster: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80', vertical: true },
   { title: 'Street Basketball', tag: 'Event', year: '2025', video: '1169209569', poster: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=800&q=80' },
-  { title: 'Bloom Coffee — Morning Ritual', tag: 'Social Media', year: '2025', video: null, poster: null },
 ];
 ---
 
@@ -43,10 +43,10 @@ const projects = [
       <h2 class="heading" set:html={t.work.heading} />
       <div class="video-grid">
         {projects.map((p) => (
-          <article class="video-card">
+          <article class:list={["video-card", p.vertical && "vertical"]}>
             <a href={lang === 'en' ? '/work' : '/nl/work'} class="video-thumb" aria-label={`${p.title} — ${p.tag}, ${p.year}`}>
               {p.video ? (
-                <div class="video-card-media" data-video={p.video}>
+                <div class:list={["video-card-media", p.vertical && "vertical"]} data-video={p.video}>
                   <img src={p.poster} alt={p.title} class="video-poster" loading="lazy" />
                   <button class="play-btn" aria-label={`Play ${p.title}`}>
                     <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
