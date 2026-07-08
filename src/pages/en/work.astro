@@ -1,7 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { translations } from '../../i18n.ts';
-const t = translations.nl;
+const t = translations.en;
+const lang = 'en';
 
 const projects = [
   {
@@ -22,7 +23,7 @@ const projects = [
     title: "Barber Video",
     videoId: "7gZLxHgUQx8",
     vertical: true,
-    tag: "Merkenfilm",
+    tag: "Brand Film",
     year: "2026",
   },
   {
@@ -36,7 +37,7 @@ const projects = [
     title: "Barber Video 2",
     videoId: "_n2xRrS4pHQ",
     vertical: true,
-    tag: "Merkenfilm",
+    tag: "Brand Film",
     year: "2026",
   },
   {
@@ -50,7 +51,7 @@ const projects = [
     title: "Together We Build",
     videoId: "otjwjZ9A7Gc",
     vertical: true,
-    tag: "Evenement",
+    tag: "Event",
     year: "2026",
   },
   {
@@ -65,13 +66,13 @@ const projects = [
 const featured = projects[0];
 ---
 
-<Layout t={t} lang="nl" pageTitle="Werk — Goldfishstudio" year="2026">
+<Layout t={t} lang="en" pageTitle="Work" year="2026">
 
   <section class="container" style="padding-top: 8rem;">
     <div class="eyebrow" set:html={t.work.eyebrow} />
     <h1 class="heading" style="font-size: clamp(2rem, 5vw, 3.5rem);" set:html={t.work.heading} />
 
-    <!-- Uitgelichte video -->
+    <!-- Featured video -->
     <div style="margin-top: 3rem;">
       <article class:list={["video-card", featured.vertical && "vertical"]}>
         <div class:list={["video-card-media", featured.vertical && "vertical"]} data-video={featured.videoId} style={'cursor:pointer;'}>
@@ -87,13 +88,13 @@ const featured = projects[0];
           <span class="video-meta-dot"></span>
           <span class="video-year">{featured.year}</span>
         </div>
-        <div class="video-title">{featured.title}</div>
+        <div class="video-title" set:html={featured.title} />
       </article>
     </div>
 
-    <!-- Meer werk -->
+    <!-- More work -->
     <div style="margin-top: 4rem;">
-      <div class="eyebrow" style="font-size:.65rem; margin-bottom:1.5rem;">MEER WERK</div>
+      <div class="eyebrow" style="font-size:.65rem; margin-bottom:1.5rem;">MORE WORK</div>
       <div class="video-grid">
         {projects.slice(1).map((p) => (
           <article class:list={["video-card", p.vertical && "vertical"]}>

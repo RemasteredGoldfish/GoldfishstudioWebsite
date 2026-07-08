@@ -1,20 +1,20 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { translations } from '../../i18n.ts';
-const t = translations.nl;
-const lang = 'nl';
+const t = translations.en;
+const lang = 'en';
 ---
 
-<Layout t={t} lang="nl" pageTitle="Contact" year="2026">
+<Layout t={t} lang="en" pageTitle="Contact" year="2026">
 
   <section class="container" style="padding-top: 8rem; padding-bottom: 4rem;">
     <div class="contact-grid">
       <div>
         <div class="eyebrow">Contact</div>
-        <h1 class="heading" style="font-size: clamp(2rem, 5vw, 3.5rem);">Laten we<br/>samenwerken.</h1>
+        <h1 class="heading" style="font-size: clamp(2rem, 5vw, 3.5rem);">Let's work<br/>together.</h1>
         <p class="lede">
-          Een project in gedachten? Stuur me een bericht en ik reageer binnen 24 uur.
-          Als het dringend is, zeg "URGENT" in het onderwerp.
+          Got a project in mind? Reach out and I'll get back to you within 24 hours.
+          If it's a fire, put "URGENT" in the subject.
         </p>
 
         <div style="margin-top: 2.5rem;">
@@ -27,8 +27,8 @@ const lang = 'nl';
             <div class="contact-value"><a href="https://instagram.com/remastered_goldfish" target="_blank" rel="noopener noreferrer">@remastered_goldfish</a></div>
           </div>
           <div style="margin-bottom:1.5rem;">
-            <div class="contact-label">Locatie</div>
-            <div class="contact-value">Nederland</div>
+            <div class="contact-label">Location</div>
+            <div class="contact-value">The Netherlands</div>
           </div>
           <div style="margin-bottom:1.5rem;">
             <div class="contact-label">BTW</div>
@@ -41,38 +41,38 @@ const lang = 'nl';
       <form class="contact-form" id="contact-form">
         <div id="form-status" style="display:none;padding:1rem;margin-bottom:1rem;border-radius:4px;font-size:.9rem;"></div>
         <div class="field">
-          <label for="name">Je naam</label>
-          <input type="text" id="name" name="name" placeholder="Jan de Vries" required />
+          <label for="name">Your name</label>
+          <input type="text" id="name" name="name" placeholder="John Doe" required />
         </div>
         <div class="field">
           <label for="email">E-mail</label>
-          <input type="email" id="email" name="email" placeholder="jan@voorbeeld.nl" required />
+          <input type="email" id="email" name="email" placeholder="john@example.com" required />
         </div>
         <div class="field">
-          <label for="type">Projecttype</label>
-          <input type="text" id="type" name="type" placeholder="Commercial / Muziekvideo / Evenement / Anders" />
+          <label for="type">Project type</label>
+          <input type="text" id="type" name="type" placeholder="Commercial / Music video / Event / Other" />
         </div>
         <div class="field">
-          <label for="budget">Budget</label>
+          <label for="budget">Budget range</label>
           <select id="budget" name="budget" style="width:100%;padding:.9rem 0;background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--fg);font-family:var(--font-sans);font-size:1rem;">
-            <option value="" style="background:var(--bg);">Selecteer een range...</option>
-            <option value="under-500" style="background:var(--bg);">Onder €500</option>
-            <option value="500-1000" style="background:var(--bg);">€500 – €1.000</option>
-            <option value="1000-2500" style="background:var(--bg);">€1.000 – €2.500</option>
-            <option value="2500-5000" style="background:var(--bg);">€2.500 – €5.000</option>
-            <option value="5000+" style="background:var(--bg);">€5.000+</option>
+            <option value="" style="background:var(--bg);">Select a range...</option>
+            <option value="under-500" style="background:var(--bg);">Under €500</option>
+            <option value="500-1000" style="background:var(--bg);">€500 – €1,000</option>
+            <option value="1000-2500" style="background:var(--bg);">€1,000 – €2,500</option>
+            <option value="2500-5000" style="background:var(--bg);">€2,500 – €5,000</option>
+            <option value="5000+" style="background:var(--bg);">€5,000+</option>
           </select>
         </div>
         <div class="field">
-          <label for="message">Vertel me over je project</label>
-          <textarea id="message" name="message" placeholder="Wat moet er gefilmd worden? Referenties, deadlines, of specifieke wensen?" required></textarea>
+          <label for="message">Tell me about your project</label>
+          <textarea id="message" name="message" placeholder="What do you need filmed? Any references, deadlines, or specific requirements?" required></textarea>
         </div>
-        <button type="submit" class="btn btn-primary" style="align-self: flex-end;" id="submit-btn">Verstuur bericht</button>
+        <button type="submit" class="btn btn-primary" style="align-self: flex-end;" id="submit-btn">Send message</button>
       </form>
     </div>
   </section>
 
-  <!-- Prijzen -->
+  <!-- Pricing -->
   <section style="border-top: 1px solid var(--border); background: var(--bg-warm);">
     <div class="container">
       <div class="eyebrow" set:html={t.pricing.eyebrow} />
@@ -132,7 +132,7 @@ const lang = 'nl';
       e.preventDefault();
       var btn = document.getElementById('submit-btn');
       var status = document.getElementById('form-status');
-      btn.textContent = 'Versturen...';
+      btn.textContent = 'Sending...';
       btn.disabled = true;
       status.style.display = 'none';
       try {
@@ -142,24 +142,24 @@ const lang = 'nl';
         });
         var data = await res.json();
         if (data.success) {
-          status.textContent = 'Bericht verstuurd! Ik reageer binnen 24 uur.';
+          status.textContent = 'Message sent! I\'ll get back to you within 24 hours.';
           status.style.background = '#1a2a1a';
           status.style.color = '#7ec87e';
           status.style.display = 'block';
           this.reset();
         } else {
-          status.textContent = 'Er ging iets mis. Probeer opneuw of mail direct naar info@goldfishstudio.nl.';
+          status.textContent = 'Something went wrong. Please try again or email info@goldfishstudio.nl directly.';
           status.style.background = '#2a1a1a';
           status.style.color = '#e07070';
           status.style.display = 'block';
         }
       } catch (err) {
-        status.textContent = 'Netwerkfout. Probeer opneuw of mail direct naar info@goldfishstudio.nl.';
+        status.textContent = 'Network error. Please try again or email info@goldfishstudio.nl directly.';
         status.style.background = '#2a1a1a';
         status.style.color = '#e07070';
         status.style.display = 'block';
       }
-      btn.textContent = 'Verstuur bericht';
+      btn.textContent = 'Send message';
       btn.disabled = false;
     });
   </script>

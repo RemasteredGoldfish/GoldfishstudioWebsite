@@ -1,10 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { translations } from '../i18n.ts';
-const t = translations.en;
-const lang = 'en';
+const t = translations.nl;
+const lang = 'nl';
 
-// Auto-detect vertical videos via Vimeo oEmbed API (runs at build time)
 async function getVimeoOrientation(videoId) {
   if (!videoId) return { vertical: false };
   try {
@@ -17,29 +16,27 @@ async function getVimeoOrientation(videoId) {
 }
 
 const rawProjects = [
-  { title: 'Martabak Anniversary', tag: 'Commercial', year: '2026', video: '1169208960', poster: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=80' },
-  { title: 'The Barber Shop', tag: 'Brand Film', year: '2026', video: '1169208935', poster: 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=80' },
-  { title: 'Bloom Coffee — Morning Ritual', tag: 'Social Media', year: '2025', video: '1169209749', poster: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80' },
-  { title: 'Street Basketball', tag: 'Event', year: '2025', video: '1169209569', poster: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=800&q=80' },
+  { title: 'Martabak Jubileum', tag: 'Commercial', year: '2026', video: '1169208960', poster: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=80' },
+  { title: 'The Barber Shop', tag: 'Merkenfilm', year: '2026', video: '1169208935', poster: 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=80' },
+  { title: 'Street Basketball', tag: 'Evenement', year: '2025', video: '1169209569', poster: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=800&q=80' },
+  { title: 'Bloom Coffee — Ochtendritueel', tag: 'Social Media', year: '2025', video: '1169209749', poster: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80' },
 ];
 
-const projectsWithOrientation = await Promise.all(
+const projects = await Promise.all(
   rawProjects.map(async (p) => {
     const info = await getVimeoOrientation(p.video);
-    // Only auto-apply vertical if not already set
     return { ...p, vertical: p.vertical ?? info.vertical };
   })
 );
-const projects = projectsWithOrientation;
 ---
 
-<Layout t={t} lang="en" pageTitle="Goldfishstudio" year="2026">
+<Layout t={t} lang="nl" pageTitle="Goldfishstudio" year="2026">
 
   <section class="hero">
     <div class="hero-bg" aria-hidden="true">
       <iframe
         src="https://player.vimeo.com/video/1169208987?h=a7a6a855d2&autoplay=1&loop=1&muted=1&background=1"
-        title="Goldfishstudio background"
+        title="Goldfishstudio achtergrond"
         allow="autoplay; fullscreen"
         loading="lazy"
       />
@@ -51,8 +48,8 @@ const projects = projectsWithOrientation;
         <h1 class="hero-title" set:html={t.hero.title} />
         <p class="hero-sub" set:html={t.hero.sub} />
         <div class="hero-actions">
-          <a href="/work" class="btn btn-primary" set:html={t.hero.cta1} />
-          <a href="/contact" class="btn btn-ghost" set:html={t.hero.cta2} />
+          <a href="/nl/work" class="btn btn-primary" set:html={t.hero.cta1} />
+          <a href="/nl/contact" class="btn btn-ghost" set:html={t.hero.cta2} />
         </div>
       </div>
     </div>
@@ -65,20 +62,18 @@ const projects = projectsWithOrientation;
       <div class="video-grid">
         {projects.map((p) => (
           <article class:list={["video-card", p.vertical && "vertical"]}>
-            <a href={lang === 'en' ? '/work' : '/nl/work'} class="video-thumb" aria-label={`${p.title} — ${p.tag}, ${p.year}`}>
-              {p.video ? (
-                <div class:list={["video-card-media", p.vertical && "vertical"]} data-video={p.video}>
-                  <img src={p.poster} alt={p.title} class="video-poster" loading="lazy" />
-                  <button class="play-btn" aria-label={`Play ${p.title}`}>
-                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                  </button>
-                  <div class="video-thumb-loading" style="display:none;"></div>
-                  <iframe class="video-iframe" title={p.title} allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" loading="lazy" style="display:none;" onload="this.style.display='block';this.parentElement.querySelector('.video-thumb-loading').style.display='none';this.parentElement.querySelector('.video-poster').style.display='none';this.parentElement.querySelector('.play-btn').style.display='none';"></iframe>
-                </div>
-              ) : (
-                <div class="video-thumb-placeholder">Coming soon</div>
-              )}
-            </a>
+            {p.video ? (
+              <div class:list={["video-card-media", p.vertical && "vertical"]} data-video={p.video} style="cursor:pointer;">
+                <img src={p.poster} alt={p.title} class="video-poster" loading="lazy" />
+                <button class="play-btn" aria-label={`Play ${p.title}`}>
+                  <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </button>
+                <div class="video-thumb-loading" style="display:none;"></div>
+                <iframe class:list={["video-iframe", p.vertical && "vertical"]} title={p.title} allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" loading="lazy" style="display:none;" onload="this.style.display='block';this.parentElement.querySelector('.video-thumb-loading').style.display='none';this.parentElement.querySelector('.video-poster').style.display='none';this.parentElement.querySelector('.play-btn').style.display='none';"></iframe>
+              </div>
+            ) : (
+              <div class="video-thumb-placeholder">Binnenkort</div>
+            )}
             <div class="video-meta">
               <span class="video-tag" set:html={p.tag} />
               <span class="video-meta-dot"></span>
@@ -102,8 +97,8 @@ const projects = projectsWithOrientation;
           <p set:html={t.about.p3} />
         </div>
         <div class="editorial-image" aria-hidden="true">
-          <!-- TODO: Replace src with your actual portrait photo (e.g., /images/portrait.jpg) -->
-          <img src="https://images.unsplash.com/photo-1554048612-387768052bf7?auto=format&fit=crop&w=800&q=80" alt="Portrait" class="cinematic-img" loading="lazy" />
+          <!-- TODO: Vervang src met je eigen portretfoto (bijv. /images/portret.jpg) -->
+          <img src="https://images.unsplash.com/photo-1554048612-387768052bf7?auto=format&fit=crop&w=800&q=80" alt="Portret" class="cinematic-img" loading="lazy" />
         </div>
       </div>
     </div>
@@ -151,7 +146,7 @@ const projects = projectsWithOrientation;
     <div class="container">
       <h2 class="heading" set:html={t.cta.heading} />
       <p class="lede" style="margin:0 auto 2.5rem;" set:html={t.cta.sub} />
-      <a href="/contact" class="btn btn-primary" set:html={t.cta.btn} />
+      <a href="/nl/contact" class="btn btn-primary" set:html={t.cta.btn} />
     </div>
   </div>
 
@@ -166,17 +161,16 @@ const projects = projectsWithOrientation;
           <p><strong set:html={t.how.h3} /> <span set:html={t.how.h3desc} /></p>
         </div>
         <div class="editorial-image" aria-hidden="true">
-          <!-- TODO: Replace src with your actual behind the scenes photo (e.g., /images/bts.jpg) -->
-          <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=800&q=80" alt="Behind the scenes" class="cinematic-img" loading="lazy" />
+          <!-- TODO: Vervang src met je eigen behind the scenes foto (bijv. /images/bts.jpg) -->
+          <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=800&q=80" alt="Achter de schermen" class="cinematic-img" loading="lazy" />
         </div>
       </div>
     </div>
   </section>
 
   <script>
-    document.querySelectorAll('.video-card-media').forEach(card => {
-      card.addEventListener('click', (e) => {
-        // Prevent triggering if clicking the link wrapper (optional, but good for safety)
+    document.querySelectorAll('.video-card-media[data-video]').forEach(card => {
+      card.addEventListener('click', () => {
         const videoId = card.dataset.video;
         if (!videoId) return;
         const iframe = card.querySelector('iframe');

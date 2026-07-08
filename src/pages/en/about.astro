@@ -1,10 +1,10 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { translations } from '../../i18n.ts';
-const t = translations.nl;
+const t = translations.en;
 ---
 
-<Layout t={t} lang="nl" pageTitle="Over mij — Goldfishstudio" year="2026">
+<Layout t={t} lang="en" pageTitle="About" year="2026">
 
   <section class="container" style="padding-top: 8rem;">
     <div class="editorial">
@@ -16,7 +16,7 @@ const t = translations.nl;
         <p set:html={t.about.p3} />
       </div>
       <div class="editorial-image" aria-hidden="true">
-        <div class="video-thumb-placeholder">Portretfoto</div>
+        <div class="video-thumb-placeholder">Portrait photo</div>
       </div>
     </div>
   </section>
@@ -27,19 +27,19 @@ const t = translations.nl;
       <div class="stats-grid">
         <div class="stat-card">
           <div class="stat-num">20+</div>
-          <div class="stat-label">Projecten voltooid</div>
+          <div class="stat-label">Projects completed</div>
         </div>
         <div class="stat-card">
           <div class="stat-num">2</div>
-          <div class="stat-label">Jaar ervaring</div>
+          <div class="stat-label">Years experience</div>
         </div>
         <div class="stat-card">
           <div class="stat-num">4K</div>
-          <div class="stat-label">Alle projecten in 4K</div>
+          <div class="stat-label">All projects in 4K</div>
         </div>
         <div class="stat-card">
           <div class="stat-num">100%</div>
-          <div class="stat-label">Klanttevredenheid</div>
+          <div class="stat-label">Client satisfaction</div>
         </div>
       </div>
     </div>
