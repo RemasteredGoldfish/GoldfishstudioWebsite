@@ -6,11 +6,11 @@ import { ClientRouter } from 'astro:transitions';
 const { pageTitle, year = '2026', lang = 'en' } = Astro.props;
 const t = translations[lang];
 const otherLang = lang === 'en' ? 'nl' : 'en';
-const otherPath = lang === 'en' ? '/nl' : '';
+const otherPath = lang === 'en' ? '' : '/en';
 const navLinks = [
-  { href: lang === 'en' ? '/work' : '/nl/work', label: t.nav.work },
-  { href: lang === 'en' ? '/about' : '/nl/about', label: t.nav.about },
-  { href: lang === 'en' ? '/contact' : '/nl/contact', label: t.nav.contact },
+  { href: lang === 'en' ? '/en/work' : '/work', label: t.nav.work },
+  { href: lang === 'en' ? '/en/about' : '/about', label: t.nav.about },
+  { href: lang === 'en' ? '/en/contact' : '/contact', label: t.nav.contact },
 ];
 const currentPath = Astro.url.pathname.replace(/\/+$/, '') || '/';
 const isActive = (href) => {
@@ -309,7 +309,7 @@ const isActive = (href) => {
   <div class="grain-overlay" aria-hidden="true"></div>
   <a href="#main-content" class="skip-link">Skip to content</a>
   <nav class="nav" id="top-nav" aria-label="Primary">
-    <a href={lang === 'en' ? '/' : '/nl/'} class="nav-logo">goldfish<span>studio</span></a>
+    <a href={lang === 'en' ? '/en' : '/'} class="nav-logo">goldfish<span>studio</span></a>
     <div class="nav-right">
       <ul class="nav-links">
         {navLinks.map((link) => (
@@ -318,8 +318,8 @@ const isActive = (href) => {
           </li>
         ))}
       </ul>
-      <a href={lang === 'en' ? '/nl/' : '/'} class="lang-btn" aria-label={lang === 'en' ? 'Switch to Dutch' : 'Switch to English'}>{t.langBtn}</a>
-      <a href={lang === 'en' ? '/contact' : '/nl/contact'} class="nav-cta">{t.nav.hire}</a>
+      <a href={lang === 'en' ? '/' : '/en'} class="lang-btn" aria-label={lang === 'en' ? 'Switch to Dutch' : 'Switch to English'}>{t.langBtn}</a>
+      <a href={lang === 'en' ? '/en/contact' : '/contact'} class="nav-cta">{t.nav.hire}</a>
       <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label={lang === 'en' ? 'Open menu' : 'Open menu'}>
         <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
         <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>
@@ -335,8 +335,8 @@ const isActive = (href) => {
       ))}
     </ul>
     <div class="mobile-meta">
-      <a href={lang === 'en' ? '/nl/' : '/'}>{t.langBtn === 'NL' ? 'Nederlands' : 'English'}</a>
-      <a href={lang === 'en' ? '/contact' : '/nl/contact'}>{t.nav.hire}</a>
+      <a href={lang === 'en' ? '/' : '/en'}>{t.langBtn === 'NL' ? 'Nederlands' : 'English'}</a>
+      <a href={lang === 'en' ? '/en/contact' : '/contact'}>{t.nav.hire}</a>
       <a href="mailto:info@goldfishstudio.nl">info@goldfishstudio.nl</a>
     </div>
   </aside>
@@ -353,8 +353,8 @@ const isActive = (href) => {
     <ul class="footer-links">
       <li><a href="mailto:info@goldfishstudio.nl">info@goldfishstudio.nl</a></li>
       <li><a href="https://instagram.com/remastered_goldfish" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-      <li><a href={lang === 'en' ? '/work' : '/nl/work'}>{t.footer.portfolio}</a></li>
-      <li><a href={lang === 'en' ? '/contact' : '/nl/contact'}>{t.footer.touch}</a></li>
+      <li><a href={lang === 'en' ? '/en/work' : '/work'}>{t.footer.portfolio}</a></li>
+      <li><a href={lang === 'en' ? '/en/contact' : '/contact'}>{t.footer.touch}</a></li>
     </ul>
   </footer>
 
