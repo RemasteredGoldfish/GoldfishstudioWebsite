@@ -4,41 +4,66 @@ import { translations } from '../i18n.ts';
 const t = translations.en;
 const lang = 'en';
 
-async function getVimeoOrientation(videoId) {
-  if (!videoId) return { vertical: false };
-  try {
-    const res = await fetch(`https://vimeo.com/api/oembed.json?url=https://vimeo.com/${videoId}`, {
-      headers: { 'User-Agent': 'goldfishstudio-site' },
-    });
-    const data = await res.json();
-    return { vertical: data.height > data.width, title: data.title };
-  } catch { return { vertical: false }; }
-}
-
-const rawFeatured = {
-  title: 'Restaurant Promo — De Kas',
-  tag: 'Commercial',
-  year: '2026',
-  video: '1169209749',
-};
-const featuredInfo = await getVimeoOrientation(rawFeatured.video);
-const featured = { ...rawFeatured, vertical: featuredInfo.vertical };
-
-const rawProjects = [
-  { title: 'Martabak Anniversary', tag: 'Commercial', year: '2026', video: '1169208960', poster: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=80' },
-  { title: 'The Barber Shop', tag: 'Brand Film', year: '2026', video: '1169208935', poster: 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=80' },
-  { title: 'Street Basketball', tag: 'Event', year: '2025', video: '1169209569', poster: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=800&q=80' },
-  { title: 'Social Media — Bloom Coffee', tag: 'Social Media', year: '2025', video: '1169209749', poster: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80' },
-  { title: 'Product Launch — Waka Waka', tag: 'Commercial', year: '2025', video: null, poster: null },
-  { title: 'Event Highlight — AfroTech', tag: 'Event', year: '2024', video: null, poster: null },
+const projects = [
+  {
+    title: "Gospel Celebrations Friday Delivery",
+    videoId: "fvcC-OiFOXM",
+    vertical: false,
+    tag: "Concert",
+    year: "2026",
+  },
+  {
+    title: "Office Amelia Video",
+    videoId: "2zAnE4BHG3g",
+    vertical: true,
+    tag: "Social Media",
+    year: "2026",
+  },
+  {
+    title: "Barber Video",
+    videoId: "7gZLxHgUQx8",
+    vertical: true,
+    tag: "Brand Film",
+    year: "2026",
+  },
+  {
+    title: "Martabak",
+    videoId: "9nALKayuaE0",
+    vertical: true,
+    tag: "Commercial",
+    year: "2026",
+  },
+  {
+    title: "Barber Video 2",
+    videoId: "_n2xRrS4pHQ",
+    vertical: true,
+    tag: "Brand Film",
+    year: "2026",
+  },
+  {
+    title: "Sabajo Vision",
+    videoId: "a-9kq35OiDQ",
+    vertical: true,
+    tag: "Community",
+    year: "2026",
+  },
+  {
+    title: "Together We Build",
+    videoId: "otjwjZ9A7Gc",
+    vertical: true,
+    tag: "Event",
+    year: "2026",
+  },
+  {
+    title: "Office Website 4K",
+    videoId: "oLuet3RdY1A",
+    vertical: false,
+    tag: "Corporate",
+    year: "2026",
+  },
 ];
 
-const projects = await Promise.all(
-  rawProjects.map(async (p) => {
-    const info = await getVimeoOrientation(p.video);
-    return { ...p, vertical: p.vertical ?? info.vertical };
-  })
-);
+const featured = projects[0];
 ---
 
 <Layout t={t} lang="en" pageTitle="Work" year="2026">
@@ -50,17 +75,13 @@ const projects = await Promise.all(
     <!-- Featured video -->
     <div style="margin-top: 3rem;">
       <article class:list={["video-card", featured.vertical && "vertical"]}>
-        <div class:list={["video-card-media", featured.vertical && "vertical"]} data-video={featured.video} style={featured.video ? '' : 'cursor:default;'}>
-          <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80" alt={featured.title} class="video-poster" loading="lazy" />
-          {featured.video && (
-            <button class="play-btn" aria-label={`Play ${featured.title}`}>
-              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            </button>
-          )}
+        <div class:list={["video-card-media", featured.vertical && "vertical"]} data-video={featured.videoId} style={'cursor:pointer;'}>
+          <img src={`https://img.youtube.com/vi/${featured.videoId}/maxresdefault.jpg`} alt={featured.title} class="video-poster" loading="lazy" />
+          <button class="play-btn" aria-label={`Play ${featured.title}`}>
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </button>
           <div class="video-thumb-loading" style="display:none;"></div>
-          {featured.video && (
-            <iframe class:list={["video-iframe", featured.vertical && "vertical"]} title={featured.title} allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" loading="lazy" style="display:none;" onload="this.style.display='block';this.parentElement.querySelector('.video-thumb-loading').style.display='none';this.parentElement.querySelector('.video-poster').style.display='none';this.parentElement.querySelector('.play-btn').style.display='none';"></iframe>
-          )}
+          <iframe class:list={["video-iframe", featured.vertical && "vertical"]} title={featured.title} allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" loading="lazy" style="display:none;" onload="this.style.display='block';this.parentElement.querySelector('.video-thumb-loading').style.display='none';this.parentElement.querySelector('.video-poster').style.display='none';this.parentElement.querySelector('.play-btn').style.display='none';"></iframe>
         </div>
         <div class="video-meta">
           <span class="video-tag">{featured.tag}</span>
@@ -75,20 +96,16 @@ const projects = await Promise.all(
     <div style="margin-top: 4rem;">
       <div class="eyebrow" style="font-size:.65rem; margin-bottom:1.5rem;">MORE WORK</div>
       <div class="video-grid">
-        {projects.map((p) => (
+        {projects.slice(1).map((p) => (
           <article class:list={["video-card", p.vertical && "vertical"]}>
-            {p.video ? (
-              <div class:list={["video-card-media", p.vertical && "vertical"]} data-video={p.video} style="cursor:pointer;">
-                <img src={p.poster} alt={p.title} class="video-poster" loading="lazy" />
-                <button class="play-btn" aria-label={`Play ${p.title}`}>
-                  <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                </button>
-                <div class="video-thumb-loading" style="display:none;"></div>
-                <iframe class:list={["video-iframe", p.vertical && "vertical"]} title={p.title} allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" loading="lazy" style="display:none;" onload="this.style.display='block';this.parentElement.querySelector('.video-thumb-loading').style.display='none';this.parentElement.querySelector('.video-poster').style.display='none';this.parentElement.querySelector('.play-btn').style.display='none';"></iframe>
-              </div>
-            ) : (
-              <div class="video-thumb-placeholder">Coming soon</div>
-            )}
+            <div class:list={["video-card-media", p.vertical && "vertical"]} data-video={p.videoId} style="cursor:pointer;">
+              <img src={`https://img.youtube.com/vi/${p.videoId}/maxresdefault.jpg`} alt={p.title} class="video-poster" loading="lazy" />
+              <button class="play-btn" aria-label={`Play ${p.title}`}>
+                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+              <div class="video-thumb-loading" style="display:none;"></div>
+              <iframe class:list={["video-iframe", p.vertical && "vertical"]} title={p.title} allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" loading="lazy" style="display:none;" onload="this.style.display='block';this.parentElement.querySelector('.video-thumb-loading').style.display='none';this.parentElement.querySelector('.video-poster').style.display='none';this.parentElement.querySelector('.play-btn').style.display='none';"></iframe>
+            </div>
             <div class="video-meta">
               <span class="video-tag">{p.tag}</span>
               <span class="video-meta-dot"></span>
@@ -115,7 +132,7 @@ const projects = await Promise.all(
         btn.style.display = 'none';
         loader.style.display = 'flex';
         
-        iframe.src = `https://player.vimeo.com/video/${videoId}?autoplay=1`;
+        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
         iframe.style.display = 'block';
       });
     });
