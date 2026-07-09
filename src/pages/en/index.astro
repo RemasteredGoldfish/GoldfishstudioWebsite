@@ -67,87 +67,13 @@ const projects = [
     </div>
   </section>
 
-  <section style="border-top: 1px solid var(--border);">
-    <div class="container">
-      <div class="editorial">
-        <div class="editorial-text">
-          <div class="eyebrow" set:html={t.about.eyebrow} />
-          <h2 class="heading" set:html={t.about.heading} />
-          <p set:html={t.about.p1} />
-          <p set:html={t.about.p2} />
-          <p set:html={t.about.p3} />
-        </div>
-        <div class="editorial-image" aria-hidden="true">
-          <!-- TODO: Replace src with your actual portrait photo (e.g., /images/portrait.jpg) -->
-          <img src="https://images.unsplash.com/photo-1554048612-387768052bf7?auto=format&fit=crop&w=800&q=80" alt="Portrait" class="cinematic-img" loading="lazy" />
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section style="border-top: 1px solid var(--border); background: var(--bg-warm);">
-    <div class="container">
-      <div class="eyebrow" set:html={t.services.eyebrow} />
-      <h2 class="heading" set:html={t.services.heading} />
-      <div class="services-grid">
-        <div class="service-item">
-          <div class="eyebrow">01</div>
-          <h3 set:html={t.services.s1} />
-          <p set:html={t.services.s1desc} />
-        </div>
-        <div class="service-item">
-          <div class="eyebrow">02</div>
-          <h3 set:html={t.services.s2} />
-          <p set:html={t.services.s2desc} />
-        </div>
-        <div class="service-item">
-          <div class="eyebrow">03</div>
-          <h3 set:html={t.services.s3} />
-          <p set:html={t.services.s3desc} />
-        </div>
-        <div class="service-item">
-          <div class="eyebrow">04</div>
-          <h3 set:html={t.services.s4} />
-          <p set:html={t.services.s4desc} />
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section style="border-top: 1px solid var(--border);">
-    <div class="container">
-      <div class="testimonial">
-        <div class="testimonial-quote" set:html={t.testimonial.quote} />
-        <div class="testimonial-author" set:html={t.testimonial.author} />
-      </div>
-    </div>
-  </section>
-
   <div class="cta-band">
     <div class="container">
       <h2 class="heading" set:html={t.cta.heading} />
       <p class="lede" style="margin:0 auto 2.5rem;" set:html={t.cta.sub} />
-      <a href="/contact" class="btn btn-primary" set:html={t.cta.btn} />
+      <a href="/en/contact" class="btn btn-primary" set:html={t.cta.btn} />
     </div>
   </div>
-
-  <section style="border-top: 1px solid var(--border);">
-    <div class="container">
-      <div class="editorial">
-        <div class="editorial-text">
-          <div class="eyebrow" set:html={t.how.eyebrow} />
-          <h2 class="heading" set:html={t.how.heading} />
-          <p><strong set:html={t.how.h1} /> <span set:html={t.how.h1desc} /></p>
-          <p><strong set:html={t.how.h2} /> <span set:html={t.how.h2desc} /></p>
-          <p><strong set:html={t.how.h3} /> <span set:html={t.how.h3desc} /></p>
-        </div>
-        <div class="editorial-image" aria-hidden="true">
-          <!-- TODO: Replace src with your actual behind the scenes photo (e.g., /images/bts.jpg) -->
-          <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=800&q=80" alt="Behind the scenes" class="cinematic-img" loading="lazy" />
-        </div>
-      </div>
-    </div>
-  </section>
 
   <script>
     document.querySelectorAll('.video-card-media').forEach(card => {
