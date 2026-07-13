@@ -254,12 +254,24 @@ const isActive = (href) => {
       position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
       width: 64px; height: 64px; border-radius: 50%; background: rgba(196, 164, 110, 0.9);
       border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
-      transition: transform 0.3s ease, background 0.3s ease; backdrop-filter: blur(4px);
+      transition: transform 0.3s ease, background 0.3s ease; backdrop-filter: blur(4px); z-index: 2;
     }
     .video-card:hover .play-btn { transform: translate(-50%, -50%) scale(1.1); background: var(--accent); }
     .play-btn svg { width: 24px; height: 24px; fill: #0c0c0c; margin-left: 3px; }
-    .video-iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+    .video-iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; z-index: 1; }
     .vertical .video-iframe { width: 100%; height: 100%; left: 0; } /* Ensures iframe fills vertical cards properly */
+    
+    /* Mobile video responsiveness */
+    @media (max-width: 900px) {
+      .video-card-media { aspect-ratio: 16/9; }
+      .video-card-media.vertical { aspect-ratio: 9/16; }
+    }
+    @media (max-width: 480px) {
+      .video-card-media { aspect-ratio: auto; height: 60vw; min-height: 240px; }
+      .video-card-media.vertical { height: 90vw; max-width: 80vw; margin: 0 auto 1.2rem; }
+      .play-btn { width: 48px; height: 48px; }
+      .play-btn svg { width: 20px; height: 20px; }
+    }
 
     /* Reveal-on-scroll */
     .reveal { opacity: 0; transform: translateY(20px); transition: opacity .8s ease, transform .8s ease; }
@@ -302,6 +314,8 @@ const isActive = (href) => {
       .video-title { font-size: 1.15rem; }
       .video-thumb { aspect-ratio: 16/9; }
       .stat-num { font-size: 1.8rem; }
+      .video-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .video-card-media { margin-bottom: 0.8rem; }
     }
   </style>
 </head>
