@@ -147,6 +147,7 @@ const lang = 'nl';
           status.style.color = '#7ec87e';
           status.style.display = 'block';
           this.reset();
+          status.scrollIntoView({ behavior: 'smooth', block: 'center' });
         } else {
           var errorMsg = data.error || 'Onbekende fout';
           status.textContent = 'Fout: ' + errorMsg + '. Mail direct naar info@goldfishstudio.nl.';
@@ -154,6 +155,7 @@ const lang = 'nl';
           status.style.color = '#e07070';
           status.style.display = 'block';
           console.error('Contact form error:', data.error);
+          status.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
       } catch (err) {
         status.textContent = 'Netwerkfout. Probeer opnieuw of mail direct naar info@goldfishstudio.nl.';
@@ -161,6 +163,7 @@ const lang = 'nl';
         status.style.color = '#e07070';
         status.style.display = 'block';
         console.error('Contact form exception:', err);
+        status.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
       btn.textContent = 'Verstuur bericht';
       btn.disabled = false;
