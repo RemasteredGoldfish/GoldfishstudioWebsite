@@ -2,9 +2,9 @@ export const translations = {
   en: {
     nav: { work: 'Work', about: 'About', contact: 'Contact', hire: 'Hire me' },
     hero: {
-      eyebrow: 'Videography & Film Production — Netherlands',
-      title: 'I create <em>cinematic videos</em> that tell your story with emotion and intent.',
-      sub: "I'm a freelance videographer based in the Netherlands. I help brands, artists, and businesses connect with their audience through visual storytelling — from concept to final cut.",
+      eyebrow: 'Videographer Amsterdam — Commercial & Brand Films',
+      title: 'I create <em>cinematic videos</em> that connect your audience to your story.',
+      sub: "Freelance videographer & filmmaker in the Netherlands. I produce commercial video content, music videos, and brand films that engage, inspire, and convert. From concept to final cut — let's tell your story.",
       cta1: 'View my work',
       cta2: 'Get in touch →',
     },

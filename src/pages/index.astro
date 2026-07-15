@@ -48,7 +48,7 @@ const projects = [
         {projects.map((p) => (
           <article class:list={["video-card", p.vertical && "vertical"]}>
             <div class:list={["video-card-media", p.vertical && "vertical"]} data-video={p.videoId} style="cursor:pointer;">
-              <img src={`https://img.youtube.com/vi/${p.videoId}/maxresdefault.jpg`} alt={p.title} class="video-poster" loading="lazy" />
+              <img src={`https://img.youtube.com/vi/${p.videoId}/maxresdefault.jpg`} alt={p.title + ' — Goldfishstudio videography'} class="video-poster" loading="lazy" />
               <button class="play-btn" aria-label={`Play ${p.title}`}>
                 <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
               </button>

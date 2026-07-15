@@ -2,8 +2,7 @@
 import { translations } from '../i18n.ts';
 import { ClientRouter } from 'astro:transitions';
 
-
-const { pageTitle, year = '2026', lang = 'en' } = Astro.props;
+const { pageTitle, year = '2026', lang = 'en', pageDescription = null } = Astro.props;
 const t = translations[lang];
 const otherLang = lang === 'en' ? 'nl' : 'en';
 const otherPath = lang === 'en' ? '' : '/en';
@@ -17,6 +16,43 @@ const isActive = (href) => {
   const clean = href.replace(/\/+$/, '') || '/';
   return currentPath === clean;
 };
+
+// SEO: hreflang helpers
+const getEnPath = () => {
+  if (currentPath === '/') return '/en/';
+  if (currentPath === '/en/') return '/en/';
+  if (currentPath.startsWith('/en/')) return currentPath;
+  return '/en' + currentPath;
+};
+
+const getNlPath = () => {
+  if (currentPath === '/') return '/';
+  if (currentPath === '/en/') return '/';
+  if (currentPath.startsWith('/en/')) return currentPath.replace('/en', '');
+  return currentPath;
+};
+
+// SEO: page-specific descriptions
+const descriptions = {
+  en: {
+    '/en/': 'Freelance videographer in Amsterdam, Netherlands. I create cinematic commercial videos, music videos, and brand films that tell your story.',
+    '/': 'Videograaf in Nederland. Ik maak cineastische commerciële video\'s, muziekvideo\'s en merkfilms die jouw verhaal vertellen.',
+    '/en/work': 'Portfolio of recent videography projects — commercials, brand films, music videos, and event coverage.',
+    '/work': 'Portfolio met recente videografie projecten — reclames, merkfilms, muziekvideo\'s en evenementen.',
+    '/en/about': 'About J. Murray — freelance videographer and filmmaker based in the Netherlands specializing in cinematic storytelling.',
+    '/about': 'Over J. Murray — videograaf en filmmaker in Nederland gespecialiseerd in cinematische verhalen.',
+    '/en/contact': 'Get in touch with Goldfishstudio. Book a consultation or inquire about your next video project.',
+    '/contact': 'Neem contact op met Goldfishstudio. Boek een gesprek of vraag naar jouw volgende videoprojet.',
+  }
+};
+
+const getDescription = () => {
+  if (pageDescription) return pageDescription;
+  const normalized = currentPath === '/' ? (lang === 'en' ? '/en/' : '/') : currentPath;
+  return descriptions[lang]?.[normalized] || descriptions[lang]?.['/'] || descriptions.en['/en/'];
+};
+
+const metaDescription = getDescription();
 ---
 <!doctype html>
 <html lang={lang}>
@@ -33,27 +69,41 @@ const isActive = (href) => {
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
   <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" /></noscript>
   <meta property="og:title" content={pageTitle + ' — Goldfishstudio'} />
-  <meta property="og:description" content={lang === 'en' ? 'Goldfishstudio — Cinematic videography & film production in the Netherlands.' : 'Goldfishstudio — Cineastische videografie & filmproductie in Nederland.'} />
+  <meta property="og:description" content={metaDescription} />
   <meta property="og:type" content="website" />
   <meta property="og:url" content={Astro.url} />
-  <meta property="og:image" content="https://goldfishstudio.nl/favicon.svg" />
+  <meta property="og:image" content="https://goldfishstudio.nl/og-image.jpg" />
   <meta property="og:locale" content={lang === 'en' ? 'en_NL' : 'nl_NL'} />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="alternate" hreflang="en" href="https://goldfishstudio.nl{lang === 'en' ? currentPath : '/'} " />
-  <link rel="alternate" hreflang="nl" href="https://goldfishstudio.nl{lang === 'nl' ? currentPath : '/nl'}" />
+  <meta name="description" content={metaDescription} />
+  <link rel="canonical" href={new URL(currentPath === '/' ? (lang === 'en' ? '/en/' : '/') : currentPath, Astro.url.origin).toString()} />
+  <link rel="alternate" hreflang="en" href={new URL(getEnPath(), 'https://goldfishstudio.nl').toString()} />
+  <link rel="alternate" hreflang="nl" href={new URL(getNlPath(), 'https://goldfishstudio.nl').toString()} />
   <link rel="alternate" hreflang="x-default" href="https://goldfishstudio.nl/" />
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
+    "@id": "https://goldfishstudio.nl",
     name: "Goldfishstudio",
-    description: "Cinematic videography & film production in the Netherlands.",
+    description: metaDescription,
     url: "https://goldfishstudio.nl",
     email: "info@goldfishstudio.nl",
-    address: { "@type": "PostalAddress", addressCountry: "NL" },
+    sameAs: ["https://instagram.com/remastered_goldfish"],
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: "NL",
+      addressRegion: "Netherlands"
+    },
     priceRange: "€€",
-    knowsAbout: ["Videography", "Film Production", "Commercial Video", "Music Videos", "Brand Films"],
+    areaServed: ["NL", "EU"],
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "Customer Support",
+      email: "info@goldfishstudio.nl"
+    },
+    knowsAbout: ["Videography", "Film Production", "Commercial Video", "Music Videos", "Brand Films", "Event Coverage"],
+    serviceType: ["Commercial Videography", "Music Video Production", "Brand Film Production", "Event Videography"]
   })} />
-  <meta name="description" content={lang === 'en' ? 'Goldfishstudio — Cinematic videography & film production in the Netherlands.' : 'Goldfishstudio — Cineastische videografie & filmproductie in Nederland.'} />
   <style is:global>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {

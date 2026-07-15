@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://goldfishstudio.nl/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://goldfishstudio.nl/en/" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://goldfishstudio.nl/" />
+  </url>
+  <url>
+    <loc>https://goldfishstudio.nl/work</loc>
+    <lastmod>2026-07-15</lastmod>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://goldfishstudio.nl/en/work" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://goldfishstudio.nl/work" />
+  </url>
+  <url>
+    <loc>https://goldfishstudio.nl/about</loc>
+    <lastmod>2026-07-15</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://goldfishstudio.nl/en/about" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://goldfishstudio.nl/about" />
+  </url>
+  <url>
+    <loc>https://goldfishstudio.nl/contact</loc>
+    <lastmod>2026-07-15</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://goldfishstudio.nl/en/contact" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://goldfishstudio.nl/contact" />
+  </url>
+  <url>
+    <loc>https://goldfishstudio.nl/en/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://goldfishstudio.nl/en/" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://goldfishstudio.nl/" />
+  </url>
+  <url>
+    <loc>https://goldfishstudio.nl/en/work</loc>
+    <lastmod>2026-07-15</lastmod>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://goldfishstudio.nl/en/work" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://goldfishstudio.nl/work" />
+  </url>
+  <url>
+    <loc>https://goldfishstudio.nl/en/about</loc>
+    <lastmod>2026-07-15</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://goldfishstudio.nl/en/about" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://goldfishstudio.nl/about" />
+  </url>
+  <url>
+    <loc>https://goldfishstudio.nl/en/contact</loc>
+    <lastmod>2026-07-15</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://goldfishstudio.nl/en/contact" />
+    <xhtml:link rel="alternate" hreflang="nl" href="https://goldfishstudio.nl/contact" />
+  </url>
+</urlset>

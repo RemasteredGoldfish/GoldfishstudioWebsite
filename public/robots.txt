@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Allow: /sitemap.xml
+Disallow: /api/
+
+Sitemap: https://goldfishstudio.nl/sitemap.xml
