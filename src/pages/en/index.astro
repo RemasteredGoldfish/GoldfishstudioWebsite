@@ -48,7 +48,7 @@ const projects = [
                 <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
               </button>
               <div class="video-thumb-loading" style="display:none;"></div>
-              <iframe class:list={["video-iframe", p.vertical && "vertical"]} title={p.title} allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" loading="lazy" style="display:none;" onload="this.style.display='block';this.parentElement.querySelector('.video-thumb-loading').style.display='none';this.parentElement.querySelector('.video-poster').style.display='none';this.parentElement.querySelector('.play-btn').style.display='none';"></iframe>
+              <iframe class:list={["video-iframe", p.vertical && "vertical"]} title={p.title} allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;inset:0;opacity:0;pointer-events:none;"></iframe>
             </div>
             <div class="video-meta">
               <span class="video-tag" set:html={p.tag} />
@@ -86,7 +86,7 @@ const projects = [
     function initVideoGrid() {
       document.addEventListener('click', (e) => {
         const card = e.target.closest('.video-card-media[data-video]');
-        if (!card || card.querySelector('iframe').style.display === 'block') return; // Already playing
+        if (!card || card.querySelector('iframe').style.opacity === '1') return; // Already playing
         
         const iframe = card.querySelector('iframe');
         const poster = card.querySelector('.video-poster');
@@ -98,7 +98,8 @@ const projects = [
         poster.style.display = 'none';
         btn.style.display = 'none';
         loader.style.display = 'none';
-        iframe.style.display = 'block';
+        iframe.style.opacity = '1';
+        iframe.style.pointerEvents = 'auto';
       }, { capture: true });
     }
     
