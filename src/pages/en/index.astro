@@ -50,7 +50,7 @@ const projects = [
                 <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
               </button>
               {p.muxId ? (
-                <iframe class:list={["video-iframe", p.vertical && "vertical"]} title={p.title} src="" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;" allowfullscreen style="display:none;"></iframe>
+                <iframe class:list={["video-iframe", p.vertical && "vertical"]} title={p.title} src="" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; fullscreen;" allowfullscreen style="display:none;"></iframe>
               ) : (
                 <iframe class:list={["video-iframe", p.vertical && "vertical"]} title={p.title} allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" style="display:none;"></iframe>
               )}
