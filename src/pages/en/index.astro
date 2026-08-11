@@ -71,25 +71,33 @@ const projects = [
   </div>
 
   <script>
-    // Event delegation for video clicks — single listener instead of 7
+    // Preload all video iframes on page load so they're instant on click
+    function preloadVideos() {
+      document.querySelectorAll('.video-card-media[data-video]').forEach(card => {
+        const videoId = card.dataset.video;
+        const iframe = card.querySelector('iframe');
+        if (iframe && videoId && !iframe.src) {
+          iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&fs=0&modestbranding=1`;
+        }
+      });
+    }
+    
+    // Event delegation for video clicks — show iframe instantly
     function initVideoGrid() {
       document.addEventListener('click', (e) => {
         const card = e.target.closest('.video-card-media[data-video]');
-        if (!card || card.querySelector('iframe[src]')) return; // Already playing
+        if (!card || card.querySelector('iframe').style.display === 'block') return; // Already playing
         
-        const videoId = card.dataset.video;
         const iframe = card.querySelector('iframe');
         const poster = card.querySelector('.video-poster');
         const btn = card.querySelector('.play-btn');
         const loader = card.querySelector('.video-thumb-loading');
         
-        if (!iframe || !videoId) return;
+        if (!iframe) return;
         
         poster.style.display = 'none';
         btn.style.display = 'none';
-        loader.style.display = 'flex';
-        
-        iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&fs=0&modestbranding=1`;
+        loader.style.display = 'none';
         iframe.style.display = 'block';
       }, { capture: true });
     }
@@ -111,6 +119,7 @@ const projects = [
     }
     
     loadHeroBg();
+    preloadVideos();
     initVideoGrid();
   </script>
 
