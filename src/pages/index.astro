@@ -114,25 +114,30 @@ const projects = [
           // Mux: autoplay with sound on click
           const titleParam = videoTitle.toLowerCase().replace(/\s+/g, '');
           iframe.src = `https://player.mux.com/${muxId}?autoplay=true&metadata-video-title=${titleParam}&video-title=${titleParam}`;
-        } else {
-          iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&fs=0&modestbranding=1`;
-        }
-        
-        // Show iframe when ready
-        iframe.onload = () => {
+          
+          // Show immediately, don't wait for onload
           iframe.style.display = 'block';
           poster.style.display = 'none';
           btn.style.display = 'none';
-        };
-        
-        // Fallback in case onload doesn't fire
-        setTimeout(() => {
-          if (iframe.style.display !== 'block') {
+        } else {
+          iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&fs=0&modestbranding=1`;
+          
+          // Show iframe when ready
+          iframe.onload = () => {
             iframe.style.display = 'block';
             poster.style.display = 'none';
             btn.style.display = 'none';
-          }
-        }, 100);
+          };
+          
+          // Fallback in case onload doesn't fire
+          setTimeout(() => {
+            if (iframe.style.display !== 'block') {
+              iframe.style.display = 'block';
+              poster.style.display = 'none';
+              btn.style.display = 'none';
+            }
+          }, 500);
+        }
       }, { capture: true });
     }
     
