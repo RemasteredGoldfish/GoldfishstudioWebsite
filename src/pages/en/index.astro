@@ -45,14 +45,10 @@ const projects = [
         {projects.map((p) => (
           <article class:list={["video-card", p.vertical && "vertical"]}>
             <div class:list={["video-card-media", p.vertical && "vertical"]} data-video={p.videoId} data-mux={p.muxId} style="cursor:pointer;position:relative;">
-              <img src={`https://img.youtube.com/vi/${p.videoId}/maxresdefault.jpg`} alt={p.title} class="video-poster" loading="eager" decoding="async" onerror={`this.src='https://img.youtube.com/vi/${p.videoId}/hqdefault.jpg'`} />
-              <button class="play-btn" aria-label={`Play ${p.title}`}>
-                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-              </button>
               {p.muxId ? (
-                <iframe class:list={["video-iframe", p.vertical && "vertical"]} title={p.title} src="" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; fullscreen;" allowfullscreen style="display:none;"></iframe>
+                <iframe class:list={["video-iframe", p.vertical && "vertical"]} title={p.title} src={`https://player.mux.com/${p.muxId}?autoplay=true`} allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; fullscreen;" allowfullscreen style="display:block; width:100%; height:100%; border:none;"></iframe>
               ) : (
-                <iframe class:list={["video-iframe", p.vertical && "vertical"]} title={p.title} allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" style="display:none;"></iframe>
+                <iframe class:list={["video-iframe", p.vertical && "vertical"]} title={p.title} src={`https://www.youtube-nocookie.com/embed/${p.videoId}?autoplay=1&fs=0&modestbranding=1`} allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" style="display:block; width:100%; height:100%; border:none;"></iframe>
               )}
             </div>
             <div class="video-meta">
@@ -92,57 +88,7 @@ const projects = [
       }
     }
     
-    // Lazy-load Mux or YouTube iframes only on click
-    function initVideoGrid() {
-      document.addEventListener('click', (e) => {
-        const card = e.target.closest('.video-card-media[data-video]');
-        if (!card) return;
-        
-        const videoId = card.dataset.video;
-        const muxId = card.dataset.mux;
-        const videoTitle = card.closest('article').querySelector('.video-title')?.textContent || '';
-        const iframe = card.querySelector('iframe');
-        
-        // Already loaded
-        if (iframe.src) return;
-        
-        const poster = card.querySelector('.video-poster');
-        const btn = card.querySelector('.play-btn');
-        
-        // Load Mux (with sound on click) or YouTube
-        if (muxId) {
-          // Mux: autoplay with sound on click
-          const titleParam = videoTitle.toLowerCase().replace(/\s+/g, '');
-          iframe.src = `https://player.mux.com/${muxId}?autoplay=true&metadata-video-title=${titleParam}&video-title=${titleParam}`;
-          
-          // Show immediately, don't wait for onload
-          iframe.style.display = 'block';
-          poster.style.display = 'none';
-          btn.style.display = 'none';
-        } else {
-          iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&fs=0&modestbranding=1`;
-          
-          // Show iframe when ready
-          iframe.onload = () => {
-            iframe.style.display = 'block';
-            poster.style.display = 'none';
-            btn.style.display = 'none';
-          };
-          
-          // Fallback in case onload doesn't fire
-          setTimeout(() => {
-            if (iframe.style.display !== 'block') {
-              iframe.style.display = 'block';
-              poster.style.display = 'none';
-              btn.style.display = 'none';
-            }
-          }, 500);
-        }
-      }, { capture: true });
-    }
-    
     loadHeroBg();
-    initVideoGrid();
   </script>
 
 </Layout>
