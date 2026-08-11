@@ -100,6 +100,7 @@ const projects = [
         
         const videoId = card.dataset.video;
         const muxId = card.dataset.mux;
+        const videoTitle = card.closest('article').querySelector('.video-title')?.textContent || '';
         const iframe = card.querySelector('iframe');
         
         // Already loaded
@@ -110,8 +111,9 @@ const projects = [
         
         // Load Mux (with sound on click) or YouTube
         if (muxId) {
-          // Mux: autoplay without mute = plays with sound
-          iframe.src = `https://player.mux.com/${muxId}?autoplay=true`;
+          // Mux: autoplay with sound on click
+          const titleParam = videoTitle.toLowerCase().replace(/\s+/g, '');
+          iframe.src = `https://player.mux.com/${muxId}?autoplay=true&metadata-video-title=${titleParam}&video-title=${titleParam}`;
         } else {
           iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&fs=0&modestbranding=1`;
         }
