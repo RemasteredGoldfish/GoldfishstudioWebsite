@@ -20,7 +20,7 @@ export const POST: APIRoute = async ({ request }) => {
     const resend = new Resend(apiKey);
 
     const { error } = await resend.emails.send({
-      from: 'Goldfishstudio Website <website@goldfishstudio.nl>',
+      from: 'Goldfishstudio Website <info@goldfishstudio.nl>',
       to: ['info@goldfishstudio.nl'],
       replyTo: email,
       subject: `Website: ${type || 'New message'} from ${name}`,
