@@ -18,13 +18,8 @@ const projects = [
 <Layout t={t} lang="nl" pageTitle="Goldfishstudio" year="2026">
 
   <section class="hero">
-    <div class="hero-bg" aria-hidden="true">
-      <iframe
-        src="https://player.vimeo.com/video/1169208987?h=a7a6a855d2&autoplay=1&loop=1&muted=1&background=1"
-        title="Goldfishstudio achtergrond"
-        allow="autoplay; fullscreen"
-        loading="lazy"
-      />
+    <div class="hero-bg" aria-hidden="true" id="hero-bg">
+      <!-- Iframe loads after page paints for better LCP -->
     </div>
     <div class="hero-overlay" />
     <div class="container hero-content">
@@ -48,7 +43,7 @@ const projects = [
         {projects.map((p) => (
           <article class:list={["video-card", p.vertical && "vertical"]}>
             <div class:list={["video-card-media", p.vertical && "vertical"]} data-video={p.videoId} style="cursor:pointer;">
-              <img src={`https://img.youtube.com/vi/${p.videoId}/maxresdefault.jpg`} alt={p.title + ' — Goldfishstudio videography'} class="video-poster" loading="lazy" />
+              <img src={`https://img.youtube.com/vi/${p.videoId}/maxresdefault.jpg`} alt={p.title + ' — Goldfishstudio videography'} class="video-poster" loading="lazy" decoding="async" />
               <button class="play-btn" aria-label={`Play ${p.title}`}>
                 <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
               </button>
@@ -76,14 +71,19 @@ const projects = [
   </div>
 
   <script>
-    document.querySelectorAll('.video-card-media[data-video]').forEach(card => {
-      card.addEventListener('click', () => {
+    // Event delegation for video clicks — single listener instead of 7
+    function initVideoGrid() {
+      document.addEventListener('click', (e) => {
+        const card = e.target.closest('.video-card-media[data-video]');
+        if (!card || card.querySelector('iframe[src]')) return; // Already playing
+        
         const videoId = card.dataset.video;
-        if (!videoId) return;
         const iframe = card.querySelector('iframe');
         const poster = card.querySelector('.video-poster');
         const btn = card.querySelector('.play-btn');
         const loader = card.querySelector('.video-thumb-loading');
+        
+        if (!iframe || !videoId) return;
         
         poster.style.display = 'none';
         btn.style.display = 'none';
@@ -91,8 +91,27 @@ const projects = [
         
         iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&fs=0&modestbranding=1`;
         iframe.style.display = 'block';
-      });
-    });
+      }, { capture: true });
+    }
+    
+    // Load hero Vimeo iframe after page paints (requestIdleCallback with fallback)
+    function loadHeroBg() {
+      const heroBg = document.getElementById('hero-bg');
+      if (!heroBg) return;
+      
+      const loadIframe = () => {
+        heroBg.innerHTML = '<iframe src="https://player.vimeo.com/video/1169208987?h=a7a6a855d2&autoplay=1&loop=1&muted=1&background=1" title="Goldfishstudio achtergrond" allow="autoplay; fullscreen" style="width:100%;height:100%;border:none;"></iframe>';
+      };
+      
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadIframe, { timeout: 2000 });
+      } else {
+        requestAnimationFrame(() => setTimeout(loadIframe, 100));
+      }
+    }
+    
+    loadHeroBg();
+    initVideoGrid();
   </script>
 
 </Layout>
