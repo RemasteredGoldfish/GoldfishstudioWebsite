@@ -6,7 +6,7 @@ const lang = 'en';
 
 const projects = [
   // Vertical videos first
-  { title: 'Office Amelia Video', videoId: '2zAnE4BHG3g', muxId: null, vertical: true, tag: 'Social Media', year: '2026' },
+  { title: 'Office Amelia Video', videoId: '2zAnE4BHG3g', muxId: 'Wbla02Gv5901KwOncSIDQ8Afmwk8Uwlls9hma02w1ZzRnI', vertical: true, tag: 'Social Media', year: '2026' },
   { title: 'Basketball Commercial', videoId: '7gZLxHgUQx8', muxId: '4BIw4S4zfZ401cF5cL54YY7hPAr00BoQFH6YrQpT5OclE', vertical: true, tag: 'Commercial', year: '2026' },
   { title: 'Martabak', videoId: '9nALKayuaE0', muxId: 'LyrdTPrrRFX8rpoK727fJMZcOHgrmv00QzpeVpYRWIXw', vertical: true, tag: 'Commercial', year: '2026' },
   { title: 'Barber', videoId: '7gZLxHgUQx8', muxId: '4hCHlswi3XjkKSrjIfY9xN2Lbyp6AzK00yhqBWpbk4zg', vertical: true, tag: 'Commercial', year: '2026' },
@@ -46,9 +46,9 @@ const projects = [
           <article class:list={["video-card", p.vertical && "vertical"]}>
             <div class:list={["video-card-media", p.vertical && "vertical"]} style="cursor:pointer;position:relative;" data-mux={p.muxId} data-video-id={p.videoId} data-title={p.title}>
               {p.muxId ? (
-                <iframe class:list={["video-iframe", p.vertical && "vertical"]} title={p.title} src={`https://player.mux.com/${p.muxId}?autoplay=true&muted=true&controls=true`} allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; fullscreen;" allowfullscreen style="display:block; width:100%; height:100%; border:none; pointer-events:none;"></iframe>
+                <iframe class:list={["video-iframe", p.vertical && "vertical"]} title={p.title} src={`https://player.mux.com/${p.muxId}?autoplay=true&muted=true&controls=true&loop=true`} allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; fullscreen;" allowfullscreen style="display:block; width:100%; height:100%; border:none; pointer-events:none;"></iframe>
               ) : (
-                <iframe class:list={["video-iframe", p.vertical && "vertical"]} title={p.title} src={`https://www.youtube-nocookie.com/embed/${p.videoId}?autoplay=1&mute=1&fs=0&modestbranding=1`} allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" style="display:block; width:100%; height:100%; border:none; pointer-events:none;"></iframe>
+                <iframe class:list={["video-iframe", p.vertical && "vertical"]} title={p.title} src={`https://www.youtube-nocookie.com/embed/${p.videoId}?autoplay=1&mute=1&fs=0&modestbranding=1&loop=1&playlist=${p.videoId}`} allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" style="display:block; width:100%; height:100%; border:none; pointer-events:none;"></iframe>
               )}
             </div>
             <div class="video-meta">
