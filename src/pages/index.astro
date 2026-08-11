@@ -44,11 +44,11 @@ const projects = [
       <div class="video-grid">
         {projects.map((p) => (
           <article class:list={["video-card", p.vertical && "vertical"]}>
-            <div class:list={["video-card-media", p.vertical && "vertical"]} data-video={p.videoId} data-mux={p.muxId} style="cursor:pointer;position:relative;">
+            <div class:list={["video-card-media", p.vertical && "vertical"]} style="cursor:pointer;position:relative;" data-mux={p.muxId} data-video-id={p.videoId} data-title={p.title}>
               {p.muxId ? (
-                <iframe class:list={["video-iframe", p.vertical && "vertical"]} title={p.title} src={`https://player.mux.com/${p.muxId}?autoplay=true`} allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; fullscreen;" allowfullscreen style="display:block; width:100%; height:100%; border:none;"></iframe>
+                <iframe class:list={["video-iframe", p.vertical && "vertical"]} title={p.title} src={`https://player.mux.com/${p.muxId}?autoplay=true&muted=true&controls=true`} allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; fullscreen;" allowfullscreen style="display:block; width:100%; height:100%; border:none; pointer-events:none;"></iframe>
               ) : (
-                <iframe class:list={["video-iframe", p.vertical && "vertical"]} title={p.title} src={`https://www.youtube-nocookie.com/embed/${p.videoId}?autoplay=1&fs=0&modestbranding=1`} allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" style="display:block; width:100%; height:100%; border:none;"></iframe>
+                <iframe class:list={["video-iframe", p.vertical && "vertical"]} title={p.title} src={`https://www.youtube-nocookie.com/embed/${p.videoId}?autoplay=1&mute=1&fs=0&modestbranding=1`} allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" style="display:block; width:100%; height:100%; border:none; pointer-events:none;"></iframe>
               )}
             </div>
             <div class="video-meta">
@@ -88,7 +88,27 @@ const projects = [
       }
     }
     
+    // Click to open full player
+    function initVideoGrid() {
+      document.addEventListener('click', (e) => {
+        const card = e.target.closest('.video-card-media[data-mux], .video-card-media[data-video-id]');
+        if (!card) return;
+        
+        const muxId = card.dataset.mux;
+        const videoId = card.dataset.videoId;
+        const title = card.dataset.title;
+        
+        if (muxId) {
+          const titleParam = title.toLowerCase().replace(/\s+/g, '+');
+          window.open(`https://player.mux.com/${muxId}?metadata-video-title=${titleParam}&video-title=${titleParam}`, '_blank');
+        } else if (videoId) {
+          window.open(`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&fs=1`, '_blank');
+        }
+      });
+    }
+    
     loadHeroBg();
+    initVideoGrid();
   </script>
 
 </Layout>
