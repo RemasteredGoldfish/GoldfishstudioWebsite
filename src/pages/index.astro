@@ -70,13 +70,13 @@ const projects = [
   </div>
 
   <script>
-    // Load hero Vimeo iframe after page paints (requestIdleCallback with fallback)
+    // Load hero Mux video after page paints (requestIdleCallback with fallback)
     function loadHeroBg() {
       const heroBg = document.getElementById('hero-bg');
       if (!heroBg) return;
       
       const loadIframe = () => {
-        heroBg.innerHTML = '<iframe src="https://player.vimeo.com/video/1169208987?h=a7a6a855d2&autoplay=1&loop=1&muted=1&background=1" title="Goldfishstudio achtergrond" allow="autoplay; fullscreen" style="width:100%;height:100%;border:none;"></iframe>';
+        heroBg.innerHTML = '<iframe src="https://player.mux.com/O00qf5HrTommDuoYh6xIq3GloLj1IM5WqzjtS9aBWOwg?autoplay=1&muted=1&loop=1" title="Goldfishstudio background" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;" allowfullscreen style="width:100%;height:100%;border:none;position:absolute;top:0;left:0;"></iframe>';
       };
       
       if ('requestIdleCallback' in window) {
