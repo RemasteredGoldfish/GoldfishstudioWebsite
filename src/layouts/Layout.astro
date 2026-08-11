@@ -341,7 +341,7 @@ const metaDescription = getDescription();
       section { padding: 5rem 0; }
       .container { padding: 0 1.5rem; }
       .editorial, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      .video-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .video-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
       .video-card.vertical { grid-row: auto; }
       .services-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
@@ -365,8 +365,8 @@ const metaDescription = getDescription();
       .video-title { font-size: 1.15rem; }
       .video-thumb { aspect-ratio: 16/9; }
       .stat-num { font-size: 1.8rem; }
-      .video-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-      .video-card-media { margin-bottom: 0.8rem; }
+      .video-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .video-card-media { margin-bottom: 0.6rem; }
     }
   </style>
 </head>
