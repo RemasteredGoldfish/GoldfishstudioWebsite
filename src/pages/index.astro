@@ -106,9 +106,10 @@ const projects = [
         const poster = card.querySelector('.video-poster');
         const btn = card.querySelector('.play-btn');
         
-        // Load Mux or YouTube
+        // Load Mux (with sound on click) or YouTube
         if (muxId) {
-          iframe.src = `https://player.mux.com/${muxId}?autoplay=true&muted=true`;
+          // Mux: autoplay without mute = plays with sound
+          iframe.src = `https://player.mux.com/${muxId}?autoplay=true`;
         } else {
           iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&fs=0&modestbranding=1`;
         }
