@@ -82,7 +82,7 @@ export const translations = {
   nl: {
     nav: { work: 'Werk', about: 'Over mij', contact: 'Contact', hire: 'Huur mij' },
     hero: {
-      eyebrow: 'Videografie & Filmproductie — Nederland',
+      eyebrow: 'Videografie & Filmproductie Nederland',
       title: 'Ik creëer <em>cineastische video\'s</em> die jouw verhaal vertellen met emotie en intentie.',
       sub: 'Ik ben een freelance videograaf en filmmaker gevestigd in Nederland. Ik help merken, artiesten en bedrijven zich te verbinden met hun publiek door visueel verhalen vertellen — van concept tot aan de uiteindelijke montage.',
       cta1: 'Bekijk mijn werk',
