@@ -9,7 +9,6 @@ const otherPath = lang === 'en' ? '' : '/en';
 const navLinks = [
   { href: lang === 'en' ? '/en/work' : '/work', label: t.nav.work },
   { href: lang === 'en' ? '/en/about' : '/about', label: t.nav.about },
-  { href: lang === 'en' ? '/en/contact' : '/contact', label: t.nav.contact },
 ];
 const currentPath = Astro.url.pathname.replace(/\/+$/, '') || '/';
 const isActive = (href) => {
@@ -384,7 +383,6 @@ const metaDescription = getDescription();
         ))}
       </ul>
       <a href={lang === 'en' ? '/' : '/en'} class="lang-btn" aria-label={lang === 'en' ? 'Switch to Dutch' : 'Switch to English'}>{t.langBtn}</a>
-      <a href={lang === 'en' ? '/en/contact' : '/contact'} class="nav-cta">{t.nav.hire}</a>
       <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label={lang === 'en' ? 'Open menu' : 'Open menu'}>
         <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
         <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>
@@ -401,7 +399,6 @@ const metaDescription = getDescription();
     </ul>
     <div class="mobile-meta">
       <a href={lang === 'en' ? '/' : '/en'}>{t.langBtn === 'NL' ? 'Nederlands' : 'English'}</a>
-      <a href={lang === 'en' ? '/en/contact' : '/contact'}>{t.nav.hire}</a>
       <a href="mailto:info@goldfishstudio.nl">info@goldfishstudio.nl</a>
     </div>
   </aside>
@@ -419,7 +416,6 @@ const metaDescription = getDescription();
       <li><a href="mailto:info@goldfishstudio.nl">info@goldfishstudio.nl</a></li>
       <li><a href="https://instagram.com/remastered_goldfish" target="_blank" rel="noopener noreferrer">Instagram</a></li>
       <li><a href={lang === 'en' ? '/en/work' : '/work'}>{t.footer.portfolio}</a></li>
-      <li><a href={lang === 'en' ? '/en/contact' : '/contact'}>{t.footer.touch}</a></li>
     </ul>
   </footer>
 
