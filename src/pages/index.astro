@@ -1,24 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { projects } from '../data/projects.ts';
 import { translations } from '../i18n.ts';
 const t = translations.nl;
 const lang = 'nl';
-
-const projects = [
-  // Vertical videos first
-  { title: 'Coach Kux', videoId: '7gZLxHgUQx8', muxId: 'PIp6EDEDue008BuRkVus5yWVZTSP9QwgxYIUAKvA26yc', vertical: true, tag: 'Reel', year: '2026' },
-  { title: 'Basketball Commercial', videoId: '7gZLxHgUQx8', muxId: '4BIw4S4zfZ401cF5cL54YY7hPAr00BoQFH6YrQpT5OclE', vertical: true, tag: 'Commercial', year: '2026' },
-  { title: 'Martabak', videoId: '9nALKayuaE0', muxId: 'LyrdTPrrRFX8rpoK727fJMZcOHgrmv00QzpeVpYRWIXw', vertical: true, tag: 'Commercial', year: '2026' },
-  { title: 'Barber', videoId: '7gZLxHgUQx8', muxId: '4hCHlswi3XjkKSrjIfY9xN2Lbyp6AzK00yhqBWpbk4zg', vertical: true, tag: 'Commercial', year: '2026' },
-  { title: 'Pathfinder Day', videoId: 'otjwjZ9A7Gc', muxId: 'JA7D3foAf02DySqLel39EZCXM9Jq00KhsRU8lHWPZ5x6U', vertical: true, tag: 'Event', year: '2026' },
-  { title: 'Office Amelia Video', videoId: '2zAnE4BHG3g', muxId: 'Wbla02Gv5901KwOncSIDQ8Afmwk8Uwlls9hma02w1ZzRnI', vertical: true, tag: 'Social Media', year: '2026' },
-  { title: 'I Am Uniek Podcast', videoId: '7gZLxHgUQx8', muxId: 'lvxpMax4DXpsO4NxhniXJo9nb00wIN95jObcIPH7BNEA', vertical: true, tag: 'Podcast', year: '2026' },
-  // Horizontal videos
-  { title: 'Gospel Celebrations Friday Delivery', videoId: 'fvcC-OiFOXM', muxId: null, vertical: false, tag: 'Concert', year: '2026' },
-  { title: 'Office Website 4K', videoId: 'oLuet3RdY1A', muxId: 'O00qf5HrTommDuoYh6xIq3GloLj1IM5WqzjtS9aBWOwg', vertical: false, tag: 'Corporate', year: '2026' },
-];
 ---
-
 <Layout t={t} lang="nl" pageTitle="Goldfishstudio" year="2026">
 
   <section class="hero">
@@ -43,24 +29,36 @@ const projects = [
     <div class="container">
       <div class="eyebrow" set:html={t.work.eyebrow} />
       <h2 class="heading" set:html={t.work.heading} />
-      <div class="video-grid">
-        {projects.map((p) => (
-          <article class:list={["video-card", p.vertical && "vertical"]}>
-            <div class:list={["video-card-media", p.vertical && "vertical"]} style="cursor:pointer;position:relative;" data-mux={p.muxId} data-video-id={p.videoId} data-title={p.title}>
-              {p.muxId ? (
-                <iframe class:list={["video-iframe", p.vertical && "vertical"]} title={p.title} src={`https://player.mux.com/${p.muxId}?autoplay=true&muted=true&controls=true&loop=true`} allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; fullscreen;" allowfullscreen style="display:block; width:100%; height:100%; border:none; pointer-events:none;"></iframe>
-              ) : (
-                <iframe class:list={["video-iframe", p.vertical && "vertical"]} title={p.title} src={`https://www.youtube-nocookie.com/embed/${p.videoId}?autoplay=1&mute=1&fs=0&modestbranding=1&loop=1&playlist=${p.videoId}`} allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" style="display:block; width:100%; height:100%; border:none; pointer-events:none;"></iframe>
-              )}
-            </div>
-            <div class="video-meta">
-              <span class="video-tag" set:html={p.tag} />
-              <span class="video-meta-dot"></span>
-              <span class="video-year" set:html={p.year} />
-            </div>
-            <div class="video-title" set:html={p.title} />
-          </article>
-        ))}
+      <div class="video-grid" style="display: flex; flex-direction: column; gap: 2rem;">
+        {projects.map((p) => {
+          const slug = p.title
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/^-|-$/g, '');
+          const videoUrl = p.muxId 
+            ? `https://player.mux.com/${p.muxId}?autoplay=true&muted=true&controls=true&loop=true`
+            : `https://www.youtube-nocookie.com/embed/${p.videoId}?autoplay=1&mute=1&fs=0&modestbranding=1&loop=1&playlist=${p.videoId}`;
+          return (
+            <a href={`/work/${slug}`} class={['video-card', p.vertical && 'vertical'].filter(Boolean).join(' ')}>
+              <div class={['video-card-media', p.vertical && 'vertical'].filter(Boolean).join(' ')} style="position:relative;">
+                <iframe
+                  class={['video-iframe', p.vertical && 'vertical'].filter(Boolean).join(' ')}
+                  title={p.title}
+                  src={videoUrl}
+                  allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; fullscreen;"
+                  allowFullscreen
+                  style="display:block; width:100%; height:100%; border:none; pointer-events:none;"
+                />
+              </div>
+              <div class="video-meta">
+                <span class="video-tag" set:html={p.tag} />
+                <span class="video-meta-dot"></span>
+                <span class="video-year" set:html={p.year} />
+              </div>
+              <div class="video-title" set:html={p.title} />
+            </a>
+          );
+        })}
       </div>
     </div>
   </section>
@@ -74,43 +72,27 @@ const projects = [
   </div>
 
   <script>
-    // Load hero Mux video after page paints (requestIdleCallback with fallback)
-    function loadHeroBg() {
-      const heroBg = document.getElementById('hero-bg');
-      if (!heroBg) return;
-      
-      const loadIframe = () => {
-        heroBg.innerHTML = '<iframe src="https://player.mux.com/O00qf5HrTommDuoYh6xIq3GloLj1IM5WqzjtS9aBWOwg?autoplay=true&muted=true&loop=true&controls=false" title="Goldfishstudio background" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;" allowfullscreen style="width:100%;height:100%;border:none;position:absolute;top:0;left:0;"></iframe>';
-      };
-      
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(loadIframe, { timeout: 2000 });
-      } else {
-        requestAnimationFrame(() => setTimeout(loadIframe, 100));
-      }
+  import { translations } from '../i18n.ts';
+  const t = translations.nl;
+  const lang = 'nl';
+
+  // Load hero Mux video after page paints (requestIdleCallback with fallback)
+  function loadHeroBg() {
+    const heroBg = document.getElementById('hero-bg');
+    if (!heroBg) return;
+
+    const loadIframe = () => {
+      heroBg.innerHTML = '<iframe src=\"https://player.mux.com/O00qf5HrTommDuoYh6xIq3GloLj1IM5WqzjtS9aBWOwg?autoplay=true&muted=true&loop=true&controls=false\" title=\"Goldfishstudio background\" allow=\"accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;\" allowfullscreen style=\"width:100%;height:100%;border:none;position:absolute;top:0;left:0;\"></iframe>';
+    };
+
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(loadIframe, { timeout: 2000 });
+    } else {
+      requestAnimationFrame(() => setTimeout(loadIframe, 100));
     }
-    
-    // Click to open full player
-    function initVideoGrid() {
-      document.addEventListener('click', (e) => {
-        const card = e.target.closest('.video-card-media[data-mux], .video-card-media[data-video-id]');
-        if (!card) return;
-        
-        const muxId = card.dataset.mux;
-        const videoId = card.dataset.videoId;
-        const title = card.dataset.title;
-        
-        if (muxId) {
-          const titleParam = title.toLowerCase().replace(/\s+/g, '+');
-          window.open(`https://player.mux.com/${muxId}?metadata-video-title=${titleParam}&video-title=${titleParam}`, '_blank');
-        } else if (videoId) {
-          window.open(`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&fs=1`, '_blank');
-        }
-      });
-    }
-    
-    loadHeroBg();
-    initVideoGrid();
-  </script>
+  }
+
+  loadHeroBg();
+</script>
 
 </Layout>
