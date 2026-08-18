@@ -80,7 +80,7 @@ export const translations = {
     },
   },
   nl: {
-    nav: { work: 'Werk', about: 'Over mij', contact: 'Contact', hire: 'Contacten' },
+    nav: { work: 'Werk', about: 'Over mij', contact: 'Contact', hire: 'Contact' },
     hero: {
       eyebrow: 'Videografie & Filmproductie Nederland',
       title: 'Ik creëer <em>cineastische video\'s</em> die jouw verhaal vertellen met emotie en intentie.',
