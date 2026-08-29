@@ -29,7 +29,7 @@ const lang = 'nl';
     <div class="container">
       <div class="eyebrow" set:html={t.work.eyebrow} />
       <h2 class="heading" set:html={t.work.heading} />
-      <div class="video-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
+      <div class="video-grid">
         {projects.map((p) => {
           const slug = p.title
             .toLowerCase()
