@@ -20,9 +20,9 @@ const lang = 'nl';
 const { project } = Astro.props;
 const { title, tag, year, muxId, videoId, vertical } = project;
 const description = `A ${tag.toLowerCase()} project titled "${title}" from ${year}.`;
-const videoUrl = muxId 
-  ? `https://player.mux.com/${muxId}?autoplay=true&muted=true&controls=true&loop=true`
-  : `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&fs=0&modestbranding=1&loop=1&playlist=${videoId}`;
+  const videoUrl = muxId 
+    ? `https://player.mux.com/${muxId}?muted=true&controls=true&loop=true`
+    : `https://www.youtube-nocookie.com/embed/${videoId}?mute=1&fs=0&modestbranding=1&loop=1&playlist=${videoId}`;
 ---
 <Layout t={t} lang={lang} pageTitle={`${title} — Goldfishstudio`} pageDescription={description} year="2026">
   <section class="container" style="padding-top: 6rem; padding-bottom: 6rem;">

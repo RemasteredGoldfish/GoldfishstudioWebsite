@@ -36,8 +36,8 @@ const lang = 'nl';
             .replace(/[^a-z0-9]+/g, '-')
             .replace(/^-|-$/g, '');
           const videoUrl = p.muxId 
-            ? `https://player.mux.com/${p.muxId}?autoplay=true&muted=true&controls=true&loop=true`
-            : `https://www.youtube-nocookie.com/embed/${p.videoId}?autoplay=1&mute=1&fs=0&modestbranding=1&loop=1&playlist=${p.videoId}`;
+            ? `https://player.mux.com/${p.muxId}?muted=true&controls=true`
+            : `https://www.youtube-nocookie.com/embed/${p.videoId}?mute=1&fs=0&modestbranding=1`;
           return (
             <a href={`/work/${slug}`} class={['video-card', p.vertical && 'vertical'].filter(Boolean).join(' ')}>
               <div class={['video-card-media', p.vertical && 'vertical'].filter(Boolean).join(' ')} style="position:relative;">
@@ -47,7 +47,8 @@ const lang = 'nl';
                   src={videoUrl}
                   allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; fullscreen;"
                   allowFullscreen
-                  style="display:block; width:100%; height:100%; border:none; pointer-events:none;"
+                  style="display:block; width:100%; height:100%; border:none; "
+                  loading="lazy"
                 />
               </div>
               <div class="video-meta">
