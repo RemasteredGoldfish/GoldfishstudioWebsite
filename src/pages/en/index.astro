@@ -2,23 +2,102 @@
 import Layout from '../../layouts/Layout.astro';
 import { translations } from '../../i18n.ts';
 const t = translations.en;
-const lang = 'en';
 
 const projects = [
   // Vertical videos first
-  { title: 'Coach Kux', videoId: '7gZLxHgUQx8', muxId: 'PIp6EDEDue008BuRkVus5yWVZTSP9QwgxYIUAKvA26yc', vertical: true, tag: 'Reel', year: '2026' },
-  { title: 'Basketball Commercial', videoId: '7gZLxHgUQx8', muxId: '4BIw4S4zfZ401cF5cL54YY7hPAr00BoQFH6YrQpT5OclE', vertical: true, tag: 'Commercial', year: '2026' },
-  { title: 'Martabak', videoId: '9nALKayuaE0', muxId: 'LyrdTPrrRFX8rpoK727fJMZcOHgrmv00QzpeVpYRWIXw', vertical: true, tag: 'Commercial', year: '2026' },
-  { title: 'Barber', videoId: '7gZLxHgUQx8', muxId: '4hCHlswi3XjkKSrjIfY9xN2Lbyp6AzK00yhqBWpbk4zg', vertical: true, tag: 'Commercial', year: '2026' },
-  { title: 'Pathfinder Day', videoId: 'otjwjZ9A7Gc', muxId: 'JA7D3foAf02DySqLel39EZCXM9Jq00KhsRU8lHWPZ5x6U', vertical: true, tag: 'Event', year: '2026' },
-  { title: 'Office Amelia Video', videoId: '2zAnE4BHG3g', muxId: 'Wbla02Gv5901KwOncSIDQ8Afmwk8Uwlls9hma02w1ZzRnI', vertical: true, tag: 'Social Media', year: '2026' },
-  { title: 'I Am Uniek Podcast', videoId: '7gZLxHgUQx8', muxId: 'lvxpMax4DXpsO4NxhniXJo9nb00wIN95jObcIPH7BNEA', vertical: true, tag: 'Podcast', year: '2026' },
+  { 
+    title: 'Coach Kux', 
+    videoId: '7gZLxHgUQx8', 
+    muxId: 'PIp6EDEDue008BuRkVus5yWVZTSP9QwgxYIUAKvA26yc', 
+    vertical: true, 
+    tag: 'Reel', 
+    year: '2026',
+    client: 'Coach Kux',
+    role: 'Director & Director of Photography'
+  },
+  { 
+    title: 'Basketball Commercial', 
+    videoId: '7gZLxHgUQx8', 
+    muxId: '4BIw4S4zfZ401cF5cL54YY7hPAr00BoQFH6YrQpT5OclE', 
+    vertical: true, 
+    tag: 'Commercial', 
+    year: '2026',
+    client: 'Basketball Brand',
+    role: 'Director & Director of Photography'
+  },
+  { 
+    title: 'Martabak', 
+    videoId: '9nALKayuaE0', 
+    muxId: 'LyrdTPrrRFX8rpoK727fJMZcOHgrmv00QzpeVpYRWIXw', 
+    vertical: true, 
+    tag: 'Commercial', 
+    year: '2026',
+    client: 'Martabak Restaurant',
+    role: 'Director & Director of Photography'
+  },
+  { 
+    title: 'Barber', 
+    videoId: '7gZLxHgUQx8', 
+    muxId: '4hCHlswi3XjkKSrjIfY9xN2Lbyp6AzK00yhqBWpbk4zg', 
+    vertical: true, 
+    tag: 'Commercial', 
+    year: '2026',
+    client: 'Barber Shop Amsterdam',
+    role: 'Director & Director of Photography'
+  },
+  { 
+    title: 'Pathfinder Day', 
+    videoId: 'otjwjZ9A7Gc', 
+    muxId: 'JA7D3foAf02DySqLel39EZCXM9Jq00KhsRU8lHWPZ5x6U', 
+    vertical: true, 
+    tag: 'Event', 
+    year: '2026',
+    client: 'Pathfinder',
+    role: 'Director & Director of Photography'
+  },
+  { 
+    title: 'Office Amelia Video', 
+    videoId: '2zAnE4BHG3g', 
+    muxId: 'Wbla02Gv5901KwOncSIDQ8Afmwk8Uwlls9hma02w1ZzRnI', 
+    vertical: true, 
+    tag: 'Social Media', 
+    year: '2026',
+    client: 'Office Amelia',
+    role: 'Director & Director of Photography'
+  },
+  { 
+    title: 'I Am Uniek Podcast', 
+    videoId: '7gZLxHgUQx8', 
+    muxId: 'lvxpMax4DXpsO4NxhniXJo9nb00wIN95jObcIPH7BNEA', 
+    vertical: true, 
+    tag: 'Podcast', 
+    year: '2026',
+    client: 'I Am Uniek',
+    role: 'Director & Director of Photography'
+  },
   // Horizontal videos
-  { title: 'Gospel Celebrations Friday Delivery', videoId: 'fvcC-OiFOXM', muxId: null, vertical: false, tag: 'Concert', year: '2026' },
-  { title: 'Office Website 4K', videoId: 'oLuet3RdY1A', muxId: 'O00qf5HrTommDuoYh6xIq3GloLj1IM5WqzjtS9aBWOwg', vertical: false, tag: 'Corporate', year: '2026' },
+  { 
+    title: 'Gospel Celebrations Friday Delivery', 
+    videoId: 'fvcC-OiFOXM', 
+    muxId: null, 
+    vertical: false, 
+    tag: 'Concert', 
+    year: '2026',
+    client: 'Gospel Celebrations',
+    role: 'Director & Director of Photography'
+  },
+  { 
+    title: 'Office Website 4K', 
+    videoId: 'oLuet3RdY1A', 
+    muxId: 'O00qf5HrTommDuoYh6xIq3GloLj1IM5WqzjtS9aBWOwg', 
+    vertical: false, 
+    tag: 'Corporate', 
+    year: '2026',
+    client: 'Office Website',
+    role: 'Director & Director of Photography'
+  },
 ];
 ---
-
 <Layout t={t} lang="en" pageTitle="Goldfishstudio" year="2026">
 
   <section class="hero">
@@ -32,8 +111,8 @@ const projects = [
         <h1 class="hero-title" set:html={t.hero.title} />
         <p class="hero-sub" set:html={t.hero.sub} />
         <div class="hero-actions">
-          <a href="/work" class="btn btn-primary" set:html={t.hero.cta1} />
-          <a href="/contact" class="btn btn-ghost" set:html={t.hero.cta2} />
+          <a href="/en/work" class="btn btn-primary" set:html={t.hero.cta1} />
+          <a href="/en/contact" class="btn btn-ghost" set:html={t.hero.cta2} />
         </div>
       </div>
     </div>
@@ -44,23 +123,33 @@ const projects = [
       <div class="eyebrow" set:html={t.work.eyebrow} />
       <h2 class="heading" set:html={t.work.heading} />
       <div class="video-grid">
-        {projects.map((p) => (
-          <article class:list={["video-card", p.vertical && "vertical"]}>
-            <div class:list={["video-card-media", p.vertical && "vertical"]} style="cursor:pointer;position:relative;" data-mux={p.muxId} data-video-id={p.videoId} data-title={p.title}>
-              {p.muxId ? (
-                <iframe loading="lazy"  class:list={["video-iframe", p.vertical && "vertical"]} title={p.title} src={`https://player.mux.com/${p.muxId}?autoplay=true&muted=true&controls=true&loop=true`} allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; fullscreen;" allowfullscreen style="display:block; width:100%; height:100%; border:none;"></iframe>
-              ) : (
-                <iframe loading="lazy" class:list={["video-iframe", p.vertical && "vertical"]} title={p.title} src={`https://www.youtube-nocookie.com/embed/${p.videoId}?autoplay=1&mute=1&fs=0&modestbranding=1&loop=1&playlist=${p.videoId}`} allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" style="display:block; width:100%; height:100%; border:none;"></iframe>
-              )}
-            </div>
-            <div class="video-meta">
-              <span class="video-tag" set:html={p.tag} />
-              <span class="video-meta-dot"></span>
-              <span class="video-year" set:html={p.year} />
-            </div>
-            <div class="video-title" set:html={p.title} />
-          </article>
-        ))}
+        {projects.map((p) => {
+          const cardClasses = ['video-card'];
+          if (p.vertical) cardClasses.push('vertical');
+          const mediaClasses = ['video-card-media'];
+          if (p.vertical) mediaClasses.push('vertical');
+          const iframeClasses = ['video-iframe'];
+          if (p.vertical) iframeClasses.push('vertical');
+          return (
+            <article class:list={cardClasses}>
+              <div class:list={mediaClasses} style="cursor:pointer;position:relative;" data-mux={p.muxId} data-video-id={p.videoId} data-title={p.title}>
+                {p.muxId ? (
+                  <iframe loading="lazy" class:list={iframeClasses} title={p.title} src={`https://player.mux.com/${p.muxId}?autoplay=true&muted=true&controls=false&loop=true&playsinline=true`} allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; fullscreen;" allowfullscreen style="display:block; width:100%; height:100%; border:none;"></iframe>
+                ) : (
+                  <iframe loading="lazy" class:list={iframeClasses} title={p.title} src={`https://www.youtube-nocookie.com/embed/${p.videoId}?autoplay=1&mute=1&fs=0&modestbranding=1&loop=1&playlist=${p.videoId}`} allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" style="display:block; width:100%; height:100%; border:none;"></iframe>
+                )}
+              </div>
+              <div class="video-meta">
+                <span class="video-tag" set:html={p.tag} />
+                <span class="video-meta-dot"></span>
+                <span class="video-year" set:html={p.year} />
+              </div>
+              <div class="video-title" set:html={p.title} />
+              <div class="video-client" set:html={p.client} />
+              <div class="video-role" set:html={p.role} />
+            </article>
+          );
+        })}
       </div>
     </div>
   </section>
@@ -80,13 +169,14 @@ const projects = [
       if (!heroBg) return;
       
       const loadIframe = () => {
-        heroBg.innerHTML = '<iframe loading="lazy" src="https://player.mux.com/O00qf5HrTommDuoYh6xIq3GloLj1IM5WqzjtS9aBWOwg?autoplay=true&muted=true&loop=true&controls=false" title="Goldfishstudio background" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;" allowfullscreen style="width:100%;height:100%;border:none;position:absolute;top:0;left:0;"></iframe>';
+        heroBg.innerHTML = '<iframe loading="eager" src="https://player.mux.com/O00qf5HrTommDuoYh6xIq3GloLj1IM5WqzjtS9aBWOwg?autoplay=true&muted=true&loop=true&controls=false&playsinline=1&background_audio=false" title="Goldfishstudio background" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;" allowfullscreen style="width:100%;height:100%;border:none;position:absolute;top:0;left:0;"></iframe>';
       };
       
+      // Defer loading until after initial paint to avoid blocking main thread
       if ('requestIdleCallback' in window) {
-        requestIdleCallback(loadIframe, { timeout: 2000 });
+        requestIdleCallback(loadIframe, { timeout: 1000 });
       } else {
-        requestAnimationFrame(() => setTimeout(loadIframe, 100));
+        requestAnimationFrame(() => setTimeout(loadIframe, 50));
       }
     }
     
@@ -101,10 +191,40 @@ const projects = [
         const title = card.dataset.title;
         
         if (muxId) {
-          const titleParam = title.toLowerCase().replace(/\s+/g, '+');
-          window.open(`https://player.mux.com/${muxId}?metadata-video-title=${titleParam}&video-title=${titleParam}`, '_blank');
+          // Mux video - open modal with Mux player
+          openModal(`https://player.mux.com/${muxId}?autoplay=true&controls=true`, title);
         } else if (videoId) {
-          window.open(`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&fs=1`, '_blank');
+          // YouTube video - open modal with YouTube embed
+          openModal(`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&fs=1&modestbranding=1`, title);
+        }
+      });
+    }
+    
+    function openModal(src, title) {
+      const modal = document.createElement('div');
+      modal.className = 'video-modal';
+      modal.innerHTML = `
+        <div class="video-modal-overlay" onclick="this.parentElement.remove()"></div>
+        <div class="video-modal-content">
+          <button class="video-modal-close" onclick="this.closest('.video-modal').remove()" aria-label="Close video">×</button>
+          <iframe src="${src}" title="${title}" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen></iframe>
+        </div>
+      `;
+      document.body.appendChild(modal);
+      document.body.style.overflow = 'hidden';
+      modal.querySelector('.video-modal-overlay').addEventListener('click', () => {
+        modal.remove();
+        document.body.style.overflow = '';
+      });
+      modal.querySelector('.video-modal-close').addEventListener('click', () => {
+        modal.remove();
+        document.body.style.overflow = '';
+      });
+      document.addEventListener('keydown', function esc(e) {
+        if (e.key === 'Escape') {
+          modal.remove();
+          document.body.style.overflow = '';
+          document.removeEventListener('keydown', esc);
         }
       });
     }
