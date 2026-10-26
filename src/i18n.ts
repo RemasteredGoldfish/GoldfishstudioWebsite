@@ -15,7 +15,7 @@ export const translations = {
     },
     about: {
       eyebrow: 'About GoldfishStudio',
-      heading: 'We are <em>J. Murray</em> — filmmaker and visual storyteller.',
+      heading: 'I am <em>J. Murray</em> — filmmaker and visual storyteller.',
       p1: 'Based in the Netherlands, I create cinematic films that help brands connect with their audience through intentional storytelling and visual excellence.',
       p2: 'From concept to final cut, I handle every aspect of production: concept development, directing, filming, editing, color grading, and sound design. My process is collaborative — we discuss your vision, I bring it to life with cinematic precision.',
       p3: 'Available for projects across the Netherlands, Europe, and worldwide for select collaborations.',
@@ -101,7 +101,7 @@ export const translations = {
     },
     about: {
       eyebrow: 'Over GoldfishStudio',
-      heading: 'Wij zijn <em>J. Murray</em> — filmmaker en visueel verteller.',
+      heading: 'Ik ben <em>J. Murray</em> — filmmaker en visueel verteller.',
       p1: 'Gevestigd in Nederland, maak ik cinematische films die merken helpen verbinden met hun publiek door bewuste storytelling en visuele excellentie.',
       p2: 'Van concept tot eindmontage, behandel ik elk aspect van de productie: conceptontwikkeling, regie, filmen, montage, kleurcorrectie en geluidsdesign. Mijn proces is samenwerkingsgericht — we bespreken jouw visie, ik breng het tot leven met cinematische precisie.',
       p3: 'Beschikbaar voor projecten in Nederland, Europa en wereldwijd voor geselecteerde samenwerkingen.',
