@@ -1,0 +1,28 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { projects } from '../../../data/projects.ts';
+import { translations } from '../../../i18n.ts';
+export const getStaticPaths = async () => projects.map(project => ({ params: { slug: project.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') }, props: { project } }));
+const t = translations.en;
+const { project } = Astro.props;
+const { title, tag, year, muxId, videoId, vertical, client, role } = project;
+const description = `A ${tag.toLowerCase()} project titled "${title}" from ${year}.`;
+const videoUrl = muxId ? `https://player.mux.com/${muxId}?autoplay=true&muted=true&controls=true&loop=true` : `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&fs=0&modestbranding=1&loop=1&playlist=${videoId}`;
+---
+<Layout t={t} lang="en" pageTitle={`${title} — Goldfishstudio`} pageDescription={description} year="2026">
+  <section class="project-page">
+    <div class="container project-detail">
+      <a href="/en/work" class="project-back">← Back to work</a>
+      <div class="project-header">
+        <h1 class="heading">{title}</h1>
+        <div class="project-meta"><span>{tag}</span><span class="project-divider">·</span><span>{year}</span><span class="project-divider">·</span><span>{client}</span></div>
+      </div>
+      <div class:list={["project-video", vertical && "vertical"]}><iframe class="project-video-iframe" src={videoUrl} title={title} allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen></iframe></div>
+      <div class="project-info">
+        <div class="project-description">{description}</div>
+        <div class="project-role"><strong>My role</strong>{role}</div>
+      </div>
+      <div class="project-contact"><a href="/en/contact" class="btn btn-primary">Discuss your project →</a></div>
+    </div>
+  </section>
+</Layout>
