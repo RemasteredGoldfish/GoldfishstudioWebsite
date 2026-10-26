@@ -18,11 +18,11 @@ export const getStaticPaths = async () => {
 const t = translations.nl;
 const lang = 'nl';
 const { project } = Astro.props;
-const { title, tag, year, muxId, videoId, vertical } = project;
-const description = `A ${tag.toLowerCase()} project titled "${title}" from ${year}.`;
-  const videoUrl = muxId 
-    ? `https://player.mux.com/${muxId}?autoplay=true&muted=true&controls=true&loop=true`
-    : `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&fs=0&modestbranding=1&loop=1&playlist=${videoId}`;
+const { title, tag, year, muxId, videoId, vertical, client, role } = project;
+const description = `Een ${tag.toLowerCase()} project genaamd "${title}" uit ${year}.`;
+const videoUrl = muxId 
+  ? `https://player.mux.com/${muxId}?autoplay=true&muted=true&controls=true&loop=true`
+  : `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&fs=0&modestbranding=1&loop=1&playlist=${videoId}`;
 ---
 <Layout t={t} lang={lang} pageTitle={`${title} — Goldfishstudio`} pageDescription={description} year="2026">
   <section class="container" style="padding-top: 6rem; padding-bottom: 6rem;">
@@ -31,7 +31,7 @@ const description = `A ${tag.toLowerCase()} project titled "${title}" from ${yea
       <a href="/work" class="btn btn-ghost" style="margin-bottom: 2rem; display: inline-block;">
         ← Terug naar portfolio
       </a>
-      
+
       {/* Project header */}
       <div class="project-header">
         <h1 class="heading">{title}</h1>
@@ -39,9 +39,11 @@ const description = `A ${tag.toLowerCase()} project titled "${title}" from ${yea
           <span class="project-tag">{tag}</span>
           <span class="project-divider">•</span>
           <span class="project-year">{year}</span>
+          <span class="project-divider">•</span>
+          <span class="project-client">{client}</span>
         </div>
       </div>
-      
+
       {/* Project video */}
       <div class="project-video">
         <iframe
@@ -52,12 +54,17 @@ const description = `A ${tag.toLowerCase()} project titled "${title}" from ${yea
           allowFullscreen
         />
       </div>
-      
+
       {/* Project description */}
       <div class="project-description">
         {description}
       </div>
-      
+
+      {/* My role */}
+      <div class="project-role">
+        <strong>Mijn rol:</strong> {role}
+      </div>
+
       {/* Contact CTA */}
       <div class="project-contact">
         <a href="/contact" class="btn btn-primary">
