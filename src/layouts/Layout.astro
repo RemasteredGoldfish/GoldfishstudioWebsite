@@ -132,10 +132,9 @@ const metaDescription = getDescription();
 
     .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: flex-start; justify-content: space-between; padding: 2rem 3rem; transition: background .4s, background-color .4s; will-change: background-color; }
     .nav.scrolled { background: rgba(8,8,8,.94); backdrop-filter: blur(12px); }
-    .nav-logo { display: inline-flex; align-items: center; gap: .55rem; font-family: var(--font-sans); font-size: .76rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--fg); background: var(--fg); color: var(--bg); padding: .28rem .55rem .28rem .4rem; }
-    .nav-logo::before { content: ''; width: 1rem; height: 1rem; border-radius: 50%; background: var(--accent); display: inline-block; }
-    .nav-logo::after { content: '◂'; color: var(--accent); font-size: .9rem; margin-left: -.35rem; }
-    .nav-logo span { color: var(--bg); }
+    .nav-logo { display: inline-flex; align-items: center; gap: .55rem; font-family: var(--font-sans); font-size: .76rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--fg); }
+    .nav-logo img { width: 3.2rem; height: 2.15rem; object-fit: contain; object-position: center; }
+    .nav-logo span { color: var(--fg); }
     .nav-right { display: flex; align-items: center; gap: 2rem; }
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a { font-size: .7rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--fg); transition: color .3s; padding: .25rem 0; }
@@ -262,6 +261,9 @@ const metaDescription = getDescription();
     .project-role { color: var(--fg-muted); font-size: .8rem; line-height: 1.8; }
     .project-role strong { display: block; color: var(--accent); font-size: .65rem; letter-spacing: .14em; text-transform: uppercase; margin-bottom: .5rem; }
     .project-contact { margin-top: 4rem; }
+    .logo-intro { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; background: var(--bg); opacity: 1; transition: opacity .55s ease; }
+    .logo-intro.is-hidden { opacity: 0; pointer-events: none; }
+    .logo-intro video { width: min(820px, 92vw); height: auto; display: block; }
 
     .video-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
     .video-card { cursor: pointer; }
@@ -417,9 +419,8 @@ const metaDescription = getDescription();
     @media (max-width: 480px) {
       .nav { padding: .85rem 1rem; }
       .nav-right { gap: .5rem; }
-      .nav-logo { font-size: .68rem; letter-spacing: .14em; padding: .25rem .45rem .25rem .35rem; white-space: nowrap; }
-      .nav-logo::before { width: .8rem; height: .8rem; }
-      .nav-logo::after { font-size: .72rem; }
+      .nav-logo { font-size: .62rem; letter-spacing: .12em; white-space: nowrap; }
+      .nav-logo img { width: 2.6rem; height: 1.8rem; }
       .container { padding: 0 1rem; }
       section { padding: 3.5rem 0; }
       .hero-title { font-size: 2rem; }
@@ -452,7 +453,7 @@ const metaDescription = getDescription();
   <div class="grain-overlay" aria-hidden="true"></div>
   <a href="#main-content" class="skip-link">Skip to content</a>
   <nav class="nav" id="top-nav" aria-label="Primary">
-    <a href={lang === 'en' ? '/en' : '/'} class="nav-logo">goldfish<span>studio</span></a>
+    <a href={lang === 'en' ? '/en' : '/'} class="nav-logo"><img src="/brand/goldfish-logo.png" alt="" aria-hidden="true" /><span>goldfishstudio</span></a>
     <div class="nav-right">
       <ul class="nav-links">
         {navLinks.map((link) => (

@@ -8,6 +8,9 @@ const featured = projects.slice(0, 3);
 const slugify = (title) => title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 ---
 <Layout t={t} lang={lang} pageTitle="Goldfishstudio" year="2026">
+  <div class="logo-intro" id="logo-intro" aria-hidden="true">
+    <video autoplay muted playsinline preload="auto"><source src="/brand/goldfish-logo-animation.mp4" type="video/mp4" /></video>
+  </div>
   <section class="hero figma-home">
     <div class="hero-bg" aria-hidden="true" id="hero-bg"></div>
     <div class="hero-overlay"></div>
@@ -80,6 +83,17 @@ const slugify = (title) => title.toLowerCase().replace(/[^a-z0-9]+/g, '-').repla
       const load = () => { heroBg.innerHTML = '<iframe loading="eager" src="https://player.mux.com/O00qf5HrTommDuoYh6xIq3GloLj1IM5WqzjtS9aBWOwg?autoplay=true&muted=true&loop=true&controls=false&playsinline=1&background_audio=false" title="Goldfishstudio background" allow="autoplay; encrypted-media" allowfullscreen></iframe>'; };
       if ('requestIdleCallback' in window) requestIdleCallback(load, { timeout: 1000 }); else requestAnimationFrame(() => setTimeout(load, 50));
     }
+    function initLogoIntro() {
+      const intro = document.getElementById('logo-intro');
+      const video = intro?.querySelector('video');
+      if (!intro || !video) return;
+      const finish = () => { intro.classList.add('is-hidden'); setTimeout(() => intro.remove(), 700); };
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || sessionStorage.getItem('goldfish-logo-intro-seen')) { finish(); return; }
+      sessionStorage.setItem('goldfish-logo-intro-seen', '1');
+      video.addEventListener('ended', finish, { once: true });
+      setTimeout(finish, 4200);
+    }
     loadHeroBg();
+    initLogoIntro();
   </script>
 </Layout>
