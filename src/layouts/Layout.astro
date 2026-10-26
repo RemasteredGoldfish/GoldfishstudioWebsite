@@ -132,9 +132,8 @@ const metaDescription = getDescription();
 
     .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: flex-start; justify-content: space-between; padding: 2rem 3rem; transition: background .4s, background-color .4s; will-change: background-color; }
     .nav.scrolled { background: rgba(8,8,8,.94); backdrop-filter: blur(12px); }
-    .nav-logo { display: inline-flex; align-items: center; gap: .55rem; font-family: var(--font-sans); font-size: .76rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--fg); }
-    .nav-logo img { width: 3.2rem; height: 2.15rem; object-fit: contain; object-position: center; }
-    .nav-logo span { color: var(--fg); }
+    .nav-logo { display: inline-flex; align-items: center; color: var(--fg); }
+    .nav-logo img { width: 4.2rem; height: 2.8rem; object-fit: contain; object-position: center; }
     .nav-right { display: flex; align-items: center; gap: 2rem; }
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a { font-size: .7rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--fg); transition: color .3s; padding: .25rem 0; }
@@ -419,8 +418,7 @@ const metaDescription = getDescription();
     @media (max-width: 480px) {
       .nav { padding: .85rem 1rem; }
       .nav-right { gap: .5rem; }
-      .nav-logo { font-size: .62rem; letter-spacing: .12em; white-space: nowrap; }
-      .nav-logo img { width: 2.6rem; height: 1.8rem; }
+      .nav-logo img { width: 3.2rem; height: 2.2rem; }
       .container { padding: 0 1rem; }
       section { padding: 3.5rem 0; }
       .hero-title { font-size: 2rem; }
@@ -453,7 +451,7 @@ const metaDescription = getDescription();
   <div class="grain-overlay" aria-hidden="true"></div>
   <a href="#main-content" class="skip-link">Skip to content</a>
   <nav class="nav" id="top-nav" aria-label="Primary">
-    <a href={lang === 'en' ? '/en' : '/'} class="nav-logo"><img src="/brand/goldfish-logo.png" alt="" aria-hidden="true" /><span>goldfishstudio</span></a>
+    <a href={lang === 'en' ? '/en' : '/'} class="nav-logo"><img src="/brand/goldfish-logo.png" alt="Goldfishstudio" /></a>
     <div class="nav-right">
       <ul class="nav-links">
         {navLinks.map((link) => (
