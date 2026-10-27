@@ -35,14 +35,10 @@ const getNlPath = () => {
 // SEO: page-specific descriptions
 const descriptions = {
   en: {
-    '/en/': 'Freelance videographer in Amsterdam, Netherlands. I create cinematic commercial videos, music videos, and brand films that tell your story.',
-    '/': 'Videograaf in Nederland. Ik maak cineastische commerciële video\'s, muziekvideo\'s en merkfilms die jouw verhaal vertellen.',
+    '/en': 'Freelance videographer in Amsterdam, Netherlands. I create cinematic commercial videos, music videos, and brand films that tell your story.',
     '/en/work': 'Portfolio of recent videography projects — commercials, brand films, music videos, and event coverage.',
-    '/work': 'Portfolio met recente videografie projecten — reclames, merkfilms, muziekvideo\'s en evenementen.',
     '/en/about': 'About J. Murray — freelance videographer and filmmaker based in the Netherlands specializing in cinematic storytelling.',
-    '/about': 'Over J. Murray — videograaf en filmmaker in Nederland gespecialiseerd in cinematische verhalen.',
     '/en/contact': 'Get in touch with Goldfishstudio. Book a consultation or inquire about your next video project.',
-    '/contact': 'Neem contact op met Goldfishstudio. Boek een gesprek of vraag naar jouw volgende videoprojet.',
   },
   nl: {
     '/': 'Videograaf in Nederland. Ik maak cineastische commerciële video\'s, muziekvideo\'s en merkfilms die jouw verhaal vertellen.',
@@ -54,8 +50,8 @@ const descriptions = {
 
 const getDescription = () => {
   if (pageDescription) return pageDescription;
-  const normalized = currentPath === '/' ? (lang === 'en' ? '/en/' : '/') : currentPath;
-  return descriptions[lang]?.[normalized] || descriptions[lang]?.['/'] || descriptions.en['/en/'];
+  const normalized = currentPath === '/' ? (lang === 'en' ? '/en' : '/') : currentPath;
+  return descriptions[lang]?.[normalized] || descriptions[lang]?.['/'] || descriptions.en['/en'];
 };
 
 const metaDescription = getDescription();
