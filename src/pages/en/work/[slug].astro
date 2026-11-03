@@ -7,7 +7,7 @@ const t = translations.en;
 const { project } = Astro.props;
 const { title, tag, year, muxId, videoId, vertical, client, role } = project;
 const description = `A ${tag.toLowerCase()} project titled "${title}" from ${year}.`;
-const videoUrl = muxId ? `https://player.mux.com/${muxId}?autoplay=true&muted=true&controls=true&loop=true` : `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&fs=0&modestbranding=1&loop=1&playlist=${videoId}`;
+const videoUrl = muxId ? `https://player.mux.com/${muxId}?muted=true&controls=true&loop=true` : `https://www.youtube-nocookie.com/embed/${videoId}?fs=0&modestbranding=1&loop=1&playlist=${videoId}`;
 ---
 <Layout t={t} lang="en" pageTitle={`${title} — Goldfishstudio`} pageDescription={description} year="2026">
   <section class="project-page">

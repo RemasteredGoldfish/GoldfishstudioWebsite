@@ -12,7 +12,7 @@ const slugify = (title) => title.toLowerCase().replace(/[^a-z0-9]+/g, '-').repla
     <p class="lede" style="margin-top:2rem;">Een selectie van commercials, branded content, social films en verhalen die we samen met onze klanten tot leven brachten.</p>
     <div class="figma-projects">
       {projects.map((p) => {
-        const videoUrl = p.muxId ? `https://player.mux.com/${p.muxId}?autoplay=true&muted=true&controls=false&loop=true&playsinline=true` : `https://www.youtube-nocookie.com/embed/${p.videoId}?autoplay=1&mute=1&fs=0&modestbranding=1&loop=1&playlist=${p.videoId}`;
+        const videoUrl = p.muxId ? `https://player.mux.com/${p.muxId}?muted=true&controls=true&loop=true&playsinline=true` : `https://www.youtube-nocookie.com/embed/${p.videoId}?fs=0&modestbranding=1&loop=1&playlist=${p.videoId}`;
         return (
           <a href={`/work/${slugify(p.title)}`} class:list={["video-card", p.vertical && "vertical"]}>
             <div class:list={["video-card-media", p.vertical && "vertical"]}><iframe loading="lazy" title={p.title} src={videoUrl} allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen></iframe></div>
