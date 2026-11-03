@@ -11,13 +11,13 @@ export const projects = [
     role: 'Director & Director of Photography'
   },
   { 
-    title: 'Basketball Commercial', 
+    title: 'BODY & FIT - VOORUITGANG - VERTICAL',
     videoId: '7gZLxHgUQx8', 
-    muxId: 'ZzfLnZi5aBe7Y13Pyqkqk1sLYOeshTf26uTDAAkX02hw',
+    muxId: 'XsaF3Fpnl6LvuGkWdTfbC5CbeJBwpIKbpRxV02GfIIyc',
     vertical: true, 
     tag: 'Commercial', 
     year: '2026',
-    client: 'Basketball Brand',
+    client: 'BODY & FIT',
     role: 'Director & Director of Photography'
   },
   { 
