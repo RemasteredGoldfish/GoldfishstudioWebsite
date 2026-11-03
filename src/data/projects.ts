@@ -13,7 +13,7 @@ export const projects = [
   { 
     title: 'Basketball Commercial', 
     videoId: '7gZLxHgUQx8', 
-    muxId: '4BIw4S4zfZ401cF5cL54YY7hPAr00BoQFH6YrQpT5OclE', 
+    muxId: 'ZzfLnZi5aBe7Y13Pyqkqk1sLYOeshTf26uTDAAkX02hw',
     vertical: true, 
     tag: 'Commercial', 
     year: '2026',
