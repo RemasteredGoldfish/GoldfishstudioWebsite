@@ -7,14 +7,13 @@ const lang = 'en';
 
 <Layout t={t} lang="en" pageTitle="Contact" year="2026">
 
-  <section class="container page-intro figma-section" style="padding-bottom: 6rem;">
-    <div class="contact-grid">
+  <section class="container page-intro figma-section" >
+    <div class="contact-page-grid">
       <div>
         <div class="eyebrow">Contact</div>
-        <h1 class="heading">Let's work<br/>together.</h1>
+        <h1 class="heading">Tell me about<br/><em>your project.</em></h1>
         <p class="lede">
-          Got a project in mind? Reach out and I'll get back to you within 24 hours.
-          If it's a fire, put "URGENT" in the subject.
+          An event, aftermovie, interview, podcast or photoshoot? Tell me what you want to create and when you need it.
         </p>
 
         <div style="margin-top: 2.5rem;">
@@ -46,7 +45,7 @@ const lang = 'en';
         </div>
         <div class="field">
           <label for="type">Project type</label>
-          <input type="text" id="type" name="type" placeholder="Commercial / Music video / Event / Other" />
+          <input type="text" id="type" name="type" placeholder="Event / Aftermovie / Interview / Podcast / Photography" />
         </div>
         <div class="field">
           <label for="budget">Budget range</label>
@@ -68,38 +67,8 @@ const lang = 'en';
     </div>
   </section>
 
-  <!-- Pricing -->
-  <section style="border-top: 1px solid var(--border); background: var(--bg-warm);">
-    <div class="container">
-      <div class="eyebrow" set:html={t.pricing.eyebrow} />
-      <h2 class="heading" set:html={t.pricing.heading} />
-      <p class="lede" style="margin-bottom:3rem; font-size:.85rem;" set:html={t.pricing.note} />
-      <div class="pricing-grid">
-        <div class="pricing-card">
-          <h3 set:html={t.pricing.p1} />
-          <div class="pricing-price" set:html={t.pricing.p1price} />
-        </div>
-        <div class="pricing-card">
-          <h3 set:html={t.pricing.p2} />
-          <div class="pricing-price" set:html={t.pricing.p2price} />
-        </div>
-        <div class="pricing-card">
-          <h3 set:html={t.pricing.p3} />
-          <div class="pricing-price" set:html={t.pricing.p3price} />
-        </div>
-        <div class="pricing-card">
-          <h3 set:html={t.pricing.p4} />
-          <div class="pricing-price" set:html={t.pricing.p4price} />
-        </div>
-      </div>
-      <div style="text-align:center; margin-top:3rem;">
-        <a href="mailto:info@goldfishstudio.nl" class="btn btn-ghost" set:html={t.pricing.cta} />
-      </div>
-    </div>
-  </section>
-
   <!-- FAQ -->
-  <section style="border-top: 1px solid var(--border);">
+  <section class="page-section">
     <div class="container">
       <h2 class="heading" set:html={t.faq.heading} />
       <div class="faq-grid">
@@ -161,3 +130,4 @@ const lang = 'en';
   </script>
 
 </Layout>
+

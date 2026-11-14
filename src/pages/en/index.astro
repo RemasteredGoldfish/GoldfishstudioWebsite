@@ -1,99 +1,65 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { projects } from '../../data/projects.ts';
-import { translations } from '../../i18n.ts';
-const t = translations.en;
-const lang = 'en';
-const featured = projects.slice(0, 3);
-const slugify = (title) => title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 ---
-<Layout t={t} lang={lang} pageTitle="Goldfishstudio" year="2026">
-  <div class="logo-intro" id="logo-intro" aria-hidden="true">
-    <video autoplay muted playsinline preload="auto"><source src="/brand/goldfish-logo-animation.mp4" type="video/mp4" /></video>
-  </div>
-  <section class="hero figma-home">
-    <div class="hero-bg" aria-hidden="true" id="hero-bg"></div>
-    <div class="hero-overlay"></div>
-    <div class="container hero-content">
-      <div class="hero-inner">
-        <div class="hero-eyebrow">Films with a pulse</div>
-        <h1 class="hero-title">Stories that<br /><em>keep moving.</em></h1>
-        <p class="hero-sub">Goldfishstudio makes films for brands, people and ideas that want to move something forward. Based in the Netherlands · available worldwide.</p>
-        <div class="hero-actions">
-          <a href="/en/work" class="btn btn-primary">View selected work →</a>
-          <a href="/en/contact" class="btn btn-ghost">Start a conversation</a>
+<Layout lang="en" pageTitle="GoldfishStudio — your story in focus">
+
+  <section class="hero wrap" id="top" aria-labelledby="hero-title">
+    <div class="hero-topline"><p class="eyebrow"><span class="gold-dot"></span> Films with a pulse</p><p class="location">Netherlands <span aria-hidden="true">↗</span> Worldwide</p></div>
+    <div class="hero-grid">
+      <div class="hero-copy" data-enter>
+        <h1 id="hero-title">Your story.<br> <em>In focus.</em></h1>
+        <p class="hero-description">From events and aftermovies to interviews, podcasts and commercials. GoldfishStudio captures what makes your brand, story or moment special.</p>
+        <div class="hero-actions"><a class="button" href="#werk">View the work <span aria-hidden="true">↓</span></a><a class="underlink" href="/en/contact">Start a project <span aria-hidden="true">↗</span></a></div>
+      </div>
+      <div class="hero-visual">
+        <div class="film-frame" id="hero-film">
+          <img class="hero-poster" src="https://image.mux.com/O00qf5HrTommDuoYh6xIq3GloLj1IM5WqzjtS9aBWOwg/thumbnail.jpg?width=1600&time=10" alt="Still from a GoldfishStudio production" fetchpriority="high">
+          <div class="background-player" id="background-player" aria-hidden="true"></div>
+          <button class="motion-toggle" id="motion-toggle" aria-label="Play background video" aria-pressed="false"><span class="motion-symbol" aria-hidden="true">▶</span><span class="motion-label">Play video</span></button>
         </div>
+        <div class="film-foot"><span>Video · Photography · Production</span><span>GoldfishStudio <span aria-hidden="true">©</span></span></div>
       </div>
     </div>
-    <div class="figma-scroll">Scroll to discover</div>
-    <div class="figma-side-note">Film · Direction · Edit</div>
+    <div class="hero-bottom"><span>Stories that keep moving.</span><a href="#werk">Scroll to see more <span aria-hidden="true">↓</span></a></div>
   </section>
 
-  <section class="figma-section" id="work">
-    <div class="container">
-      <div class="eyebrow">Selected work</div>
-      <h2 class="heading">A few worlds<br />we <em>help make real.</em></h2>
-      <div class="figma-projects">
-        {featured.map((p) => {
-          const videoUrl = p.muxId
-            ? `https://player.mux.com/${p.muxId}?autoplay=muted&muted=true&controls=false&loop=true&playsinline=true`
-            : `https://www.youtube-nocookie.com/embed/${p.videoId}?autoplay=1&mute=1&fs=0&modestbranding=1&loop=1&playlist=${p.videoId}`;
-          return (
-            <a href={`/en/work/${slugify(p.title)}`} class:list={["video-card", p.vertical && "vertical"]}>
-              <div class:list={["video-card-media", p.vertical && "vertical"]}>
-                <iframe loading="lazy" title={p.title} src={videoUrl} allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen></iframe>
-              </div>
-              <div class="video-meta"><span class="video-tag">{p.tag}</span><span class="video-meta-dot"></span><span class="video-year">{p.year}</span></div>
-              <div class="video-title">{p.title}</div>
-              <div class="video-client">{p.client}</div>
-            </a>
-          );
-        })}
-      </div>
-      <a href="/en/work" class="text-link">View all projects <span>↗</span></a>
-    </div>
-  </section>
-
-  <section class="figma-section">
-    <div class="container">
-      <div class="eyebrow">What we do</div>
-      <h2 class="heading">From first idea<br />to the <em>last frame.</em></h2>
-      <div class="services-grid" style="margin-top:4rem;">
-        <div class="service-item"><div class="eyebrow">01</div><h3>Concept &amp; direction</h3><p>A clear idea, a strong direction and a film that feels like your brand.</p></div>
-        <div class="service-item"><div class="eyebrow">02</div><h3>Film &amp; production</h3><p>From a focused social shoot to a full commercial — every detail considered.</p></div>
-        <div class="service-item"><div class="eyebrow">03</div><h3>Edit &amp; finishing</h3><p>Editing, colour, sound design and versions that work on every screen.</p></div>
-        <div class="service-item"><div class="eyebrow">04</div><h3>Social-first content</h3><p>Vertical and horizontal films that do more than look good — they stay with people.</p></div>
+  <section class="work dark-section" id="werk" aria-labelledby="work-title">
+    <div class="wrap section-inner">
+      <div class="section-top"><p class="eyebrow">Selected work <span class="short-rule"></span></p><span class="small-note">A selection from the portfolio</span></div>
+      <div class="work-heading"><h2 id="work-title">Three projects.<br> <em>Three different worlds.</em></h2><div class="work-controls"><button class="previews-toggle" id="previews-toggle" aria-pressed="true">Ⅱ Pause previews</button><a class="underlink" href="/en/work">View all projects <span aria-hidden="true">↗</span></a></div></div>
+      <div class="project-grid">
+        <article class="project">
+          <div class="project-heading"><div><span class="project-kind">Reel · 2026</span><h3>Coach Kux</h3></div><span class="project-number">01</span></div>
+          <button class="project-film" data-playback="PIp6EDEDue008BuRkVus5yWVZTSP9QwgxYIUAKvA26yc" data-title="Coach Kux" data-page="/en/work/coach-kux" aria-label="Play Coach Kux"><img src="https://image.mux.com/PIp6EDEDue008BuRkVus5yWVZTSP9QwgxYIUAKvA26yc/thumbnail.jpg?width=900" alt="Coach Kux — video still" loading="lazy"><span class="play-button" aria-hidden="true">↗</span></button>
+        </article>
+        <article class="project">
+          <div class="project-heading"><div><span class="project-kind">Commercial · 2026</span><h3>BODY & FIT</h3></div><span class="project-number">02</span></div>
+          <button class="project-film" data-playback="XsaF3Fpnl6LvuGkWdTfbC5CbeJBwpIKbpRxV02GfIIyc" data-title="BODY & FIT — Vooruitgang" data-page="/en/work/body-fit-vooruitgang-vertical" aria-label="Play BODY & FIT"><img src="https://image.mux.com/XsaF3Fpnl6LvuGkWdTfbC5CbeJBwpIKbpRxV02GfIIyc/thumbnail.jpg?width=900" alt="BODY & FIT — video still" loading="lazy"><span class="play-button" aria-hidden="true">↗</span></button>
+        </article>
+        <article class="project">
+          <div class="project-heading"><div><span class="project-kind">Commercial · 2026</span><h3>Martabak</h3></div><span class="project-number">03</span></div>
+          <button class="project-film" data-playback="LyrdTPrrRFX8rpoK727fJMZcOHgrmv00QzpeVpYRWIXw" data-title="Martabak" data-page="/en/work/martabak" aria-label="Play Martabak"><img src="https://image.mux.com/LyrdTPrrRFX8rpoK727fJMZcOHgrmv00QzpeVpYRWIXw/thumbnail.jpg?width=900" alt="Martabak Restaurant — video still" loading="lazy"><span class="play-button" aria-hidden="true">↗</span></button>
+        </article>
       </div>
     </div>
   </section>
 
-  <section class="figma-cta">
-    <div class="container">
-      <div class="eyebrow">Let's make something</div>
-      <h2 class="heading">Tell us what<br />keeps you <em>up.</em></h2>
-      <p class="lede" style="margin:2rem 0 2.5rem;">An idea, a deadline or just a feeling? Start the conversation. We reply within 24 hours.</p>
-      <a href="/en/contact" class="btn btn-ghost">Start a project →</a>
+  <section class="approach wrap section-inner" id="aanpak" aria-labelledby="approach-title">
+    <div class="section-top"><p class="eyebrow">What I do <span class="short-rule"></span></p><span class="small-note">From first idea to final frame</span></div>
+    <div class="approach-grid">
+      <div class="approach-intro"><h2 id="approach-title">The idea.<br> The shoot.<br> <em>The video.</em></h2><p>From concept and direction to editing, colour and sound design. With versions for every screen.</p><a class="underlink" href="/en/contact">Start a project <span aria-hidden="true">↗</span></a></div>
+      <div class="services">
+        <div class="service"><span class="service-number">01</span><div><h3>Concept & direction</h3><p>A clear idea, a creative direction and a video that fits your brand.</p></div><span class="service-star" aria-hidden="true">✳</span></div>
+        <div class="service"><span class="service-number">02</span><div><h3>Video & production</h3><p>From a social shoot to a full commercial, with attention to every detail.</p></div><span class="service-star" aria-hidden="true">✳</span></div>
+        <div class="service"><span class="service-number">03</span><div><h3>Edit & finishing</h3><p>Editing, colour, sound design and versions for every screen.</p></div><span class="service-star" aria-hidden="true">✳</span></div>
+        <div class="service"><span class="service-number">04</span><div><h3>Social-first content</h3><p>Vertical and horizontal videos for your social channels.</p></div><span class="service-star" aria-hidden="true">✳</span></div>
+      </div>
     </div>
   </section>
 
-  <script>
-    function loadHeroBg() {
-      const heroBg = document.getElementById('hero-bg');
-      if (!heroBg) return;
-      const load = () => { heroBg.innerHTML = '<iframe loading="eager" src="https://player.mux.com/O00qf5HrTommDuoYh6xIq3GloLj1IM5WqzjtS9aBWOwg?autoplay=muted&muted=true&loop=true&controls=false&playsinline=1&background_audio=false" title="Goldfishstudio background" allow="autoplay; encrypted-media" allowfullscreen></iframe>'; };
-      if ('requestIdleCallback' in window) requestIdleCallback(load, { timeout: 1000 }); else requestAnimationFrame(() => setTimeout(load, 50));
-    }
-    function initLogoIntro() {
-      const intro = document.getElementById('logo-intro');
-      const video = intro?.querySelector('video');
-      if (!intro || !video) return;
-      const finish = () => { intro.classList.add('is-hidden'); setTimeout(() => intro.remove(), 700); };
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || sessionStorage.getItem('goldfish-logo-intro-seen')) { finish(); return; }
-      sessionStorage.setItem('goldfish-logo-intro-seen', '1');
-      video.addEventListener('ended', finish, { once: true });
-      setTimeout(finish, 4200);
-    }
-    loadHeroBg();
-    initLogoIntro();
-  </script>
+  <section class="contact-section" id="contact" aria-labelledby="contact-title"><div class="wrap contact-inner"><p class="eyebrow">Let’s make something</p><div class="contact-grid"><h2 id="contact-title">Tell me what<br> you <em>have in mind.</em></h2><div class="contact-side"><p>An idea, a deadline or a feeling? Let’s talk.</p><a class="button" href="/en/contact">Start a project <span aria-hidden="true">↗</span></a><a class="email-link" href="mailto:info@goldfishstudio.nl">info@goldfishstudio.nl</a></div></div></div></section>
+
+<dialog id="film-dialog" aria-labelledby="film-title"><div class="dialog-top"><h2 id="film-title">Film</h2><button class="dialog-close" aria-label="Close video">Close <span aria-hidden="true">×</span></button></div><div id="film-player"></div><a id="film-project" class="dialog-project" href="/en/work">View project ↗</a></dialog>
+
+<script is:inline src="/home.js"></script>
 </Layout>

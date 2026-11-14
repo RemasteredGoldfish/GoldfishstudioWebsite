@@ -9,10 +9,10 @@ const slugify = (title) => title.toLowerCase().replace(/[^a-z0-9]+/g, '-').repla
   <section class="container page-intro figma-section">
     <div class="eyebrow">Geselecteerd werk</div>
     <h1 class="heading">Recente<br /><em>projecten.</em></h1>
-    <p class="lede" style="margin-top:2rem;">Een selectie van commercials, branded content, social films en verhalen die we samen met onze klanten tot leven brachten.</p>
+    <p class="lede" style="margin-top:2rem;">Van events en podcasts tot commercials en social content. Een selectie van het werk van GoldfishStudio.</p>
     <div class="figma-projects">
       {projects.map((p) => {
-        const videoUrl = p.muxId ? `https://player.mux.com/${p.muxId}?muted=true&controls=true&loop=true&playsinline=true` : `https://www.youtube-nocookie.com/embed/${p.videoId}?fs=0&modestbranding=1&loop=1&playlist=${p.videoId}`;
+        const videoUrl = p.muxId ? `https://player.mux.com/${p.muxId}?autoplay=muted&muted=true&controls=false&loop=true&playsinline=true` : `https://www.youtube-nocookie.com/embed/${p.videoId}?fs=0&modestbranding=1&loop=1&playlist=${p.videoId}`;
         return (
           <a href={`/work/${slugify(p.title)}`} class:list={["video-card", p.vertical && "vertical"]}>
             <div class:list={["video-card-media", p.vertical && "vertical"]}><iframe loading="lazy" title={p.title} src={videoUrl} allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen></iframe></div>

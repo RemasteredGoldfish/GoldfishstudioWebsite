@@ -1,44 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { translations } from '../i18n.ts';
-const t = translations.nl;
 ---
-<Layout t={t} lang="nl" pageTitle="Over ons — Goldfishstudio" year="2026">
-
-  <section class="container page-intro figma-section">
-    <div class="editorial">
-      <div>
-        <div class="eyebrow" set:html={t.about.eyebrow} />
-        <h1 class="heading" set:html={t.about.heading} />
-        <p set:html={t.about.p1} />
-        <p set:html={t.about.p2} />
-        <p set:html={t.about.p3} />
-      </div>
-    </div>
-  </section>
-
-  <!-- Stats -->
-  <section style="border-top: 1px solid var(--border);">
-    <div class="container">
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-num">50+</div>
-          <div class="stat-label">Projecten voltooid</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">Concept → eindmontage</div>
-          <div class="stat-label">Van idee tot eindfilm</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">Wereldwijd</div>
-          <div class="stat-label">Beschikbaar voor projecten wereldwijd</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">Jouw visie</div>
-          <div class="stat-label">Focus op jouw visie</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
+<Layout lang="nl" pageTitle="Over mij">
+<section class="container page-intro about-hero"><div class="about-copy"><p class="eyebrow">Over GoldfishStudio</p><h1 class="heading">De maker<br/> <em>achter het beeld.</em></h1><p>Ik ben J. Murray, de videograaf en fotograaf achter GoldfishStudio. Vanuit Nederland werk ik voor merken, organisaties en mensen die iets te vertellen hebben.</p><p>Een event, een interview, een podcast of een commercial: ieder project vraagt om een andere aanpak. Ik kijk naar wat je wilt vertellen, voor wie het is en welke beelden daarbij passen.</p><p>Van het eerste gesprek tot de opnames, montage, kleur en geluid. Je bespreekt je project rechtstreeks met de maker van de beelden.</p><a class="underlink" href="/work">Bekijk het werk <span aria-hidden="true">↗</span></a></div><div class="about-image"><img src="https://image.mux.com/JA7D3foAf02DySqLel39EZCXM9Jq00KhsRU8lHWPZ5x6U/thumbnail.jpg?width=1100" alt="Filmstill uit de eventproductie Pathfinder Day"/></div></section>
+<section class="page-section"><div class="container about-offer"><div><p class="eyebrow">Wat ik maak</p><h2 class="heading">Meer dan<br/> <em>één format.</em></h2></div><div class="services"><div class="service"><span class="service-number">01</span><div><h3>Events & aftermovies</h3><p>De sfeer, de mensen en de momenten die ertoe doen.</p></div></div><div class="service"><span class="service-number">02</span><div><h3>Interviews & podcasts</h3><p>Ruimte voor het gesprek, met aandacht voor beeld en geluid.</p></div></div><div class="service"><span class="service-number">03</span><div><h3>Commercials & social content</h3><p>Video en fotografie voor je merk en je kanalen.</p></div></div></div></div></section>
+<section class="inner-cta"><h2>Jouw volgende<br/> <em>project.</em></h2><a class="button" href="/contact">Start een project <span aria-hidden="true">↗</span></a></section>
 </Layout>
