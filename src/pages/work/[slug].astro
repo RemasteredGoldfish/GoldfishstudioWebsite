@@ -6,7 +6,7 @@ export const getStaticPaths = async () => projects.map(project => ({ params: { s
 const t = translations.nl;
 const { project } = Astro.props;
 const { title, tag, year, muxId, videoId, vertical, client, role } = project;
-const description = `Een ${tag.toLowerCase()} project genaamd "${title}" uit ${year}.`;
+const description = `${title}: een ${tag.toLowerCase()} voor ${client}, gerealiseerd door GoldfishStudio. Rol: ${role}.`;
 const videoUrl = muxId ? `https://player.mux.com/${muxId}?muted=true&controls=true&loop=true` : `https://www.youtube-nocookie.com/embed/${videoId}?fs=0&modestbranding=1&loop=1&playlist=${videoId}`;
 ---
 <Layout t={t} lang="nl" pageTitle={`${title} — Goldfishstudio`} pageDescription={description} year="2026">

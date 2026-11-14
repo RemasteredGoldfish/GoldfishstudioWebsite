@@ -9,7 +9,19 @@ const nlPath=path==='/en'?'/':path.replace(/^\/en\//,'/');
 const enPath=path.startsWith('/en')?path:path==='/'?'/en/':'/en'+path;
 const otherPath=en?nlPath:enPath;
 const title=pageTitle.includes('GoldfishStudio')?pageTitle:pageTitle.replace(/ — Goldfishstudio/g,'')+' — GoldfishStudio';
-const description=pageDescription||(en?'Video and photography for events, interviews, podcasts and brands. Based in the Netherlands, available worldwide.':'Video en fotografie voor events, interviews, podcasts en merken. Vanuit Nederland, beschikbaar wereldwijd.');
+const description=pageDescription||(en?'GoldfishStudio produces films and photography for events, interviews, podcasts and brands. Based in the Netherlands and available worldwide.':'GoldfishStudio maakt video en fotografie voor events, interviews, podcasts en merken. Vanuit Nederland, beschikbaar wereldwijd.');
+const organizationSchema={
+  '@context':'https://schema.org',
+  '@type':'Organization',
+  name:'GoldfishStudio',
+  url:'https://goldfishstudio.nl',
+  logo:'https://goldfishstudio.nl/brand/goldfish-logo.png',
+  email:'info@goldfishstudio.nl',
+  sameAs:['https://instagram.com/remastered_goldfish'],
+  description: en
+    ? 'Film and photography studio for events, interviews, podcasts and brands.'
+    : 'Studio voor video en fotografie voor events, interviews, podcasts en merken.'
+};
 const links=[{href:base+'/work',label:en?'Work':'Werk'},{href:home+'#aanpak',label:en?'Approach':'Aanpak'},{href:base+'/about',label:en?'About me':'Over mij'}];
 ---
 <!doctype html>
@@ -20,9 +32,10 @@ const links=[{href:base+'/work',label:en?'Work':'Werk'},{href:home+'#aanpak',lab
 <meta name="page-type" content="service"/><meta name="site-kind" content="other"/>
 <link rel="icon" href="/favicon.png"/><link rel="canonical" href={'https://goldfishstudio.nl'+path}/>
 <link rel="alternate" hreflang="nl" href={'https://goldfishstudio.nl'+nlPath}/><link rel="alternate" hreflang="en" href={'https://goldfishstudio.nl'+enPath}/><link rel="alternate" hreflang="x-default" href="https://goldfishstudio.nl/"/>
-<meta property="og:title" content={title}/><meta property="og:description" content={description}/><meta property="og:type" content="website"/><meta property="og:url" content={'https://goldfishstudio.nl'+path}/><meta property="og:image" content="https://image.mux.com/O00qf5HrTommDuoYh6xIq3GloLj1IM5WqzjtS9aBWOwg/thumbnail.jpg?width=1200"/><meta name="twitter:card" content="summary_large_image"/>
+<meta property="og:title" content={title}/><meta property="og:description" content={description}/><meta property="og:type" content="website"/><meta property="og:url" content={'https://goldfishstudio.nl'+path}/><meta property="og:image" content="https://image.mux.com/O00qf5HrTommDuoYh6xIq3GloLj1IM5WqzjtS9aBWOwg/thumbnail.jpg?width=1200"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta name="twitter:card" content="summary_large_image"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
 </head>
 <body id="page-top">
 <a class="skip-link" href="#main-content">{en?'Skip to content':'Ga naar de inhoud'}</a>
