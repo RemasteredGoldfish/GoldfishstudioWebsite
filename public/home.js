@@ -20,7 +20,7 @@ function setBackground(playing) {
   motionButton.querySelector('.motion-label').textContent = playing ? (en ? 'Pause video' : 'Pauzeer film') : (en ? 'Play video' : 'Speel film');
 }
 motionButton.addEventListener('click', () => setBackground(!backgroundPlaying));
-setBackground(true);
+setBackground(!reduceMotion.matches && !window.matchMedia('(max-width: 740px)').matches && !navigator.connection?.saveData);
 reduceMotion.addEventListener('change', event => { if (event.matches) setBackground(false); });
 
 const dialog = document.querySelector('#film-dialog');
